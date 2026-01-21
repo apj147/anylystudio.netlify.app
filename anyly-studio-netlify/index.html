@@ -801,8 +801,7 @@
         <div class="about-content">
             <h2>Creating Art That<br><span>Tells Your Story</span></h2>
             <p>Welcome to Anyly Studio, where creativity meets craftsmanship. Based in Ladysmith, Wisconsin, I specialize in creating custom artwork that captures the essence of your vision.</p>
-            <p>Every piece I create is a collaboration between artist and client. Whether you're looking for a portrait that captures a precious moment, an abstract piece that speaks to your soul, or a custom commission for a special occasion, I pour my heart into every brushstroke.</p>
-            <p>Art isn't just what I do—it's who I am. Let's create something beautiful together.</p>
+            <p>Every piece I create is a collaboration between artist and client. Whether you're looking for a portrait that captures a precious moment, an abstract piece that speaks to your soul, or [...]<p>Art isn't just what I do—it's who I am. Let's create something beautiful together.</p>
             <p class="signature">— April Johnson</p>
         </div>
     </section>
@@ -895,7 +894,8 @@
     <section class="contact" id="contact">
         <h2>Start Your Commission</h2>
         <p>Ready to bring your vision to life? Fill out the form below and let's create something extraordinary together.</p>
-        <form class="contact-form" action="mailto:contact@anlystudio.com" method="post" enctype="text/plain">
+        <form name="contact" method="post" data-netlify="true" class="contact-form">
+            <input type="hidden" name="form-name" value="contact">
             <div class="form-group">
                 <label for="name">Your Name</label>
                 <input type="text" id="name" name="name" required>
@@ -950,7 +950,7 @@
             <div class="footer-links">
                 <h4>Contact</h4>
                 <ul>
-                    <li><a href="mailto:contact@anlystudio.com">contact@anlystudio.com</a></li>
+                    <li><a href="mailto:hello@anylystudio.com">hello@anylystudio.com</a></li>
                     <li><a href="tel:+17154032580">(715) 403-2580</a></li>
                     <li>Ladysmith, Wisconsin</li>
                 </ul>
