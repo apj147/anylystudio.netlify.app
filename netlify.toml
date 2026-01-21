@@ -1,0 +1,3 @@
+[build]
+  publish = "anyly-studio-netlify"
+  command = ""
