@@ -1,0 +1,995 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anyly Studio | Custom Artwork & Commissions</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-cream: #FAF7F2;
+            --color-charcoal: #2C2C2C;
+            --color-gold: #C9A959;
+            --color-gold-light: #E8D5A3;
+            --color-sage: #8B9A7D;
+            --color-terracotta: #C17F59;
+            --color-soft-black: #1A1A1A;
+            --font-display: 'Cormorant Garamond', serif;
+            --font-body: 'Montserrat', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--color-cream);
+            color: var(--color-charcoal);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 1.5rem 4rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: linear-gradient(180deg, rgba(250,247,242,0.98) 0%, rgba(250,247,242,0.9) 100%);
+            backdrop-filter: blur(10px);
+            transition: all 0.4s ease;
+        }
+
+        nav.scrolled {
+            padding: 1rem 4rem;
+            box-shadow: 0 2px 30px rgba(0,0,0,0.08);
+        }
+
+        .logo {
+            font-family: var(--font-display);
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: var(--color-charcoal);
+            text-decoration: none;
+            letter-spacing: 0.02em;
+        }
+
+        .logo span {
+            color: var(--color-gold);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 3rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--color-charcoal);
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            position: relative;
+            padding: 0.5rem 0;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--color-gold);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            padding: 8rem 4rem 4rem;
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(ellipse at 20% 80%, rgba(201,169,89,0.15) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 20%, rgba(139,154,125,0.12) 0%, transparent 50%),
+                radial-gradient(ellipse at 60% 60%, rgba(193,127,89,0.08) 0%, transparent 40%);
+            z-index: -1;
+        }
+
+        .hero-content {
+            text-align: center;
+            max-width: 900px;
+            animation: fadeUp 1.2s ease-out;
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-subtitle {
+            font-family: var(--font-body);
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--color-gold);
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-title {
+            font-family: var(--font-display);
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 400;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            color: var(--color-soft-black);
+        }
+
+        .hero-title em {
+            font-style: italic;
+            color: var(--color-terracotta);
+        }
+
+        .hero-description {
+            font-size: 1.1rem;
+            font-weight: 300;
+            color: #666;
+            max-width: 600px;
+            margin: 0 auto 2.5rem;
+            line-height: 1.9;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            font-family: var(--font-body);
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            transition: all 0.4s ease;
+        }
+
+        .btn-primary {
+            background: var(--color-charcoal);
+            color: var(--color-cream);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--color-gold);
+            transition: left 0.4s ease;
+            z-index: -1;
+        }
+
+        .btn-primary:hover::before {
+            left: 0;
+        }
+
+        .btn-primary:hover {
+            color: var(--color-charcoal);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--color-charcoal);
+            border: 1px solid var(--color-charcoal);
+            margin-left: 1rem;
+        }
+
+        .btn-outline:hover {
+            background: var(--color-charcoal);
+            color: var(--color-cream);
+        }
+
+        /* Decorative Elements */
+        .floating-shapes {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .shape {
+            position: absolute;
+            opacity: 0.6;
+        }
+
+        .shape-1 {
+            top: 15%;
+            left: 5%;
+            width: 80px;
+            height: 80px;
+            border: 1px solid var(--color-gold-light);
+            border-radius: 50%;
+            animation: float 8s ease-in-out infinite;
+        }
+
+        .shape-2 {
+            top: 60%;
+            right: 8%;
+            width: 120px;
+            height: 120px;
+            border: 1px solid var(--color-sage);
+            transform: rotate(45deg);
+            animation: float 10s ease-in-out infinite reverse;
+        }
+
+        .shape-3 {
+            bottom: 20%;
+            left: 10%;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--color-gold-light) 0%, transparent 60%);
+            animation: float 7s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+        }
+
+        /* About Section */
+        .about {
+            padding: 8rem 4rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6rem;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .about-image {
+            position: relative;
+        }
+
+        .about-image-frame {
+            width: 100%;
+            aspect-ratio: 4/5;
+            background: linear-gradient(135deg, var(--color-sage) 0%, #a8b89a 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .about-image-frame::before {
+            content: '✦';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 4rem;
+            color: rgba(255,255,255,0.3);
+        }
+
+        .about-image-accent {
+            position: absolute;
+            top: -20px;
+            right: -20px;
+            width: 60%;
+            height: 60%;
+            border: 1px solid var(--color-gold);
+            z-index: -1;
+        }
+
+        .about-content h2 {
+            font-family: var(--font-display);
+            font-size: 3rem;
+            font-weight: 400;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .about-content h2 span {
+            font-style: italic;
+            color: var(--color-terracotta);
+        }
+
+        .about-content p {
+            font-size: 1rem;
+            font-weight: 300;
+            color: #555;
+            margin-bottom: 1.5rem;
+            line-height: 1.9;
+        }
+
+        .signature {
+            font-family: var(--font-display);
+            font-size: 2rem;
+            font-style: italic;
+            color: var(--color-charcoal);
+            margin-top: 2rem;
+        }
+
+        /* Services Section */
+        .services {
+            padding: 8rem 4rem;
+            background: var(--color-soft-black);
+            color: var(--color-cream);
+        }
+
+        .section-header {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 5rem;
+        }
+
+        .section-header h2 {
+            font-family: var(--font-display);
+            font-size: 3rem;
+            font-weight: 400;
+            margin-bottom: 1rem;
+        }
+
+        .section-header p {
+            font-weight: 300;
+            color: rgba(255,255,255,0.7);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .service-card {
+            padding: 3rem 2rem;
+            border: 1px solid rgba(255,255,255,0.1);
+            text-align: center;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--color-gold), var(--color-terracotta));
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+        }
+
+        .service-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .service-card:hover {
+            background: rgba(255,255,255,0.03);
+            transform: translateY(-5px);
+        }
+
+        .service-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+
+        .service-card h3 {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+
+        .service-card p {
+            font-size: 0.9rem;
+            font-weight: 300;
+            color: rgba(255,255,255,0.6);
+            line-height: 1.8;
+        }
+
+        .service-price {
+            margin-top: 1.5rem;
+            font-family: var(--font-display);
+            font-size: 1.3rem;
+            color: var(--color-gold);
+        }
+
+        /* Process Section */
+        .process {
+            padding: 8rem 4rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .process-steps {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 3rem;
+            margin-top: 4rem;
+        }
+
+        .process-step {
+            text-align: center;
+            position: relative;
+        }
+
+        .process-step::after {
+            content: '';
+            position: absolute;
+            top: 30px;
+            right: -1.5rem;
+            width: calc(100% - 60px);
+            height: 1px;
+            background: linear-gradient(90deg, var(--color-gold), transparent);
+        }
+
+        .process-step:last-child::after {
+            display: none;
+        }
+
+        .step-number {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            border: 1px solid var(--color-gold);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            color: var(--color-gold);
+            margin: 0 auto 1.5rem;
+            position: relative;
+            z-index: 1;
+            background: var(--color-cream);
+        }
+
+        .process-step h3 {
+            font-family: var(--font-display);
+            font-size: 1.3rem;
+            font-weight: 500;
+            margin-bottom: 0.75rem;
+        }
+
+        .process-step p {
+            font-size: 0.85rem;
+            font-weight: 300;
+            color: #666;
+            line-height: 1.7;
+        }
+
+        /* Testimonials */
+        .testimonials {
+            padding: 8rem 4rem;
+            background: linear-gradient(135deg, var(--color-sage) 0%, #9aaa8c 100%);
+        }
+
+        .testimonial-card {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            color: white;
+        }
+
+        .testimonial-quote {
+            font-family: var(--font-display);
+            font-size: 2rem;
+            font-style: italic;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+        }
+
+        .testimonial-author {
+            font-size: 0.9rem;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 8rem 4rem;
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .contact h2 {
+            font-family: var(--font-display);
+            font-size: 3rem;
+            font-weight: 400;
+            margin-bottom: 1rem;
+        }
+
+        .contact p {
+            font-weight: 300;
+            color: #666;
+            margin-bottom: 3rem;
+        }
+
+        .contact-form {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            text-align: left;
+        }
+
+        .contact-form .full-width {
+            grid-column: span 2;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+            color: #444;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            padding: 1rem;
+            border: 1px solid #ddd;
+            background: white;
+            font-family: var(--font-body);
+            font-size: 0.95rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--color-gold);
+        }
+
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .contact-form .btn {
+            margin-top: 1rem;
+            width: 100%;
+        }
+
+        /* Footer */
+        footer {
+            padding: 4rem;
+            background: var(--color-soft-black);
+            color: var(--color-cream);
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 4rem;
+        }
+
+        .footer-brand .logo {
+            color: var(--color-cream);
+            margin-bottom: 1rem;
+            display: inline-block;
+        }
+
+        .footer-brand p {
+            font-size: 0.9rem;
+            font-weight: 300;
+            color: rgba(255,255,255,0.6);
+            line-height: 1.8;
+        }
+
+        .footer-links h4 {
+            font-family: var(--font-display);
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-links a {
+            color: rgba(255,255,255,0.6);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--color-gold);
+        }
+
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 3rem auto 0;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.85rem;
+            color: rgba(255,255,255,0.5);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .social-links a {
+            color: rgba(255,255,255,0.5);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--color-gold);
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 1024px) {
+            .services-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .process-steps {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .process-step::after {
+                display: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                padding: 1rem 2rem;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .hero {
+                padding: 6rem 2rem 4rem;
+            }
+            
+            .about {
+                grid-template-columns: 1fr;
+                padding: 4rem 2rem;
+                gap: 3rem;
+            }
+            
+            .services {
+                padding: 4rem 2rem;
+            }
+            
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .process {
+                padding: 4rem 2rem;
+            }
+            
+            .process-steps {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .contact {
+                padding: 4rem 2rem;
+            }
+            
+            .contact-form {
+                grid-template-columns: 1fr;
+            }
+            
+            .contact-form .full-width {
+                grid-column: span 1;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .footer-bottom {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <a href="#" class="logo">Anyly<span>Studio</span></a>
+        <ul class="nav-links">
+            <li><a href="#about">About</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#process">Process</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-bg"></div>
+        <div class="floating-shapes">
+            <div class="shape shape-1"></div>
+            <div class="shape shape-2"></div>
+            <div class="shape shape-3"></div>
+        </div>
+        <div class="hero-content">
+            <p class="hero-subtitle">Custom Artwork & Commissions</p>
+            <h1 class="hero-title">Where Your Vision<br>Becomes <em>Art</em></h1>
+            <p class="hero-description">Transforming ideas into stunning, one-of-a-kind artwork. From portraits to abstract pieces, every commission is crafted with passion and precision.</p>
+            <a href="#contact" class="btn btn-primary">Commission Your Piece</a>
+            <a href="#services" class="btn btn-outline">View Services</a>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="about-image">
+            <div class="about-image-frame"></div>
+            <div class="about-image-accent"></div>
+        </div>
+        <div class="about-content">
+            <h2>Creating Art That<br><span>Tells Your Story</span></h2>
+            <p>Welcome to Anyly Studio, where creativity meets craftsmanship. Based in Ladysmith, Wisconsin, I specialize in creating custom artwork that captures the essence of your vision.</p>
+            <p>Every piece I create is a collaboration between artist and client. Whether you're looking for a portrait that captures a precious moment, an abstract piece that speaks to your soul, or a custom commission for a special occasion, I pour my heart into every brushstroke.</p>
+            <p>Art isn't just what I do—it's who I am. Let's create something beautiful together.</p>
+            <p class="signature">— April Johnson</p>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <div class="section-header">
+            <h2>Services & Offerings</h2>
+            <p>Each piece is crafted with meticulous attention to detail and a deep commitment to bringing your vision to life.</p>
+        </div>
+        <div class="services-grid">
+            <div class="service-card">
+                <span class="service-icon">🎨</span>
+                <h3>Custom Portraits</h3>
+                <p>Timeless portraits that capture personality, emotion, and the unique essence of your subject.</p>
+                <p class="service-price">Starting at $500</p>
+            </div>
+            <div class="service-card">
+                <span class="service-icon">✨</span>
+                <h3>Abstract Commissions</h3>
+                <p>Bold, expressive pieces designed to complement your space and reflect your personal aesthetic.</p>
+                <p class="service-price">Starting at $750</p>
+            </div>
+            <div class="service-card">
+                <span class="service-icon">🖼️</span>
+                <h3>Large Scale Artwork</h3>
+                <p>Statement pieces for homes, offices, and commercial spaces that demand attention.</p>
+                <p class="service-price">Starting at $2,000</p>
+            </div>
+            <div class="service-card">
+                <span class="service-icon">💫</span>
+                <h3>Pet Portraits</h3>
+                <p>Celebrate your furry family members with a portrait that captures their unique spirit.</p>
+                <p class="service-price">Starting at $350</p>
+            </div>
+            <div class="service-card">
+                <span class="service-icon">🎁</span>
+                <h3>Gift Commissions</h3>
+                <p>Create a meaningful, one-of-a-kind gift for weddings, anniversaries, or special occasions.</p>
+                <p class="service-price">Starting at $400</p>
+            </div>
+            <div class="service-card">
+                <span class="service-icon">🏢</span>
+                <h3>Commercial Projects</h3>
+                <p>Artwork for businesses, restaurants, hotels, and corporate collections.</p>
+                <p class="service-price">Contact for Quote</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process Section -->
+    <section class="process" id="process">
+        <div class="section-header">
+            <h2>The Creative Process</h2>
+            <p>A seamless journey from concept to completed masterpiece</p>
+        </div>
+        <div class="process-steps">
+            <div class="process-step">
+                <div class="step-number">1</div>
+                <h3>Consultation</h3>
+                <p>We discuss your vision, preferences, size requirements, and timeline to ensure perfect alignment.</p>
+            </div>
+            <div class="process-step">
+                <div class="step-number">2</div>
+                <h3>Concept & Deposit</h3>
+                <p>I create initial sketches for your approval. A 50% deposit secures your commission slot.</p>
+            </div>
+            <div class="process-step">
+                <div class="step-number">3</div>
+                <h3>Creation</h3>
+                <p>Your artwork comes to life. I share progress updates so you're part of the journey.</p>
+            </div>
+            <div class="process-step">
+                <div class="step-number">4</div>
+                <h3>Delivery</h3>
+                <p>Final payment, professional packaging, and delivery of your finished masterpiece.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials">
+        <div class="testimonial-card">
+            <p class="testimonial-quote">"April captured exactly what I envisioned and more. The attention to detail and the emotion in the piece exceeded all my expectations. A true artist."</p>
+            <p class="testimonial-author">— Satisfied Client</p>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <h2>Start Your Commission</h2>
+        <p>Ready to bring your vision to life? Fill out the form below and let's create something extraordinary together.</p>
+        <form class="contact-form" action="mailto:contact@anlystudio.com" method="post" enctype="text/plain">
+            <div class="form-group">
+                <label for="name">Your Name</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="phone">Phone Number</label>
+                <input type="tel" id="phone" name="phone">
+            </div>
+            <div class="form-group">
+                <label for="service">Service Interest</label>
+                <select id="service" name="service">
+                    <option value="">Select a service...</option>
+                    <option value="portrait">Custom Portrait</option>
+                    <option value="abstract">Abstract Commission</option>
+                    <option value="large-scale">Large Scale Artwork</option>
+                    <option value="pet">Pet Portrait</option>
+                    <option value="gift">Gift Commission</option>
+                    <option value="commercial">Commercial Project</option>
+                    <option value="other">Other</option>
+                </select>
+            </div>
+            <div class="form-group full-width">
+                <label for="message">Tell Me About Your Vision</label>
+                <textarea id="message" name="message" placeholder="Describe your project, including size preferences, style, timeline, and any reference images you'd like to share..."></textarea>
+            </div>
+            <div class="full-width">
+                <button type="submit" class="btn btn-primary">Send Inquiry</button>
+            </div>
+        </form>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-brand">
+                <a href="#" class="logo">Anyly<span>Studio</span></a>
+                <p>Creating custom artwork and commissions from the heart of Wisconsin. Every piece tells a story—let's tell yours.</p>
+            </div>
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#process">Process</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Contact</h4>
+                <ul>
+                    <li><a href="mailto:contact@anlystudio.com">contact@anlystudio.com</a></li>
+                    <li><a href="tel:+17154032580">(715) 403-2580</a></li>
+                    <li>Ladysmith, Wisconsin</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Anyly Studio. All rights reserved.</p>
+            <div class="social-links">
+                <a href="#">Instagram</a>
+                <a href="#">Facebook</a>
+                <a href="#">Pinterest</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 50) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
