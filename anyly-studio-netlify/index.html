@@ -3,7 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Anyly Studio | Custom Artwork & Commissions</title>
+    <title>Anyly Studio | Custom Artwork & Commissions in Ladysmith, WI</title>
+    <meta name="description" content="Anyly Studio creates custom portraits, abstract art, pet portraits, and commissioned artwork. Based in Ladysmith, Wisconsin. Transform your vision into stunning one-of-a-kind art.">
+    <meta name="keywords" content="custom artwork, art commissions, portrait artist, pet portraits, abstract art, Wisconsin artist, Ladysmith WI">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://anylystudio.netlify.app/">
+
+    <!-- Open Graph / Social Media -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Anyly Studio | Custom Artwork & Commissions">
+    <meta property="og:description" content="Transform your vision into stunning one-of-a-kind artwork. Custom portraits, abstracts, pet portraits & more from Ladysmith, Wisconsin.">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?w=1200&h=630&fit=crop">
+    <meta property="og:url" content="https://anylystudio.netlify.app/">
+    <meta property="og:site_name" content="Anyly Studio">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Anyly Studio | Custom Artwork & Commissions">
+    <meta name="twitter:description" content="Transform your vision into stunning one-of-a-kind artwork. Custom portraits, abstracts, pet portraits & more.">
+    <meta name="twitter:image" content="https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?w=1200&h=630&fit=crop">
+
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎨</text></svg>">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -687,18 +709,148 @@
             color: var(--color-gold);
         }
 
+        /* Portfolio Section */
+        .portfolio {
+            padding: 8rem 4rem;
+            background: var(--color-cream);
+        }
+
+        .portfolio .section-header h2 {
+            color: var(--color-charcoal);
+        }
+
+        .portfolio .section-header p {
+            color: #666;
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .portfolio-item {
+            position: relative;
+            aspect-ratio: 1;
+            overflow: hidden;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        .portfolio-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        .portfolio-item:hover img {
+            transform: scale(1.05);
+        }
+
+        .portfolio-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 1.5rem;
+            background: linear-gradient(transparent, rgba(0,0,0,0.8));
+            color: white;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+
+        .portfolio-item:hover .portfolio-caption {
+            transform: translateY(0);
+        }
+
+        .portfolio-caption h4 {
+            font-family: var(--font-display);
+            font-size: 1.2rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .portfolio-caption p {
+            font-size: 0.8rem;
+            opacity: 0.8;
+        }
+
+        /* Lightbox */
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.95);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .lightbox.active {
+            display: flex;
+        }
+
+        .lightbox-content {
+            max-width: 90vw;
+            max-height: 85vh;
+            position: relative;
+        }
+
+        .lightbox-content img {
+            max-width: 100%;
+            max-height: 80vh;
+            object-fit: contain;
+            border-radius: 4px;
+        }
+
+        .lightbox-caption {
+            text-align: center;
+            color: white;
+            margin-top: 1rem;
+            font-family: var(--font-display);
+            font-size: 1.3rem;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 2rem;
+            cursor: pointer;
+            z-index: 2001;
+            padding: 0.5rem;
+            line-height: 1;
+        }
+
+        .lightbox-close:hover {
+            color: var(--color-gold);
+        }
+
         /* Mobile Responsiveness */
         @media (max-width: 1024px) {
             .services-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
-            
+
             .process-steps {
                 grid-template-columns: repeat(2, 1fr);
             }
-            
+
             .process-step::after {
                 display: none;
+            }
+
+            .portfolio-grid {
+                grid-template-columns: repeat(2, 1fr);
             }
         }
 
@@ -779,7 +931,21 @@
             .services-grid {
                 grid-template-columns: 1fr;
             }
-            
+
+            .portfolio {
+                padding: 4rem 2rem;
+            }
+
+            .portfolio-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1rem;
+            }
+
+            .portfolio-caption {
+                transform: translateY(0);
+                padding: 1rem;
+            }
+
             .process {
                 padding: 4rem 2rem;
             }
@@ -836,6 +1002,7 @@
         <ul class="nav-links" id="main-nav">
             <li><a href="#about">About</a></li>
             <li><a href="#services">Services</a></li>
+            <li><a href="#portfolio">Portfolio</a></li>
             <li><a href="#process">Process</a></li>
             <li><a href="#contact">Contact</a></li>
         </ul>
@@ -922,6 +1089,88 @@
         </div>
     </section>
 
+    <!-- Portfolio Section -->
+    <section class="portfolio" id="portfolio">
+        <div class="section-header">
+            <h2>Portfolio</h2>
+            <p>A selection of recent commissions and personal works</p>
+        </div>
+        <div class="portfolio-grid">
+            <div class="portfolio-item" data-caption="Custom Portrait Commission">
+                <img src="https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?w=600&h=600&fit=crop" alt="Custom portrait artwork featuring expressive brushwork">
+                <div class="portfolio-caption">
+                    <h4>Custom Portrait</h4>
+                    <p>Oil on canvas</p>
+                </div>
+            </div>
+            <div class="portfolio-item" data-caption="Abstract Landscape">
+                <img src="https://images.unsplash.com/photo-1541961017774-22349e4a1262?w=600&h=600&fit=crop" alt="Abstract landscape painting with vibrant colors">
+                <div class="portfolio-caption">
+                    <h4>Abstract Landscape</h4>
+                    <p>Acrylic on canvas</p>
+                </div>
+            </div>
+            <div class="portfolio-item" data-caption="Pet Portrait - Golden Retriever">
+                <img src="https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=600&h=600&fit=crop" alt="Pet portrait of a golden retriever">
+                <div class="portfolio-caption">
+                    <h4>Pet Portrait</h4>
+                    <p>Digital illustration</p>
+                </div>
+            </div>
+            <div class="portfolio-item" data-caption="Modern Abstract Commission">
+                <img src="https://images.unsplash.com/photo-1549887534-1541e9326642?w=600&h=600&fit=crop" alt="Modern abstract artwork with geometric shapes">
+                <div class="portfolio-caption">
+                    <h4>Modern Abstract</h4>
+                    <p>Mixed media</p>
+                </div>
+            </div>
+            <div class="portfolio-item" data-caption="Family Portrait">
+                <img src="https://images.unsplash.com/photo-1578926288207-a90a5366759d?w=600&h=600&fit=crop" alt="Family portrait commission artwork">
+                <div class="portfolio-caption">
+                    <h4>Family Portrait</h4>
+                    <p>Oil on canvas</p>
+                </div>
+            </div>
+            <div class="portfolio-item" data-caption="Pet Portrait - Cat Study">
+                <img src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=600&h=600&fit=crop" alt="Pet portrait of a tabby cat">
+                <div class="portfolio-caption">
+                    <h4>Cat Portrait</h4>
+                    <p>Watercolor</p>
+                </div>
+            </div>
+            <div class="portfolio-item" data-caption="Abstract Expressionist Piece">
+                <img src="https://images.unsplash.com/photo-1547826039-bfc35e0f1ea8?w=600&h=600&fit=crop" alt="Abstract expressionist artwork with bold strokes">
+                <div class="portfolio-caption">
+                    <h4>Expressionist Study</h4>
+                    <p>Acrylic on canvas</p>
+                </div>
+            </div>
+            <div class="portfolio-item" data-caption="Commercial Mural Project">
+                <img src="https://images.unsplash.com/photo-1460661419201-fd4cecdf8a8b?w=600&h=600&fit=crop" alt="Large scale mural artwork for commercial space">
+                <div class="portfolio-caption">
+                    <h4>Commercial Mural</h4>
+                    <p>Large scale project</p>
+                </div>
+            </div>
+            <div class="portfolio-item" data-caption="Gift Commission - Wedding">
+                <img src="https://images.unsplash.com/photo-1513519245088-0e12902e35a6?w=600&h=600&fit=crop" alt="Custom wedding gift artwork">
+                <div class="portfolio-caption">
+                    <h4>Wedding Gift</h4>
+                    <p>Custom commission</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox">
+        <button class="lightbox-close" aria-label="Close lightbox">&times;</button>
+        <div class="lightbox-content">
+            <img src="" alt="" id="lightbox-img">
+            <p class="lightbox-caption" id="lightbox-caption"></p>
+        </div>
+    </div>
+
     <!-- Process Section -->
     <section class="process" id="process">
         <div class="section-header">
@@ -964,7 +1213,12 @@
     <section class="contact" id="contact">
         <h2>Start Your Commission</h2>
         <p>Ready to bring your vision to life? Fill out the form below and let's create something extraordinary together.</p>
-        <form class="contact-form" action="mailto:contact@anlystudio.com" method="post" enctype="text/plain">
+        <form class="contact-form" name="commission-inquiry" method="POST" data-netlify="true" netlify-honeypot="bot-field" id="contact-form">
+            <!-- Honeypot field for bot protection -->
+            <p class="hidden" style="display:none;">
+                <label>Don't fill this out: <input name="bot-field"></label>
+            </p>
+            <input type="hidden" name="form-name" value="commission-inquiry">
             <div class="form-group">
                 <label for="name">Your Name</label>
                 <input type="text" id="name" name="name" required>
@@ -998,6 +1252,10 @@
                 <button type="submit" class="btn btn-primary">Send Inquiry</button>
             </div>
         </form>
+        <div id="form-success" style="display:none; text-align:center; padding:2rem;">
+            <h3 style="font-family:var(--font-display); font-size:2rem; color:var(--color-gold); margin-bottom:1rem;">Thank You!</h3>
+            <p>Your inquiry has been received. I'll get back to you within 24-48 hours.</p>
+        </div>
     </section>
 
     <!-- Footer -->
@@ -1012,6 +1270,7 @@
                 <ul>
                     <li><a href="#about">About</a></li>
                     <li><a href="#services">Services</a></li>
+                    <li><a href="#portfolio">Portfolio</a></li>
                     <li><a href="#process">Process</a></li>
                     <li><a href="#contact">Contact</a></li>
                 </ul>
@@ -1078,6 +1337,67 @@
                     });
                 }
             });
+        });
+
+        // Lightbox functionality
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+        const lightboxCaption = document.getElementById('lightbox-caption');
+        const lightboxClose = document.querySelector('.lightbox-close');
+
+        document.querySelectorAll('.portfolio-item').forEach(item => {
+            item.addEventListener('click', () => {
+                const img = item.querySelector('img');
+                const caption = item.getAttribute('data-caption');
+                lightboxImg.src = img.src.replace('w=600&h=600', 'w=1200&h=1200');
+                lightboxImg.alt = img.alt;
+                lightboxCaption.textContent = caption;
+                lightbox.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            });
+        });
+
+        lightboxClose.addEventListener('click', closeLightbox);
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) closeLightbox();
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && lightbox.classList.contains('active')) {
+                closeLightbox();
+            }
+        });
+
+        function closeLightbox() {
+            lightbox.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // Form submission with Netlify
+        const contactForm = document.getElementById('contact-form');
+        const formSuccess = document.getElementById('form-success');
+
+        contactForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const formData = new FormData(contactForm);
+
+            try {
+                const response = await fetch('/', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    body: new URLSearchParams(formData).toString()
+                });
+
+                if (response.ok) {
+                    contactForm.style.display = 'none';
+                    formSuccess.style.display = 'block';
+                    contactForm.reset();
+                } else {
+                    alert('Something went wrong. Please try again or email contact@anlystudio.com directly.');
+                }
+            } catch (error) {
+                alert('Something went wrong. Please try again or email contact@anlystudio.com directly.');
+            }
         });
     </script>
 </body>
