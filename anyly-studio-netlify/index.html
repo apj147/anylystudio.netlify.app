@@ -702,12 +702,63 @@
             }
         }
 
+        /* Hamburger Menu */
+        .hamburger {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0.5rem;
+            z-index: 1001;
+        }
+
+        .hamburger-icon {
+            font-size: 1.5rem;
+            color: var(--color-charcoal);
+            line-height: 1;
+        }
+
         @media (max-width: 768px) {
             nav {
                 padding: 1rem 2rem;
             }
-            
+
+            .hamburger {
+                display: block;
+            }
+
             .nav-links {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: var(--color-cream);
+                flex-direction: column;
+                gap: 0;
+                padding: 0;
+                box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+                max-height: 0;
+                overflow: hidden;
+                opacity: 0;
+                transition: max-height 0.3s ease, opacity 0.3s ease, padding 0.3s ease;
+            }
+
+            .nav-links.open {
+                max-height: 300px;
+                opacity: 1;
+                padding: 1rem 0;
+            }
+
+            .nav-links li {
+                text-align: center;
+            }
+
+            .nav-links a {
+                display: block;
+                padding: 1rem 2rem;
+            }
+
+            .nav-links a::after {
                 display: none;
             }
             
@@ -767,12 +818,15 @@
     <!-- Navigation -->
     <nav>
         <a href="#" class="logo">Anyly<span>Studio</span></a>
-        <ul class="nav-links">
+        <ul class="nav-links" id="main-nav">
             <li><a href="#about">About</a></li>
             <li><a href="#services">Services</a></li>
             <li><a href="#process">Process</a></li>
             <li><a href="#contact">Contact</a></li>
         </ul>
+        <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
+            <span class="hamburger-icon">☰</span>
+        </button>
     </nav>
 
     <!-- Hero Section -->
@@ -975,6 +1029,26 @@
             } else {
                 nav.classList.remove('scrolled');
             }
+        });
+
+        // Hamburger menu toggle
+        const hamburger = document.getElementById('hamburger');
+        const mainNav = document.getElementById('main-nav');
+        const hamburgerIcon = hamburger.querySelector('.hamburger-icon');
+
+        hamburger.addEventListener('click', () => {
+            const isOpen = mainNav.classList.toggle('open');
+            hamburgerIcon.textContent = isOpen ? '✕' : '☰';
+            hamburger.setAttribute('aria-expanded', isOpen);
+        });
+
+        // Close menu when clicking a nav link
+        mainNav.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                mainNav.classList.remove('open');
+                hamburgerIcon.textContent = '☰';
+                hamburger.setAttribute('aria-expanded', 'false');
+            });
         });
 
         // Smooth scroll for anchor links
