@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project_summary name="anylystudio.netlify.app" type="static-website" primary_language="html">
+  <overview>
+    Static portfolio/commission website for Anyly Studio, an art commission business based in Ladysmith, Wisconsin.
+    Self-contained single-page application with all HTML, CSS, and JavaScript in one file.
+  </overview>
+
+  <technology_stack>
+    <frontend>
+      <item>HTML5 with semantic markup</item>
+      <item>CSS3 with CSS Variables, Grid, Flexbox, animations</item>
+      <item>Vanilla JavaScript (ES6+)</item>
+      <item>Google Fonts (Cormorant Garamond, Montserrat)</item>
+    </frontend>
+    <deployment>
+      <item>Netlify static hosting</item>
+      <item>GitHub Actions CI/CD with Jekyll builder</item>
+    </deployment>
+  </technology_stack>
+
+  <architecture>
+    <pattern>Single-file SPA (no build tools required)</pattern>
+    <file_structure>
+      <directory name="anyly-studio-netlify">Main application folder</directory>
+      <file name="index.html" lines="994">Complete application (HTML + CSS + JS)</file>
+      <directory name=".github/workflows">CI/CD configuration</directory>
+      <file name="jekyll-docker.yml">GitHub Actions workflow</file>
+    </file_structure>
+  </architecture>
+
+  <design_system>
+    <colors>
+      <color name="cream" value="#FAF7F2" usage="background" />
+      <color name="charcoal" value="#2C2C2C" usage="primary text" />
+      <color name="gold" value="#C9A959" usage="accent/highlight" />
+      <color name="sage" value="#8B9A7D" usage="secondary accent" />
+      <color name="terracotta" value="#C17F59" usage="emphasis" />
+    </colors>
+    <typography>
+      <font name="Cormorant Garamond" usage="headings/display" />
+      <font name="Montserrat" usage="body text" />
+    </typography>
+    <breakpoints>
+      <breakpoint width="1024px" description="tablet/desktop transition" />
+      <breakpoint width="768px" description="mobile/tablet transition" />
+    </breakpoints>
+  </design_system>
+
+  <key_features>
+    <feature>Fixed navigation with scroll-triggered styling</feature>
+    <feature>Animated floating shapes on hero section</feature>
+    <feature>Service cards with hover effects</feature>
+    <feature>4-step process visualization</feature>
+    <feature>Contact form with mailto action</feature>
+    <feature>Fully responsive design</feature>
+  </key_features>
+
+  <sections count="7">
+    <section name="Hero">Landing area with CTAs</section>
+    <section name="About">Artist bio and introduction</section>
+    <section name="Services">6 service offerings with pricing</section>
+    <section name="Process">4-step commission workflow</section>
+    <section name="Testimonials">Client feedback</section>
+    <section name="Contact">Commission inquiry form</section>
+    <section name="Footer">Links, contact info, social</section>
+  </sections>
+
+  <business_info>
+    <name>Anyly Studio</name>
+    <owner>April Johnson</owner>
+    <location>Ladysmith, Wisconsin</location>
+    <email>contact@anlystudio.com</email>
+    <phone>(715) 403-2580</phone>
+    <services>Custom Portraits, Abstract Commissions, Large Scale Artwork, Pet Portraits, Gift Commissions, Commercial Projects</services>
+  </business_info>
+</project_summary>

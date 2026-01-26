@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<node_summary path="anyly-studio-netlify/index.html:10-764" type="stylesheet" language="css">
+  <purpose>
+    Embedded CSS design system providing complete styling for the art studio website including
+    color palette, typography, layout systems, component styles, animations, and responsive breakpoints.
+  </purpose>
+
+  <behavior>
+    1. :root block defines CSS custom properties (design tokens)
+    2. Universal selector resets margin/padding and sets box-sizing
+    3. Base styles applied to html (smooth scroll) and body (font, colors)
+    4. Component-specific styles cascade in document order
+    5. Keyframe animations defined for fadeUp and float effects
+    6. Media queries override styles at 1024px and 768px breakpoints
+    7. Pseudo-elements generate decorative content
+    8. Transitions provide smooth hover and scroll state changes
+  </behavior>
+
+  <key_data_flows>
+    <input type="css-variables">10 design tokens consumed throughout stylesheet</input>
+    <input type="viewport">Media queries respond to viewport width changes</input>
+    <input type="user-interaction">:hover, :focus states trigger transitions</input>
+    <output type="computed-styles">Final styles applied to DOM elements</output>
+  </key_data_flows>
+
+  <dependencies incoming="Google Fonts (Cormorant Garamond, Montserrat)" outgoing="none" />
+
+  <side_effects>
+    <effect>overflow-x: hidden on body prevents horizontal scrolling</effect>
+    <effect>position: fixed on nav removes it from document flow</effect>
+    <effect>z-index stacking context established for nav (1000) and shapes (-1)</effect>
+  </side_effects>
+
+  <important_patterns>
+    <pattern name="CSS Custom Properties">
+      :root { --color-cream: #FAF7F2; --color-charcoal: #2C2C2C; --color-gold: #C9A959; ... }
+      Enables consistent theming and easy palette changes
+    </pattern>
+    <pattern name="Grid Layouts">
+      .about { grid-template-columns: 1fr 1fr; }
+      .services-grid { grid-template-columns: repeat(3, 1fr); }
+      .process-steps { grid-template-columns: repeat(4, 1fr); }
+      Responsive grids collapse at breakpoints
+    </pattern>
+    <pattern name="Gradient Overlays">
+      Multiple radial gradients for subtle color backgrounds
+      Linear gradients for decorative accents
+    </pattern>
+    <pattern name="Hover Transitions">
+      transform: translateY(-5px) for lift effect
+      width transitions on underline pseudo-elements
+      scaleX transitions on top border accents
+    </pattern>
+    <pattern name="Clamp Typography">
+      font-size: clamp(3rem, 8vw, 6rem) for fluid responsive headings
+    </pattern>
+  </important_patterns>
+
+  <components>
+    <component name="Navigation" lines="42-105">Fixed header with logo and links, scroll-triggered styling</component>
+    <component name="Hero" lines="107-280">Full-height landing with gradient background and floating shapes</component>
+    <component name="About" lines="282-352">Two-column grid with image frame and content</component>
+    <component name="Services" lines="354-442">Dark section with 3-column card grid</component>
+    <component name="Process" lines="444-506">4-step horizontal timeline with connected numbers</component>
+    <component name="Testimonials" lines="508-534">Centered quote card with sage gradient background</component>
+    <component name="Contact" lines="536-608">Form with 2-column input grid layout</component>
+    <component name="Footer" lines="610-688">3-column grid footer with dark background</component>
+    <component name="Responsive" lines="690-763">Media query overrides for tablet and mobile</component>
+  </components>
+
+  <edge_cases>
+    <case>backdrop-filter: blur(10px) may not render on older browsers</case>
+    <case>CSS Grid gap property requires modern browser support</case>
+    <case>clamp() function not supported in IE11</case>
+    <case>aspect-ratio property requires modern browsers</case>
+  </edge_cases>
+
+  <performance>
+    <metric name="specificity">Low specificity selectors for easy overrides</metric>
+    <metric name="paint-triggers">transform and opacity used for animations (compositor-friendly)</metric>
+    <metric name="reflow-risk">Minimal layout-triggering properties in transitions</metric>
+    <concern>754 lines of inline CSS increases initial HTML payload</concern>
+  </performance>
+
+  <security>
+    <item risk="none">No external resources beyond fonts</item>
+    <item risk="none">No user-controlled CSS values</item>
+  </security>
+</node_summary>
