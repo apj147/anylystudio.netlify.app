@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<node_summary path=".github/workflows/jekyll-docker.yml" type="workflow" language="yaml">
+  <purpose>
+    GitHub Actions CI/CD workflow that builds the Jekyll static site using a Docker container
+    whenever code is pushed to main or a pull request targets main branch.
+  </purpose>
+
+  <behavior>
+    1. Workflow triggers on push to main branch
+    2. Workflow triggers on pull request to main branch
+    3. Job runs on ubuntu-latest runner
+    4. Repository code checked out via actions/checkout@v4
+    5. Docker container jekyll/builder:latest pulled and started
+    6. Repository mounted to /srv/jekyll inside container
+    7. Output directory mounted to /srv/jekyll/_site
+    8. Permissions set to 777 recursively on /srv/jekyll
+    9. Jekyll build command executed with --future flag
+    10. Build artifacts generated in _site directory
+  </behavior>
+
+  <key_data_flows>
+    <input type="git-event">push or pull_request events to main branch</input>
+    <input type="repository">Full repository content via checkout action</input>
+    <output type="static-files">Built site in _site directory</output>
+  </key_data_flows>
+
+  <dependencies incoming="actions/checkout@v4, jekyll/builder:latest Docker image" outgoing="_site directory" />
+
+  <side_effects>
+    <effect>Docker container downloaded on first run</effect>
+    <effect>File permissions modified to 777 in workspace</effect>
+    <effect>_site directory created with built assets</effect>
+  </side_effects>
+
+  <important_patterns>
+    <pattern name="Docker Volume Mounts">
+      Two volume mounts separate source and output directories
+      -v ${{ github.workspace }}:/srv/jekyll (source)
+      -v ${{ github.workspace }}/_site:/srv/jekyll/_site (output)
+    </pattern>
+    <pattern name="Build Flags">
+      --future flag includes posts with future dates in build
+    </pattern>
+  </important_patterns>
+
+  <configuration>
+    <trigger type="push" branches="main" />
+    <trigger type="pull_request" branches="main" />
+    <runner>ubuntu-latest</runner>
+    <container>jekyll/builder:latest</container>
+    <actions>
+      <action name="checkout" version="v4" />
+    </actions>
+  </configuration>
+
+  <edge_cases>
+    <case>Jekyll not actually used in current site - workflow may be premature</case>
+    <case>No deployment step - only builds, doesn't deploy to Netlify</case>
+    <case>chmod 777 is overly permissive but contained in ephemeral container</case>
+    <case>latest tag may cause unexpected build changes over time</case>
+  </edge_cases>
+
+  <performance>
+    <metric name="docker-pull">Initial pull of jekyll/builder may take 1-2 minutes</metric>
+    <metric name="build-time">Typical Jekyll builds complete in under 1 minute</metric>
+    <concern>No caching of Docker layers or gems between runs</concern>
+  </performance>
+
+  <security>
+    <item risk="low">chmod 777 inside container - isolated from host</item>
+    <item risk="low">latest tag could introduce supply chain risk</item>
+    <item risk="info">No secrets or credentials used</item>
+    <recommendation>Pin Docker image to specific version tag</recommendation>
+    <recommendation>Consider adding cache step for faster builds</recommendation>
+  </security>
+
+  <notes>
+    <note>Current site is pure HTML/CSS/JS, not using Jekyll features</note>
+    <note>Netlify handles actual deployment, this only tests build</note>
+    <note>Workflow validates that Jekyll can process the site</note>
+  </notes>
+</node_summary>

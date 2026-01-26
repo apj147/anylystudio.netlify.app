@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<node_summary path="anyly-studio-netlify/index.html:766-967" type="markup" language="html">
+  <purpose>
+    Semantic HTML5 structure defining the complete page layout with navigation, 7 content sections,
+    and footer. Provides the document skeleton that CSS styles and JavaScript enhances.
+  </purpose>
+
+  <behavior>
+    1. Navigation renders as fixed overlay with logo and section links
+    2. Hero section displays centered content with call-to-action buttons
+    3. About section presents two-column layout with image placeholder and bio
+    4. Services section shows 6 offering cards in responsive grid
+    5. Process section displays 4-step workflow visualization
+    6. Testimonials section shows single client quote
+    7. Contact section renders multi-field inquiry form
+    8. Footer provides site navigation, contact info, and social links
+  </behavior>
+
+  <key_data_flows>
+    <input type="user-navigation">Anchor hrefs (#about, #services, etc.) enable section jumping</input>
+    <input type="form-input">Form fields collect: name, email, phone, service type, message</input>
+    <output type="mailto">Form action sends data to contact@anlystudio.com</output>
+    <output type="tel-link">Phone link enables direct dialing on mobile</output>
+  </key_data_flows>
+
+  <dependencies incoming="CSS styles, JavaScript handlers" outgoing="mailto:, tel: protocols" />
+
+  <side_effects>
+    <effect>Form submission triggers email client</effect>
+    <effect>Tel link may trigger phone dialer on mobile devices</effect>
+  </side_effects>
+
+  <sections>
+    <section name="Navigation" lines="767-776" id="none">
+      <elements>nav, a.logo, ul.nav-links with 4 li items</elements>
+      <links>Internal anchors: #about, #services, #process, #contact</links>
+    </section>
+
+    <section name="Hero" lines="778-793" id="none">
+      <elements>section.hero, div.hero-bg, div.floating-shapes (3 shapes), div.hero-content</elements>
+      <content>Subtitle, h1 title, description paragraph, 2 CTA buttons</content>
+      <ctas>Commission Your Piece (#contact), View Services (#services)</ctas>
+    </section>
+
+    <section name="About" lines="795-808" id="about">
+      <elements>section.about, div.about-image with frame and accent, div.about-content</elements>
+      <content>h2 heading, 3 paragraphs, signature line</content>
+      <data>Artist name: April Johnson, Location: Ladysmith, Wisconsin</data>
+    </section>
+
+    <section name="Services" lines="810-854" id="services">
+      <elements>section.services, div.section-header, div.services-grid with 6 service-cards</elements>
+      <services>
+        <service name="Custom Portraits" icon="palette" price="$500+" />
+        <service name="Abstract Commissions" icon="sparkles" price="$750+" />
+        <service name="Large Scale Artwork" icon="frame" price="$2,000+" />
+        <service name="Pet Portraits" icon="star" price="$350+" />
+        <service name="Gift Commissions" icon="gift" price="$400+" />
+        <service name="Commercial Projects" icon="building" price="Contact" />
+      </services>
+    </section>
+
+    <section name="Process" lines="856-884" id="process">
+      <elements>section.process, div.section-header, div.process-steps with 4 process-step items</elements>
+      <steps>
+        <step number="1" name="Consultation">Discuss vision, preferences, size, timeline</step>
+        <step number="2" name="Concept &amp; Deposit">Initial sketches, 50% deposit</step>
+        <step number="3" name="Creation">Artwork production with progress updates</step>
+        <step number="4" name="Delivery">Final payment, packaging, delivery</step>
+      </steps>
+    </section>
+
+    <section name="Testimonials" lines="886-892" id="none">
+      <elements>section.testimonials, div.testimonial-card</elements>
+      <content>Client quote, author attribution</content>
+    </section>
+
+    <section name="Contact" lines="894-932" id="contact">
+      <elements>section.contact, h2, p, form.contact-form with 5 form-groups</elements>
+      <form action="mailto:contact@anlystudio.com" method="post">
+        <field name="name" type="text" required="true" />
+        <field name="email" type="email" required="true" />
+        <field name="phone" type="tel" required="false" />
+        <field name="service" type="select" options="7" />
+        <field name="message" type="textarea" required="false" />
+      </form>
+    </section>
+
+    <section name="Footer" lines="934-967" id="none">
+      <elements>footer, div.footer-content (3 columns), div.footer-bottom</elements>
+      <columns>
+        <column name="Brand">Logo, tagline paragraph</column>
+        <column name="Quick Links">About, Services, Process, Contact</column>
+        <column name="Contact">Email, phone, location</column>
+      </columns>
+      <social>Instagram, Facebook, Pinterest (no URLs set)</social>
+      <copyright>2026 Anyly Studio</copyright>
+    </section>
+  </sections>
+
+  <edge_cases>
+    <case>Social links have empty href="#" - non-functional placeholders</case>
+    <case>Form enctype="text/plain" may cause formatting issues in mailto</case>
+    <case>No mobile menu - nav-links hidden at 768px with no alternative</case>
+  </edge_cases>
+
+  <performance>
+    <metric name="dom-elements">Approximately 100 DOM elements total</metric>
+    <metric name="images">0 actual images (all decorative via CSS)</metric>
+    <metric name="semantic-elements">Proper use of section, nav, footer, h1-h3</metric>
+  </performance>
+
+  <security>
+    <item risk="low">Email exposed in mailto: and footer link</item>
+    <item risk="low">Phone number exposed in tel: link</item>
+    <item risk="info">No CSRF protection on form (mailto doesn't require it)</item>
+  </security>
+
+  <accessibility>
+    <item status="good">Semantic HTML5 elements used throughout</item>
+    <item status="good">Form labels properly associated with inputs via for/id</item>
+    <item status="issue">No skip-to-content link for keyboard users</item>
+    <item status="issue">No ARIA landmarks beyond implicit roles</item>
+    <item status="issue">Mobile nav hidden without hamburger menu alternative</item>
+    <item status="issue">Decorative shapes lack aria-hidden</item>
+  </accessibility>
+</node_summary>

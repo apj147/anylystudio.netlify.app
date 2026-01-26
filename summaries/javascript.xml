@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<node_summary path="anyly-studio-netlify/index.html:969-993" type="script" language="js">
+  <purpose>
+    Client-side JavaScript providing interactive behaviors: navbar scroll effect that adds visual
+    feedback when user scrolls down, and smooth scrolling navigation for anchor links.
+  </purpose>
+
+  <behavior>
+    1. Script executes after DOM load (placed at end of body)
+    2. Scroll event listener attached to window object
+    3. On each scroll event, checks if scrollY > 50px threshold
+    4. If true, adds 'scrolled' class to nav element (triggers CSS styling)
+    5. If false, removes 'scrolled' class from nav element
+    6. querySelectorAll finds all anchor links with href starting with '#'
+    7. Click event listeners attached to each anchor link
+    8. On click, preventDefault() stops default jump behavior
+    9. getAttribute('href') extracts target section ID
+    10. querySelector finds target element in DOM
+    11. scrollIntoView() with smooth behavior animates scroll to target
+  </behavior>
+
+  <key_data_flows>
+    <input type="scroll-event">window.scrollY provides current scroll position</input>
+    <input type="click-event">anchor href attribute provides target selector</input>
+    <output type="dom-class">nav.classList toggled based on scroll position</output>
+    <output type="scroll-position">scrollIntoView modifies viewport scroll offset</output>
+  </key_data_flows>
+
+  <dependencies incoming="DOM elements (nav, anchor links)" outgoing="none" />
+
+  <side_effects>
+    <effect>nav element classList modified ('scrolled' class toggled)</effect>
+    <effect>Default anchor click behavior prevented</effect>
+    <effect>Viewport scroll position changed on anchor click</effect>
+  </side_effects>
+
+  <important_patterns>
+    <pattern name="Event Delegation Alternative">
+      Individual listeners on each anchor vs. single document listener
+      Trade-off: More listeners but simpler code
+    </pattern>
+    <pattern name="Defensive Target Check">
+      if (target) { ... } prevents error when href points to non-existent ID
+    </pattern>
+    <pattern name="Arrow Functions">
+      ES6 arrow syntax for concise event handlers
+    </pattern>
+    <pattern name="classList API">
+      Modern classList.add/remove vs. className string manipulation
+    </pattern>
+  </important_patterns>
+
+  <functions>
+    <function name="scroll-handler" lines="971-978" anonymous="true">
+      <signature>() => void</signature>
+      <description>Toggles 'scrolled' class on nav based on scroll position threshold</description>
+      <complexity>O(1) - single DOM query and comparison</complexity>
+    </function>
+    <function name="smooth-scroll-handler" lines="981-991" anonymous="true">
+      <signature>(e: Event) => void</signature>
+      <description>Prevents default anchor behavior and smoothly scrolls to target section</description>
+      <complexity>O(1) - single DOM query and scroll call</complexity>
+    </function>
+  </functions>
+
+  <edge_cases>
+    <case>Non-existent anchor target: silently ignored via null check</case>
+    <case>Empty href="#": would return null from querySelector("#")</case>
+    <case>Rapid scrolling: scroll events may fire frequently (no throttling)</case>
+    <case>Reduced motion preference: not respected (always smooth scrolling)</case>
+  </edge_cases>
+
+  <performance>
+    <metric name="event-frequency">Scroll handler fires on every scroll event (no throttle/debounce)</metric>
+    <metric name="dom-queries">Single querySelector per scroll event (cached element would be better)</metric>
+    <metric name="listener-count">1 scroll + N anchor click listeners (N = number of anchor links)</metric>
+    <improvement>Cache nav element outside scroll handler to reduce DOM queries</improvement>
+    <improvement>Add throttle to scroll handler to reduce function calls</improvement>
+    <improvement>Consider IntersectionObserver as alternative to scroll listener</improvement>
+  </performance>
+
+  <security>
+    <item risk="none">No user input processed</item>
+    <item risk="none">No dynamic code execution</item>
+    <item risk="none">No external data fetched</item>
+    <item risk="none">No localStorage/sessionStorage usage</item>
+  </security>
+
+  <accessibility>
+    <concern>Smooth scroll may cause issues for users with vestibular disorders</concern>
+    <recommendation>Respect prefers-reduced-motion media query</recommendation>
+  </accessibility>
+</node_summary>

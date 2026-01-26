@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<node_summary path="anyly-studio-netlify/index.html" type="file" language="html">
+  <purpose>
+    Complete single-page application containing all markup, styling, and interactivity for the Anyly Studio art commission website.
+    Serves as the sole entry point and contains the entire application code.
+  </purpose>
+
+  <behavior>
+    1. Browser loads HTML document with embedded CSS and JS
+    2. Google Fonts preconnect and load (Cormorant Garamond, Montserrat)
+    3. CSS applies design system variables and component styles
+    4. DOM renders 7 major sections in sequence (nav, hero, about, services, process, testimonials, contact, footer)
+    5. JavaScript initializes scroll listener for navbar effect
+    6. JavaScript attaches smooth scroll handlers to all anchor links
+    7. User scrolls trigger navbar styling changes at 50px threshold
+    8. Anchor link clicks smoothly scroll to target sections
+    9. Form submission opens mailto client with form data
+  </behavior>
+
+  <key_data_flows>
+    <input type="user-scroll">Window scroll events trigger navbar class toggle</input>
+    <input type="user-click">Anchor link clicks captured and redirected to smooth scroll</input>
+    <input type="form-data">Contact form collects name, email, phone, service, message</input>
+    <output type="mailto">Form submission opens email client with encoded data</output>
+    <output type="dom-mutation">Navbar classList modified based on scrollY position</output>
+  </key_data_flows>
+
+  <dependencies incoming="Google Fonts CDN" outgoing="mailto:contact@anlystudio.com" />
+
+  <side_effects>
+    <effect>DOM class manipulation on nav element during scroll</effect>
+    <effect>Default anchor behavior prevented for smooth scrolling</effect>
+    <effect>Email client launched on form submission</effect>
+  </side_effects>
+
+  <important_patterns>
+    <pattern name="CSS Custom Properties">Design tokens defined in :root for consistent theming</pattern>
+    <pattern name="Mobile-first Responsive">Base styles with progressive enhancement via media queries</pattern>
+    <pattern name="BEM-adjacent Naming">Semantic class names (hero-content, service-card, process-step)</pattern>
+    <pattern name="CSS Pseudo-elements">Decorative elements via ::before and ::after</pattern>
+    <pattern name="Event Delegation">Scroll listener on window, click handlers on anchor elements</pattern>
+  </important_patterns>
+
+  <edge_cases>
+    <case>Anchor link to non-existent ID silently fails (target check exists)</case>
+    <case>Form submission without JS falls back to mailto protocol</case>
+    <case>CSS animations may not trigger on older browsers</case>
+    <case>Backdrop-filter not supported in all browsers (graceful degradation)</case>
+  </edge_cases>
+
+  <performance>
+    <metric name="critical-path">All CSS inline, no external stylesheet blocking</metric>
+    <metric name="font-loading">Preconnect hints for Google Fonts reduce latency</metric>
+    <metric name="js-position">Script at end of body, non-blocking</metric>
+    <metric name="image-count">Zero images (placeholder decorative elements via CSS)</metric>
+    <metric name="total-lines">994 lines in single file</metric>
+    <concern>Large inline CSS (754 lines) could be extracted for caching</concern>
+  </performance>
+
+  <security>
+    <item risk="low">mailto: action exposes email to spam scrapers</item>
+    <item risk="info">No form validation beyond HTML5 required attribute</item>
+    <item risk="info">No sensitive data handling or authentication</item>
+    <item risk="info">External font CDN is trusted (Google Fonts)</item>
+  </security>
+</node_summary>
