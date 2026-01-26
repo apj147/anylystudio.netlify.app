@@ -812,6 +812,21 @@
                 text-align: center;
             }
         }
+
+        /* Reduced Motion Accessibility */
+        @media (prefers-reduced-motion: reduce) {
+            html {
+                scroll-behavior: auto;
+            }
+
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
     </style>
 </head>
 <body>
@@ -1013,9 +1028,9 @@
         <div class="footer-bottom">
             <p>&copy; 2026 Anyly Studio. All rights reserved.</p>
             <div class="social-links">
-                <a href="#">Instagram</a>
-                <a href="#">Facebook</a>
-                <a href="#">Pinterest</a>
+                <a href="https://instagram.com/anylystudio" target="_blank" rel="noopener noreferrer">Instagram</a>
+                <a href="https://facebook.com/anylystudio" target="_blank" rel="noopener noreferrer">Facebook</a>
+                <a href="https://pinterest.com/anylystudio" target="_blank" rel="noopener noreferrer">Pinterest</a>
             </div>
         </div>
     </footer>
