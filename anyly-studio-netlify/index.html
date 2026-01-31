@@ -687,28 +687,85 @@
             color: var(--color-gold);
         }
 
+        /* Mobile Menu Button */
+        .mobile-menu-btn {
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 28px;
+            height: 20px;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            z-index: 1001;
+        }
+
+        .mobile-menu-btn span {
+            display: block;
+            width: 100%;
+            height: 2px;
+            background: var(--color-charcoal);
+            transition: all 0.3s ease;
+        }
+
+        .mobile-menu-btn.active span:nth-child(1) {
+            transform: rotate(45deg) translate(6px, 6px);
+        }
+
+        .mobile-menu-btn.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .mobile-menu-btn.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(6px, -6px);
+        }
+
         /* Mobile Responsiveness */
         @media (max-width: 1024px) {
             .services-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
-            
+
             .process-steps {
                 grid-template-columns: repeat(2, 1fr);
             }
-            
+
             .process-step::after {
                 display: none;
             }
         }
 
         @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: flex;
+            }
+
             nav {
                 padding: 1rem 2rem;
             }
-            
+
             .nav-links {
                 display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: var(--color-cream);
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                gap: 2rem;
+                z-index: 1000;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .nav-links a {
+                font-size: 1.2rem;
             }
             
             .hero {
@@ -767,6 +824,11 @@
     <!-- Navigation -->
     <nav>
         <a href="#" class="logo">Anyly<span>Studio</span></a>
+        <button class="mobile-menu-btn" aria-label="Toggle navigation menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
         <ul class="nav-links">
             <li><a href="#about">About</a></li>
             <li><a href="#services">Services</a></li>
@@ -801,7 +863,8 @@
         <div class="about-content">
             <h2>Creating Art That<br><span>Tells Your Story</span></h2>
             <p>Welcome to Anyly Studio, where creativity meets craftsmanship. Based in Ladysmith, Wisconsin, I specialize in creating custom artwork that captures the essence of your vision.</p>
-            <p>Every piece I create is a collaboration between artist and client. Whether you're looking for a portrait that captures a precious moment, an abstract piece that speaks to your soul, or [...]<p>Art isn't just what I do—it's who I am. Let's create something beautiful together.</p>
+            <p>Every piece I create is a collaboration between artist and client. Whether you're looking for a portrait that captures a precious moment, an abstract piece that speaks to your soul, or custom artwork for your space, I'm here to bring it to life.</p>
+            <p>Art isn't just what I do—it's who I am. Let's create something beautiful together.</p>
             <p class="signature">— April Johnson</p>
         </div>
     </section>
@@ -975,6 +1038,23 @@
             } else {
                 nav.classList.remove('scrolled');
             }
+        });
+
+        // Mobile menu toggle
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const navLinks = document.querySelector('.nav-links');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenuBtn.classList.toggle('active');
+            navLinks.classList.toggle('active');
+        });
+
+        // Close mobile menu when clicking a link
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenuBtn.classList.remove('active');
+                navLinks.classList.remove('active');
+            });
         });
 
         // Smooth scroll for anchor links
