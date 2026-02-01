@@ -16,9 +16,11 @@
       "backgroundColor": "#ffffff"
     },
     "ios": {
+      "bundleIdentifier": "com.anylystudio.mobileapp",
       "supportsTablet": true
     },
     "android": {
+      "package": "com.anylystudio.mobileapp",
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
@@ -28,6 +30,11 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "27965e36-18c5-4364-be47-67c6fab12400"
+      }
     }
   }
 }
