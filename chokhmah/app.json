@@ -1,0 +1,26 @@
+{
+  "expo": {
+    "name": "Chokhmah",
+    "slug": "chokhmah",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "dark",
+    "splash": {
+      "backgroundColor": "#0D0D12"
+    },
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.chokhmah.app"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "backgroundColor": "#0D0D12"
+      },
+      "package": "com.chokhmah.app"
+    },
+    "plugins": [
+      "expo-font"
+    ]
+  }
+}
