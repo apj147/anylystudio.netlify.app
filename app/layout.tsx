@@ -12,7 +12,7 @@ const cormorant = Cormorant_Garamond({
   weight: ['400', '600'],
   style: ['normal'],
   variable: '--font-display',
-  display: 'optional',
+  display: 'swap',
 })
 
 const dmSans = DM_Sans({

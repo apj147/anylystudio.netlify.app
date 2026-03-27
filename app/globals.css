@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: 'Cormorant Garamond';
+  size-adjust: 98%;
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;
