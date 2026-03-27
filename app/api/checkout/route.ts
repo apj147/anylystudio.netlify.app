@@ -1,5 +1,7 @@
 import { NextResponse } from 'next/server'
-import { stripe } from '@/lib/stripe'
+import { getStripe } from '@/lib/stripe'
+
+export const dynamic = 'force-dynamic'
 
 export async function POST(request: Request) {
   try {
@@ -8,6 +10,8 @@ export async function POST(request: Request) {
     if (!priceId) {
       return NextResponse.json({ error: 'Missing priceId' }, { status: 400 })
     }
+
+    const stripe = getStripe()
 
     const session = await stripe.checkout.sessions.create({
       mode: 'payment',

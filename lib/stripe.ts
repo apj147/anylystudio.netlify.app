@@ -1,11 +1,27 @@
 import Stripe from 'stripe'
 
-export const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-  apiVersion: '2025-02-24.acacia',
-  typescript: true,
-})
+let _stripe: Stripe | null = null
 
-export const STRIPE_WEBHOOK_SECRET = process.env.STRIPE_WEBHOOK_SECRET!
+export function getStripe(): Stripe {
+  if (!_stripe) {
+    const key = process.env.STRIPE_SECRET_KEY
+    if (!key) {
+      throw new Error('STRIPE_SECRET_KEY is not set')
+    }
+    _stripe = new Stripe(key, {
+      apiVersion: '2025-02-24.acacia',
+      typescript: true,
+    })
+  }
+  return _stripe
+}
+
+/** @deprecated Use getStripe() instead */
+export const stripe = typeof process !== 'undefined' && process.env.STRIPE_SECRET_KEY
+  ? new Stripe(process.env.STRIPE_SECRET_KEY, { apiVersion: '2025-02-24.acacia', typescript: true })
+  : (null as unknown as Stripe)
+
+export const STRIPE_WEBHOOK_SECRET = process.env.STRIPE_WEBHOOK_SECRET || ''
 
 // Price ID map — all 8 real Anyly Studio products
 export const PRICE_IDS = {
