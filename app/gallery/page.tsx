@@ -1,9 +1,13 @@
-'use client'
-
 import Image from 'next/image'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
-import { motion } from 'framer-motion'
+import { BuyButton } from '@/components/buy-button'
+import type { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'Gallery | Anyly Studio',
+  description: 'Browse 9 categories of original artwork by April Johnson — portraits, abstracts, landscapes, botanical studies, pet portraits & more.',
+}
 
 const artworks = [
   {
@@ -90,57 +94,37 @@ const artworks = [
 ]
 
 export default function GalleryPage() {
-  const handleBuyNow = async (art: (typeof artworks)[number]) => {
-    if (!art.stripePriceId) return
-    const res = await fetch('/api/checkout', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        priceId: art.stripePriceId,
-        successUrl: `${window.location.origin}/success`,
-        cancelUrl: `${window.location.origin}/gallery`,
-      }),
-    })
-    const { url } = await res.json()
-    if (url) window.location.href = url
-  }
-
   return (
     <div className="min-h-screen bg-[#FAF7F2] dark:bg-neutral-950 py-16">
       <div className="max-w-7xl mx-auto px-6">
 
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="text-center mb-16"
-        >
+        {/* Header — CSS animation, no framer-motion */}
+        <div className="text-center mb-16 animate-fade-up">
           <div className="flex items-center justify-center gap-3 mb-4">
             <span className="h-px w-12 bg-[#C9A959]" />
-            <span className="text-xs tracking-[0.3em] uppercase text-[#C9A959]" style={{ fontFamily: 'DM Sans', fontWeight: 500 }}>
+            <span className="text-xs tracking-[0.3em] uppercase text-[#C9A959]" style={{ fontFamily: 'var(--font-body)', fontWeight: 500 }}>
               Original Artworks
             </span>
             <span className="h-px w-12 bg-[#C9A959]" />
           </div>
           <h1
             className="text-[clamp(3rem,7vw,5rem)] leading-tight text-[#1A1A1A] dark:text-white"
-            style={{ fontFamily: 'Cormorant Garamond, serif', fontWeight: 400 }}
+            style={{ fontFamily: 'var(--font-display), serif', fontWeight: 400 }}
           >
             The Gallery
           </h1>
-          <p className="text-[#888] mt-4 max-w-md mx-auto" style={{ fontFamily: 'DM Sans', fontWeight: 300 }}>
+          <p className="text-[#888] mt-4 max-w-md mx-auto" style={{ fontFamily: 'var(--font-body)', fontWeight: 300 }}>
             Every piece is handcrafted to order. Commission your own or start a conversation.
           </p>
-        </motion.div>
+        </div>
 
+        {/* Grid — CSS stagger animations */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {artworks.map((art, i) => (
-            <motion.div
+            <div
               key={art.id}
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, delay: i * 0.06 }}
-              className="group bg-white dark:bg-neutral-900 rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300"
+              className="group bg-white dark:bg-neutral-900 rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 animate-fade-up"
+              style={{ animationDelay: `${i * 60}ms`, animationFillMode: 'both' }}
             >
               <div className="relative aspect-square overflow-hidden">
                 <Image
@@ -149,6 +133,8 @@ export default function GalleryPage() {
                   fill
                   className="object-cover group-hover:scale-105 transition-transform duration-500"
                   sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                  quality={75}
+                  loading={i < 3 ? 'eager' : 'lazy'}
                 />
               </div>
 
@@ -157,20 +143,20 @@ export default function GalleryPage() {
                   <div>
                     <h3
                       className="text-xl text-[#1A1A1A] dark:text-white leading-tight"
-                      style={{ fontFamily: 'Cormorant Garamond, serif', fontWeight: 600 }}
+                      style={{ fontFamily: 'var(--font-display), serif', fontWeight: 600 }}
                     >
                       {art.title}
                     </h3>
-                    <p className="text-amber-600 text-xs tracking-widest uppercase mt-0.5" style={{ fontFamily: 'DM Sans' }}>
+                    <p className="text-amber-600 text-xs tracking-widest uppercase mt-0.5" style={{ fontFamily: 'var(--font-body)' }}>
                       {art.category}
                     </p>
                   </div>
-                  <p className="text-[#C9A959] font-medium text-sm text-right" style={{ fontFamily: 'DM Sans' }}>
+                  <p className="text-[#C9A959] font-medium text-sm text-right" style={{ fontFamily: 'var(--font-body)' }}>
                     {art.displayPrice}
                   </p>
                 </div>
 
-                <p className="text-[#777] dark:text-neutral-400 text-sm mb-5 leading-relaxed line-clamp-2" style={{ fontFamily: 'DM Sans', fontWeight: 300 }}>
+                <p className="text-[#777] dark:text-neutral-400 text-sm mb-5 leading-relaxed line-clamp-2" style={{ fontFamily: 'var(--font-body)', fontWeight: 300 }}>
                   {art.desc}
                 </p>
 
@@ -182,13 +168,7 @@ export default function GalleryPage() {
                   </Button>
 
                   {art.stripePriceId ? (
-                    <Button
-                      onClick={() => handleBuyNow(art)}
-                      size="sm"
-                      className="w-full bg-emerald-600 hover:bg-emerald-700 text-white rounded-none tracking-widest uppercase text-xs"
-                    >
-                      Buy Now — Secure Stripe Checkout
-                    </Button>
+                    <BuyButton priceId={art.stripePriceId} artId={art.id} />
                   ) : (
                     <Button asChild variant="outline" size="sm" className="w-full">
                       <Link href="/#contact">Get Custom Quote</Link>
@@ -196,11 +176,11 @@ export default function GalleryPage() {
                   )}
                 </div>
 
-                <p className="text-xs text-[#bbb] mt-3 text-center" style={{ fontFamily: 'DM Sans' }}>
+                <p className="text-xs text-[#bbb] mt-3 text-center" style={{ fontFamily: 'var(--font-body)' }}>
                   Secure checkout · Instant invoice via Stripe
                 </p>
               </div>
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>

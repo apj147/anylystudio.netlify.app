@@ -6,8 +6,11 @@ const nextConfig: NextConfig = {
       { protocol: 'https', hostname: 'images.unsplash.com' },
       { protocol: 'https', hostname: 'plus.unsplash.com' },
     ],
-    // Allow unoptimized local images to load even before real photos are uploaded
+    formats: ['image/avif', 'image/webp'],
     unoptimized: false,
+  },
+  experimental: {
+    optimizePackageImports: ['framer-motion', 'lucide-react'],
   },
 }
 

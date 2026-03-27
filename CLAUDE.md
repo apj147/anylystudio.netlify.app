@@ -1,170 +1,49 @@
-# ============================================================
-# ANYLY STUDIO — CLAUDE CODE AGENT MASTER PROMPT
-# Save as: CLAUDE.md in repo root
-# Run with: claude (from C:\Users\OMEN PC\anylystudio-nextjs\)
-# ============================================================
+# CLAUDE.md
 
-# CONTEXT
-You are working on AnylyStudio.com — a premium custom artwork commission
-website for April Johnson in Ladysmith, Wisconsin.
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
-**Live URL:** https://anylystudio.com
-**Stack:** Next.js 15.3.3 · TypeScript · Tailwind CSS · Framer Motion · Resend
-**Repo:** C:\Users\OMEN PC\anylystudio-nextjs\
-**Deploy:** Push to GitHub → Netlify auto-deploys
+## Commands
 
-**Brand colors:**
-- Gold: #C9A959
-- Sage: #8B9A7D
-- Cream: #FAF7F2
-- Charcoal: #2C2C2C
-- Soft Black: #1A1A1A
-- Terracotta: #C17F59
+```bash
+npm run dev      # start dev server at localhost:3000
+npm run build    # production build (runs TypeScript + lint)
+npm run lint     # ESLint check
+```
 
-**Fonts:** Cormorant Garamond (headings) · DM Sans (body)
+Deploy by pushing to GitHub — Netlify auto-deploys `main` in ~60s.
 
-**Services + Stripe prices:**
-- Custom Portraits $500 · Abstract Commissions $750
-- Landscape Paintings $650 · Botanical Studies $425
-- Live-Edge Wood Slab $600–$875 · Pet Portraits $350
-- Gift Commissions $400 · Large Scale $2,000 · Commercial: contact
+**Git push pattern** (local branch is `master`, remote expects `main`):
+```bash
+"C:\Program Files\Git\bin\git.exe" push origin master:main
+```
 
-**Gallery artworks (use /gallery/1.jpg through /gallery/9.jpg):**
-1. Mixed Media Statement — Large Scale — $2,000+
-2. Custom Portrait — Portrait — $500+
-3. Golden Retriever — Pet Portrait — $350+
-4. Wisconsin Autumn — Landscape — $650+
-5. Gold & Sage Abstract — Abstract — $750+
-6. Winter Birch — Landscape — $650+
-7. Live-Edge Landscape — Live-Edge — $600–$875
-8. Forest Floor Study — Botanical — $425+
-9. Botanical Still Life — Gift — $400+
+## Architecture
 
----
+**Next.js 15 App Router** — all routes under `app/`. No Pages Router.
 
-# TASK LIST (pick one and run it)
+### Request flow
+- Homepage (`app/page.tsx`) — server component, renders all sections (hero, about, gallery preview, services, process, contact form)
+- Gallery (`app/gallery/page.tsx`) — server component with `BuyButton` client island
+- Commission (`app/commission/page.tsx`) — client component (uses `useSearchParams`), wrapped in `<Suspense>`
+- Contact form submits to `app/api/contact/route.ts` → Resend → `hello@anylystudio.com`
+- Buy Now hits `app/api/checkout/route.ts` → Stripe Checkout session → redirects to Stripe-hosted page → `/success`
 
-## TASK A — Upload Real Gallery Photos
-Upload April's actual artwork photos to replace placeholders.
+### Key design decisions
+- **Stripe is lazy-initialized** via `getStripe()` in `lib/stripe.ts` — prevents build-time crash when `STRIPE_SECRET_KEY` is absent from the build environment
+- **`buy-button.tsx`** is the only client component on the gallery page — keeps the page server-rendered for SEO while enabling Stripe redirects
+- **Fonts** are loaded via `next/font/google` (Cormorant Garamond + DM Sans) and exposed as CSS variables `--font-display` / `--font-body`. Use `var(--font-display)` in inline styles rather than hardcoded font names
+- **Nav + Footer** live in `app/layout.tsx` globally. Do not add them inside individual pages
+- **`MobileNav`** (`components/mobile-nav.tsx`) handles hamburger + dark/light mode toggle via `next-themes`
 
-Steps:
-1. Copy the 9 artwork images from wherever April has them into:
-   C:\Users\OMEN PC\anylystudio-nextjs\public\gallery\
-   as 1.jpg, 2.jpg, 3.jpg ... 9.jpg
-2. Commit and push:
-   git add public/gallery/
-   git commit -m "feat: add real gallery artwork photos"
-   git push origin main
+### Brand
+- Gold: `#C9A959` · Sage: `#8B9A7D` · Cream: `#FAF7F2` · Charcoal: `#2C2C2C`
+- Amber-600 used in the nav/footer shell; gold `#C9A959` used throughout page content — both are intentional
 
----
+### Stripe price IDs
+All 9 price IDs are in `lib/stripe.ts` → `PRICE_IDS`. The gallery hardcodes them inline for simplicity; `PRICE_IDS` is the authoritative source if they need updating.
 
-## TASK B — Upload April Portrait Photo
-Replace the Unsplash placeholder in the About section with April's real photo.
+### Images
+Gallery artwork: `public/gallery/1.png` – `9.png`. Both `.jpg` and `.png` exist; `.png` is what the code references.
 
-Steps:
-1. Copy April's portrait photo to:
-   C:\Users\OMEN PC\anylystudio-nextjs\public\april-portrait.jpg
-2. Open app/page.tsx and find the About section image
-3. Change the src from the Unsplash URL to "/april-portrait.jpg"
-4. Commit and push
-
----
-
-## TASK C — Add Stripe Payment Links to Gallery
-Wire each "Commission Similar Piece" button to its Stripe payment link.
-
-In app/gallery/page.tsx, update each artwork's stripe field to a full URL:
-  stripe: 'https://buy.stripe.com/...'
-Then update the Commission button href from:
-  href={`/#contact?type=${art.stripe}`}
-To:
-  href={art.stripe}
-
-Get payment links from: https://dashboard.stripe.com/payment-links
-
----
-
-## TASK D — Add OG Image + Favicon
-1. Create public/og-image.jpg (1200×630px) using one of the gallery artworks
-2. Create public/favicon.ico or update the SVG emoji favicon in app/layout.tsx
-3. Commit and push
-
----
-
-## TASK E — Add Animation with Framer Motion
-The site uses Framer Motion but animations are CSS-only right now.
-Add scroll-triggered fade-up animations to service cards and gallery items.
-
-In app/page.tsx, wrap each service card with:
-  <motion.div
-    initial={{ opacity: 0, y: 24 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    viewport={{ once: true }}
-    transition={{ duration: 0.5, delay: index * 0.07 }}
-  >
-
-Do the same in app/gallery/page.tsx for artwork cards.
-
----
-
-## TASK F — Test Contact Form + Email
-1. Go to https://anylystudio.com/#contact
-2. Fill out the form with a test submission
-3. Check if email arrives at hello@anylystudio.com
-4. If not, check app/api/contact/route.ts and verify RESEND_API_KEY in Netlify:
-   https://app.netlify.com/projects/anylystudio → Site settings → Env vars
-   Key: RESEND_API_KEY
-   Value: re_AMvqxR26_2nK4PMaM5ska22mTUc3XZx6H
-
----
-
-## TASK G — Add /commission Dedicated Page
-Create app/commission/page.tsx — a full-page commission request form
-that pre-selects the artwork type from the ?art= URL param.
-
----
-
-## TASK H — Mobile QA Pass
-Test on mobile (375px viewport):
-1. Nav hamburger opens/closes correctly
-2. Gallery filter bar scrolls horizontally
-3. Service cards stack to 1 column
-4. Contact form fields are full-width
-5. Hero text doesn't overflow
-
----
-
-## TASK I — SEO + Sitemap
-1. Create app/sitemap.ts returning all routes (/, /gallery, /commission)
-2. Create app/robots.ts allowing all crawlers
-3. Update metadata in app/layout.tsx with canonical URL
-
----
-
-## HOW TO PUSH CHANGES
-After any file edit, run:
-
-  cd "C:\Users\OMEN PC\anylystudio-nextjs"
-  "C:\Program Files\Git\bin\git.exe" add -A
-  "C:\Program Files\Git\bin\git.exe" commit -m "your message here"
-  "C:\Program Files\Git\bin\git.exe" push origin main
-
-Netlify will auto-deploy in ~60 seconds.
-Check: https://app.netlify.com/projects/anylystudio/deploys
-
----
-
-## ENV VARS (already set in Netlify)
-  RESEND_API_KEY = re_AMvqxR26_2nK4PMaM5ska22mTUc3XZx6H
-  CONTACT_EMAIL = hello@anylystudio.com
-  NEXT_TELEMETRY_DISABLED = 1
-
-## KEY FILES
-  app/page.tsx              — Homepage
-  app/gallery/page.tsx      — Gallery (9 artworks, filter, lightbox)
-  app/api/contact/route.ts  — Email backend (Resend)
-  components/Nav.tsx        — Sticky nav + hamburger
-  components/ui/button.tsx  — Gold/sage/dark button variants
-  app/globals.css           — Brand fonts, CSS variables, animations
-  netlify.toml              — Build: npm run build, publish: .next
-  package.json              — Next.js 15.3.3
+### Environment variables (set in Netlify)
+`STRIPE_SECRET_KEY`, `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY`, `RESEND_API_KEY`, `NEXT_PUBLIC_SITE_URL`, `CONTACT_EMAIL`

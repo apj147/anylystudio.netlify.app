@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import { Cormorant_Garamond, DM_Sans } from 'next/font/google'
 import './globals.css'
 import { ThemeProvider } from 'next-themes'
 import { Button } from '@/components/ui/button'
@@ -7,7 +7,21 @@ import { Palette } from 'lucide-react'
 import Link from 'next/link'
 import { MobileNav } from '@/components/mobile-nav'
 
-const inter = Inter({ subsets: ['latin'] })
+const cormorant = Cormorant_Garamond({
+  subsets: ['latin'],
+  weight: ['300', '400', '500', '600', '700'],
+  style: ['normal', 'italic'],
+  variable: '--font-display',
+  display: 'swap',
+})
+
+const dmSans = DM_Sans({
+  subsets: ['latin'],
+  weight: ['300', '400', '500'],
+  style: ['normal', 'italic'],
+  variable: '--font-body',
+  display: 'swap',
+})
 
 export const metadata: Metadata = {
   title: 'Anyly Studio | Custom Artwork & Commissions',
@@ -41,20 +55,14 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning className={`${cormorant.variable} ${dmSans.variable}`}>
       <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300;1,9..40,400&display=swap"
-          rel="stylesheet"
-        />
         <link
           rel="icon"
           href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎨</text></svg>"
         />
       </head>
-      <body className={`${inter.className} antialiased`}>
+      <body className="antialiased" style={{ fontFamily: 'var(--font-body), system-ui, sans-serif' }}>
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
 
           {/* Global Sticky Nav */}
@@ -64,13 +72,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 <Palette className="w-7 h-7 text-amber-600" />
                 <span
                   className="text-2xl tracking-tight text-neutral-900 dark:text-amber-100"
-                  style={{ fontFamily: 'Cormorant Garamond, serif', fontWeight: 600 }}
+                  style={{ fontFamily: 'var(--font-display), Georgia, serif', fontWeight: 600 }}
                 >
                   Anyly<span className="text-amber-600">Studio</span>
                 </span>
               </Link>
 
-              {/* Desktop Nav */}
               <div className="hidden md:flex items-center gap-8 text-sm font-medium">
                 <Link href="/#about" className="text-neutral-600 dark:text-neutral-300 hover:text-amber-600 transition-colors">About</Link>
                 <Link href="/gallery" className="text-neutral-600 dark:text-neutral-300 hover:text-amber-600 transition-colors">Gallery</Link>
@@ -104,13 +111,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                     <Palette className="w-7 h-7 text-amber-600" />
                     <span
                       className="text-2xl text-white"
-                      style={{ fontFamily: 'Cormorant Garamond, serif', fontWeight: 600 }}
+                      style={{ fontFamily: 'var(--font-display), Georgia, serif', fontWeight: 600 }}
                     >
                       Anyly<span className="text-amber-600">Studio</span>
                     </span>
                   </div>
                   <p className="text-sm">Handcrafted in Ladysmith, Wisconsin</p>
-                  <p className="text-xs mt-6">© {new Date().getFullYear()} April Johnson. All Rights Reserved.</p>
+                  <p className="text-xs mt-6">&copy; {new Date().getFullYear()} April Johnson. All Rights Reserved.</p>
                 </div>
 
                 <div>
