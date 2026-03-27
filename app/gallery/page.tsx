@@ -10,124 +10,124 @@ import { ArrowRight, ExternalLink } from 'lucide-react'
 const artworks = [
   {
     id: 1,
-    title: 'Golden Reverie',
-    category: 'Portrait',
-    medium: 'Oil on canvas',
-    size: '24 × 30"',
-    price: '$500+',
-    priceNote: 'Custom portraits from $500',
-    desc: 'A luminous portrait capturing the warmth and depth of human expression through impressionistic brushwork and rich, golden tones.',
-    img: 'https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?w=700&q=85&fit=crop',
-    stripe: 'portrait',
+    title: 'Mixed Media Statement',
+    category: 'Large Scale',
+    medium: 'Mixed media on canvas',
+    size: '48 × 60"',
+    price: '$2,000+',
+    priceNote: 'Large scale from $2,000',
+    desc: 'A commanding statement piece built for homes, offices, and commercial spaces that demand bold visual presence and original character.',
+    img: '/gallery/1.jpg',
+    stripe: 'large',
     featured: true,
   },
   {
     id: 2,
-    title: 'Whispers of Autumn',
-    category: 'Abstract',
-    medium: 'Mixed media on canvas',
-    size: '36 × 48"',
-    price: '$750+',
-    priceNote: 'Abstract commissions from $750',
-    desc: 'Bold, textured strokes of amber and sienna evoke the fleeting beauty of the season — movement captured in pigment and gesture.',
-    img: 'https://images.unsplash.com/photo-1541961017774-22349e4a1262?w=700&q=85&fit=crop',
-    stripe: 'abstract',
-    featured: false,
+    title: 'Custom Portrait',
+    category: 'Portrait',
+    medium: 'Oil on canvas',
+    size: '20 × 24"',
+    price: '$500+',
+    priceNote: 'Custom portraits from $500',
+    desc: 'Timeless portraiture capturing personality, emotion, and the unique essence of your subject — painted with warmth and precision.',
+    img: '/gallery/2.jpg',
+    stripe: 'portrait',
+    featured: true,
   },
   {
     id: 3,
-    title: 'Wisconsin Horizon',
-    category: 'Landscape',
-    medium: 'Oil on canvas',
-    size: '30 × 40"',
-    price: '$650+',
-    priceNote: 'Landscapes from $650',
-    desc: 'Rolling hills and open sky — the quiet grandeur of the Midwest rendered in warm, sweeping light. A love letter to Wisconsin.',
-    img: 'https://images.unsplash.com/photo-1580136579312-94651dfd596d?w=700&q=85&fit=crop',
-    stripe: 'landscape',
+    title: 'Golden Retriever',
+    category: 'Pet Portrait',
+    medium: 'Oil on board',
+    size: '12 × 16"',
+    price: '$350+',
+    priceNote: 'Pet portraits from $350',
+    desc: 'A celebration of the bond between pet and family — painted with the joy and personality that makes each animal irreplaceable.',
+    img: '/gallery/3.jpg',
+    stripe: 'pet',
     featured: false,
   },
   {
     id: 4,
-    title: 'Peonies Study No. 3',
-    category: 'Botanical',
-    medium: 'Gouache on paper',
-    size: '16 × 20"',
-    price: '$425+',
-    priceNote: 'Botanical studies from $425',
-    desc: 'Meticulously rendered peonies in full bloom — a botanical study that celebrates the extravagant architecture of the natural world.',
-    img: 'https://images.unsplash.com/photo-1578301978693-85fa9c0320b9?w=700&q=85&fit=crop',
-    stripe: 'botanical',
-    featured: true,
+    title: 'Wisconsin Autumn',
+    category: 'Landscape',
+    medium: 'Oil on canvas',
+    size: '24 × 36"',
+    price: '$650+',
+    priceNote: 'Landscapes from $650',
+    desc: 'Rolling hills and fiery foliage — a love letter to Wisconsin rendered in warm autumnal light. Regional beauty captured forever.',
+    img: '/gallery/4.jpg',
+    stripe: 'landscape',
+    featured: false,
   },
   {
     id: 5,
-    title: 'Ember Slab No. 7',
+    title: 'Gold & Sage Abstract',
+    category: 'Abstract',
+    medium: 'Acrylic on canvas',
+    size: '30 × 40"',
+    price: '$750+',
+    priceNote: 'Abstract commissions from $750',
+    desc: 'Bold, expressive strokes in signature gold and sage — designed to anchor a room and reflect your personal aesthetic with confidence.',
+    img: '/gallery/5.jpg',
+    stripe: 'abstract',
+    featured: true,
+  },
+  {
+    id: 6,
+    title: 'Winter Birch',
+    category: 'Landscape',
+    medium: 'Oil on linen',
+    size: '18 × 24"',
+    price: '$650+',
+    priceNote: 'Landscapes from $650',
+    desc: 'Serene birch trunks against a pale Wisconsin winter — stillness and silence made visible through careful observation and quiet brushwork.',
+    img: '/gallery/6.jpg',
+    stripe: 'landscape',
+    featured: false,
+  },
+  {
+    id: 7,
+    title: 'Live-Edge Landscape',
     category: 'Live-Edge',
     medium: 'Acrylic on live-edge walnut',
     size: 'Unique slab',
     price: '$600–$875',
     priceNote: 'Live-edge slabs $600–$875',
     desc: 'Painted directly onto a natural walnut slab — the organic edge becomes part of the composition, where nature and art merge completely.',
-    img: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=700&q=85&fit=crop',
+    img: '/gallery/7.jpg',
     stripe: 'liveedge',
     featured: true,
   },
   {
-    id: 6,
-    title: 'Mochi & Max',
-    category: 'Pet Portrait',
-    medium: 'Oil on board',
-    size: '12 × 16"',
-    price: '$350+',
-    priceNote: 'Pet portraits from $350',
-    desc: 'A celebration of the bond between pet and family — painted with the warmth and personality that makes each animal unique.',
-    img: 'https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=700&q=85&fit=crop',
-    stripe: 'pet',
-    featured: false,
-  },
-  {
-    id: 7,
-    title: 'For the Bride',
-    category: 'Gift',
-    medium: 'Watercolor',
-    size: '11 × 14"',
-    price: '$400+',
-    priceNote: 'Gift commissions from $400',
-    desc: 'Commissioned as a wedding gift — a delicate watercolor portrait capturing an irreplaceable moment for a lifetime of memories.',
-    img: 'https://images.unsplash.com/photo-1532635241-17e820acc59f?w=700&q=85&fit=crop',
-    stripe: 'gift',
-    featured: false,
-  },
-  {
     id: 8,
-    title: 'Ascension',
-    category: 'Large Scale',
-    medium: 'Acrylic & gold leaf',
-    size: '60 × 80"',
-    price: '$2,000+',
-    priceNote: 'Large scale from $2,000',
-    desc: 'A commanding large-format piece in acrylic with gold leaf — designed to become the defining visual statement of any space it inhabits.',
-    img: 'https://images.unsplash.com/photo-1547891654-e66ed7ebb968?w=700&q=85&fit=crop',
-    stripe: 'large',
-    featured: true,
+    title: 'Forest Floor Study',
+    category: 'Botanical',
+    medium: 'Gouache on paper',
+    size: '11 × 14"',
+    price: '$425+',
+    priceNote: 'Botanical studies from $425',
+    desc: 'Intricate detail from the forest floor — mosses, ferns, and fallen leaves rendered with patience and a naturalist\'s eye.',
+    img: '/gallery/8.jpg',
+    stripe: 'botanical',
+    featured: false,
   },
   {
     id: 9,
-    title: 'The Quiet Hours',
-    category: 'Portrait',
-    medium: 'Oil on linen',
-    size: '20 × 24"',
-    price: '$500+',
-    priceNote: 'Custom portraits from $500',
-    desc: 'An intimate portrait in oil on linen — soft light, quiet mood, and the kind of presence that fills a room without demanding it.',
-    img: 'https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=700&q=85&fit=crop',
-    stripe: 'portrait',
+    title: 'Botanical Still Life',
+    category: 'Gift',
+    medium: 'Watercolor on paper',
+    size: '9 × 12"',
+    price: '$400+',
+    priceNote: 'Gift commissions from $400',
+    desc: 'A gift-ready botanical still life — timeless, elegant, and personal. The kind of piece someone keeps on their wall for a lifetime.',
+    img: '/gallery/9.jpg',
+    stripe: 'gift',
     featured: false,
   },
 ]
 
-const categories = ['All', 'Portrait', 'Abstract', 'Landscape', 'Botanical', 'Live-Edge', 'Pet Portrait', 'Gift', 'Large Scale']
+const categories = ['All', 'Portrait', 'Abstract', 'Landscape', 'Botanical', 'Large Scale', 'Live-Edge', 'Pet Portrait', 'Gift']
 
 export default function GalleryPage() {
   const [activeCategory, setActiveCategory] = useState('All')
@@ -170,7 +170,7 @@ export default function GalleryPage() {
 
       {/* Filter bar */}
       <div className="sticky top-[68px] z-40 bg-[#FAF7F2]/98 backdrop-blur-md border-b border-[#E8D5A3]/60">
-        <div className="max-w-7xl mx-auto px-6 py-4 flex gap-2 overflow-x-auto scrollbar-hide">
+        <div className="max-w-7xl mx-auto px-6 py-4 flex gap-2 overflow-x-auto">
           {categories.map((cat) => (
             <button
               key={cat}
@@ -206,7 +206,7 @@ export default function GalleryPage() {
               >
                 {/* Image */}
                 <div
-                  className="relative aspect-[4/3] overflow-hidden cursor-zoom-in"
+                  className="relative aspect-[4/3] overflow-hidden cursor-zoom-in bg-[#F5F0E8]"
                   onClick={() => setLightbox(art)}
                 >
                   <Image
@@ -312,12 +312,12 @@ export default function GalleryPage() {
             className="relative bg-white rounded-2xl overflow-hidden max-w-3xl w-full max-h-[90vh] flex flex-col"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="relative aspect-video">
+            <div className="relative aspect-video bg-[#F5F0E8]">
               <Image
                 src={lightbox.img}
                 alt={lightbox.title}
                 fill
-                className="object-cover"
+                className="object-contain"
                 sizes="800px"
               />
             </div>
