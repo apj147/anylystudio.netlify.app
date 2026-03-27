@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { Nav } from '@/components/Nav'
-import { ArrowRight, ExternalLink } from 'lucide-react'
+import { ArrowRight, ExternalLink, ShoppingBag, Loader2 } from 'lucide-react'
 
 const artworks = [
   {
@@ -15,11 +15,11 @@ const artworks = [
     medium: 'Mixed media on canvas',
     size: '48 × 60"',
     price: '$2,000+',
-    priceNote: 'Large scale from $2,000',
-    desc: 'A commanding statement piece built for homes, offices, and commercial spaces that demand bold visual presence and original character.',
     img: '/gallery/1.png',
     stripe: 'large',
+    priceId: 'price_1TCrRbHDqY3jqf0NVNepaalD',
     featured: true,
+    desc: 'A commanding statement piece built for homes, offices, and commercial spaces that demand bold visual presence and original character.',
   },
   {
     id: 2,
@@ -28,11 +28,11 @@ const artworks = [
     medium: 'Oil on canvas',
     size: '20 × 24"',
     price: '$500+',
-    priceNote: 'Custom portraits from $500',
-    desc: 'Timeless portraiture capturing personality, emotion, and the unique essence of your subject — painted with warmth and precision.',
     img: '/gallery/2.png',
     stripe: 'portrait',
+    priceId: 'price_1TCrRQHDqY3jqf0NlIyep1Tw',
     featured: true,
+    desc: 'Timeless portraiture capturing personality, emotion, and the unique essence of your subject — painted with warmth and precision.',
   },
   {
     id: 3,
@@ -41,11 +41,11 @@ const artworks = [
     medium: 'Oil on board',
     size: '12 × 16"',
     price: '$350+',
-    priceNote: 'Pet portraits from $350',
-    desc: 'A celebration of the bond between pet and family — painted with the joy and personality that makes each animal irreplaceable.',
     img: '/gallery/3.png',
     stripe: 'pet',
+    priceId: 'price_1TCrRKHDqY3jqf0NKhvGDETi',
     featured: false,
+    desc: 'A celebration of the bond between pet and family — painted with the joy and personality that makes each animal irreplaceable.',
   },
   {
     id: 4,
@@ -54,11 +54,11 @@ const artworks = [
     medium: 'Oil on canvas',
     size: '24 × 36"',
     price: '$650+',
-    priceNote: 'Landscapes from $650',
-    desc: 'Rolling hills and fiery foliage — a love letter to Wisconsin rendered in warm autumnal light. Regional beauty captured forever.',
     img: '/gallery/4.png',
     stripe: 'landscape',
+    priceId: 'price_1TD9aWHDqY3jqf0NdXTXIEqu',
     featured: false,
+    desc: 'Rolling hills and fiery foliage — a love letter to Wisconsin rendered in warm autumnal light. Regional beauty captured forever.',
   },
   {
     id: 5,
@@ -67,11 +67,11 @@ const artworks = [
     medium: 'Acrylic on canvas',
     size: '30 × 40"',
     price: '$750+',
-    priceNote: 'Abstract commissions from $750',
-    desc: 'Bold, expressive strokes in signature gold and sage — designed to anchor a room and reflect your personal aesthetic with confidence.',
     img: '/gallery/5.png',
     stripe: 'abstract',
+    priceId: 'price_1TCrRUHDqY3jqf0Nxm3qdFdq',
     featured: true,
+    desc: 'Bold, expressive strokes in signature gold and sage — designed to anchor a room and reflect your personal aesthetic with confidence.',
   },
   {
     id: 6,
@@ -80,11 +80,11 @@ const artworks = [
     medium: 'Oil on linen',
     size: '18 × 24"',
     price: '$650+',
-    priceNote: 'Landscapes from $650',
-    desc: 'Serene birch trunks against a pale Wisconsin winter — stillness and silence made visible through careful observation and quiet brushwork.',
     img: '/gallery/6.png',
     stripe: 'landscape',
+    priceId: 'price_1TD9aWHDqY3jqf0NdXTXIEqu',
     featured: false,
+    desc: 'Serene birch trunks against a pale Wisconsin winter — stillness and silence made visible through careful observation and quiet brushwork.',
   },
   {
     id: 7,
@@ -93,11 +93,11 @@ const artworks = [
     medium: 'Acrylic on live-edge walnut',
     size: 'Unique slab',
     price: '$600–$875',
-    priceNote: 'Live-edge slabs $600–$875',
-    desc: 'Painted directly onto a natural walnut slab — the organic edge becomes part of the composition, where nature and art merge completely.',
     img: '/gallery/7.png',
     stripe: 'liveedge',
+    priceId: 'price_1TCrRXHDqY3jqf0N7pPL6AOB',
     featured: true,
+    desc: 'Painted directly onto a natural walnut slab — the organic edge becomes part of the composition, where nature and art merge completely.',
   },
   {
     id: 8,
@@ -106,11 +106,11 @@ const artworks = [
     medium: 'Gouache on paper',
     size: '11 × 14"',
     price: '$425+',
-    priceNote: 'Botanical studies from $425',
-    desc: 'Intricate detail from the forest floor — mosses, ferns, and fallen leaves rendered with patience and a naturalist\'s eye.',
     img: '/gallery/8.png',
     stripe: 'botanical',
+    priceId: 'price_1TD9abHDqY3jqf0NVcAGlNkv',
     featured: false,
+    desc: 'Intricate detail from the forest floor — mosses, ferns, and fallen leaves rendered with patience and a naturalist\'s eye.',
   },
   {
     id: 9,
@@ -119,11 +119,11 @@ const artworks = [
     medium: 'Watercolor on paper',
     size: '9 × 12"',
     price: '$400+',
-    priceNote: 'Gift commissions from $400',
-    desc: 'A gift-ready botanical still life — timeless, elegant, and personal. The kind of piece someone keeps on their wall for a lifetime.',
     img: '/gallery/9.png',
     stripe: 'gift',
+    priceId: 'price_1TCrRNHDqY3jqf0Nqssg9RSf',
     featured: false,
+    desc: 'A gift-ready botanical still life — timeless, elegant, and personal. The kind of piece someone keeps on their wall for a lifetime.',
   },
 ]
 
@@ -132,11 +132,35 @@ const categories = ['All', 'Portrait', 'Abstract', 'Landscape', 'Botanical', 'La
 export default function GalleryPage() {
   const [activeCategory, setActiveCategory] = useState('All')
   const [lightbox, setLightbox] = useState<null | typeof artworks[0]>(null)
+  const [loadingId, setLoadingId] = useState<number | null>(null)
 
   const filtered =
     activeCategory === 'All'
       ? artworks
       : artworks.filter((a) => a.category === activeCategory)
+
+  const handleBuyNow = async (art: typeof artworks[0]) => {
+    setLoadingId(art.id)
+    try {
+      const res = await fetch('/api/checkout', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          priceId: art.priceId,
+          successUrl: `${window.location.origin}/success`,
+          cancelUrl: `${window.location.origin}/gallery`,
+        }),
+      })
+      const { url, error } = await res.json()
+      if (error) throw new Error(error)
+      if (url) window.location.href = url
+    } catch (err) {
+      console.error('Checkout error:', err)
+      alert('Something went wrong. Please try again or contact hello@anylystudio.com')
+    } finally {
+      setLoadingId(null)
+    }
+  }
 
   return (
     <>
@@ -162,7 +186,7 @@ export default function GalleryPage() {
               Gallery
             </h1>
             <p className="text-[#888] text-sm pb-3" style={{ fontFamily: 'DM Sans', fontWeight: 300 }}>
-              9 original works · Click any piece to commission a similar artwork
+              9 original works · Commission or buy securely via Stripe
             </p>
           </div>
         </div>
@@ -257,12 +281,30 @@ export default function GalleryPage() {
                     {art.desc}
                   </p>
 
-                  <Button asChild variant="outline" size="sm" className="w-full">
-                    <Link href={`/#contact?type=${art.stripe}`}>
-                      Commission Similar Piece
-                      <ArrowRight size={14} />
-                    </Link>
-                  </Button>
+                  {/* Two-button CTA */}
+                  <div className="flex flex-col gap-2">
+                    <Button asChild variant="outline" size="sm" className="w-full">
+                      <Link href={`/#contact?type=${art.stripe}`}>
+                        Commission Similar Piece
+                        <ArrowRight size={14} />
+                      </Link>
+                    </Button>
+                    <button
+                      onClick={() => handleBuyNow(art)}
+                      disabled={loadingId === art.id}
+                      className="w-full flex items-center justify-center gap-2 bg-[#1A1A1A] hover:bg-[#2C2C2C] disabled:opacity-60 text-[#FAF7F2] text-xs tracking-[0.15em] uppercase font-medium h-9 px-6 rounded-none transition-colors duration-200"
+                      style={{ fontFamily: 'DM Sans', fontWeight: 500 }}
+                    >
+                      {loadingId === art.id ? (
+                        <><Loader2 size={14} className="animate-spin" /> Processing…</>
+                      ) : (
+                        <><ShoppingBag size={14} /> Buy Now — Secure Stripe Checkout</>
+                      )}
+                    </button>
+                  </div>
+                  <p className="text-[10px] text-center text-[#ccc] mt-2" style={{ fontFamily: 'DM Sans' }}>
+                    Secure checkout · Invoice emailed automatically
+                  </p>
                 </div>
               </div>
             ))}
@@ -308,7 +350,7 @@ export default function GalleryPage() {
             <div className="relative aspect-video bg-[#F5F0E8]">
               <Image src={lightbox.img} alt={lightbox.title} fill className="object-contain" sizes="800px" />
             </div>
-            <div className="p-6 flex items-center justify-between">
+            <div className="p-6 flex flex-wrap items-center justify-between gap-4">
               <div>
                 <h3 className="text-2xl text-[#1A1A1A]" style={{ fontFamily: 'Cormorant Garamond, serif', fontWeight: 600 }}>
                   {lightbox.title}
@@ -317,11 +359,24 @@ export default function GalleryPage() {
                   {lightbox.medium} · {lightbox.size}
                 </p>
               </div>
-              <div className="flex items-center gap-4">
+              <div className="flex items-center gap-3">
                 <span className="text-2xl text-[#C9A959]" style={{ fontFamily: 'Cormorant Garamond, serif', fontWeight: 500 }}>
                   {lightbox.price}
                 </span>
-                <Button asChild size="sm" variant="default">
+                <button
+                  onClick={() => handleBuyNow(lightbox)}
+                  disabled={loadingId === lightbox.id}
+                  className="flex items-center gap-2 bg-[#1A1A1A] hover:bg-[#2C2C2C] text-[#FAF7F2] text-xs tracking-[0.15em] uppercase px-5 py-3 transition-colors"
+                  style={{ fontFamily: 'DM Sans', fontWeight: 500 }}
+                >
+                  {loadingId === lightbox.id ? (
+                    <Loader2 size={14} className="animate-spin" />
+                  ) : (
+                    <ShoppingBag size={14} />
+                  )}
+                  Buy Now
+                </button>
+                <Button asChild size="sm" variant="outline">
                   <Link href={`/#contact?type=${lightbox.stripe}`} onClick={() => setLightbox(null)}>Commission</Link>
                 </Button>
                 <button onClick={() => setLightbox(null)} className="text-[#bbb] hover:text-[#2C2C2C] transition-colors text-2xl leading-none">×</button>

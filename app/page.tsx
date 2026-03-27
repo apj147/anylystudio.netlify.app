@@ -2,7 +2,6 @@ import type { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
-import { Nav } from '@/components/Nav'
 import {
   Palette,
   Sparkles,
@@ -110,8 +109,6 @@ const process = [
 export default function Home() {
   return (
     <>
-      <Nav />
-
       {/* ── HERO ── */}
       <section className="min-h-screen relative overflow-hidden flex items-center pt-24 pb-16 bg-[#FAF7F2]">
         {/* Background gradients */}
@@ -569,30 +566,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── FOOTER ── */}
-      <footer className="bg-[#1A1A1A] text-[#FAF7F2] py-12">
-        <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
-          <div>
-            <p
-              className="text-2xl mb-1"
-              style={{ fontFamily: 'Cormorant Garamond, serif', fontWeight: 600 }}
-            >
-              Anyly<span className="text-[#C9A959]">Studio</span>
-            </p>
-            <p className="text-xs text-[#666] tracking-widest uppercase" style={{ fontFamily: 'DM Sans' }}>
-              Ladysmith, Wisconsin
-            </p>
-          </div>
-          <div className="flex gap-8 text-xs text-[#888] tracking-widest uppercase" style={{ fontFamily: 'DM Sans' }}>
-            <Link href="/gallery" className="hover:text-[#C9A959] transition-colors">Gallery</Link>
-            <Link href="/#services" className="hover:text-[#C9A959] transition-colors">Services</Link>
-            <Link href="/#contact" className="hover:text-[#C9A959] transition-colors">Contact</Link>
-          </div>
-          <p className="text-xs text-[#666]" style={{ fontFamily: 'DM Sans' }}>
-            © {new Date().getFullYear()} Anyly Studio · April Johnson
-          </p>
-        </div>
-      </footer>
     </>
   )
 }
