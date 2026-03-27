@@ -176,8 +176,8 @@ export default function Home() {
               <div className="absolute -inset-4 bg-gradient-to-br from-[#C9A959]/20 to-[#8B9A7D]/15 rounded-[2rem] blur-2xl" />
               <div className="relative rounded-[1.5rem] overflow-hidden shadow-2xl aspect-[4/5]">
                 <Image
-                  src="https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?w=800&q=90&fit=crop"
-                  alt="Anyly Studio — Custom Artwork by April Johnson"
+                  src="/hero.jpg"
+                  alt="April Johnson - Custom Artwork"
                   fill
                   className="object-cover"
                   priority
