@@ -1,12 +1,10 @@
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
-import { Nav } from '@/components/Nav'
 import { CheckCircle, ArrowRight, Mail } from 'lucide-react'
 
 export default function SuccessPage() {
   return (
     <>
-      <Nav />
       <main className="min-h-screen bg-[#FAF7F2] flex items-center justify-center px-6 pt-24">
         <div className="max-w-lg w-full text-center space-y-8">
           {/* Icon */}
