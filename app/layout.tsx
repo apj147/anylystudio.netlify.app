@@ -10,7 +10,7 @@ import { MobileNav } from '@/components/mobile-nav'
 const cormorant = Cormorant_Garamond({
   subsets: ['latin'],
   weight: ['400', '600'],
-  style: ['normal', 'italic'],
+  style: ['normal'],
   variable: '--font-display',
   display: 'optional',
 })
