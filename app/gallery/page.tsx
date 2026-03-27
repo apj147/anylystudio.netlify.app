@@ -17,7 +17,7 @@ const artworks = [
     price: '$2,000+',
     priceNote: 'Large scale from $2,000',
     desc: 'A commanding statement piece built for homes, offices, and commercial spaces that demand bold visual presence and original character.',
-    img: '/gallery/1.jpg',
+    img: '/gallery/1.png',
     stripe: 'large',
     featured: true,
   },
@@ -30,7 +30,7 @@ const artworks = [
     price: '$500+',
     priceNote: 'Custom portraits from $500',
     desc: 'Timeless portraiture capturing personality, emotion, and the unique essence of your subject — painted with warmth and precision.',
-    img: '/gallery/2.jpg',
+    img: '/gallery/2.png',
     stripe: 'portrait',
     featured: true,
   },
@@ -43,7 +43,7 @@ const artworks = [
     price: '$350+',
     priceNote: 'Pet portraits from $350',
     desc: 'A celebration of the bond between pet and family — painted with the joy and personality that makes each animal irreplaceable.',
-    img: '/gallery/3.jpg',
+    img: '/gallery/3.png',
     stripe: 'pet',
     featured: false,
   },
@@ -56,7 +56,7 @@ const artworks = [
     price: '$650+',
     priceNote: 'Landscapes from $650',
     desc: 'Rolling hills and fiery foliage — a love letter to Wisconsin rendered in warm autumnal light. Regional beauty captured forever.',
-    img: '/gallery/4.jpg',
+    img: '/gallery/4.png',
     stripe: 'landscape',
     featured: false,
   },
@@ -69,7 +69,7 @@ const artworks = [
     price: '$750+',
     priceNote: 'Abstract commissions from $750',
     desc: 'Bold, expressive strokes in signature gold and sage — designed to anchor a room and reflect your personal aesthetic with confidence.',
-    img: '/gallery/5.jpg',
+    img: '/gallery/5.png',
     stripe: 'abstract',
     featured: true,
   },
@@ -82,7 +82,7 @@ const artworks = [
     price: '$650+',
     priceNote: 'Landscapes from $650',
     desc: 'Serene birch trunks against a pale Wisconsin winter — stillness and silence made visible through careful observation and quiet brushwork.',
-    img: '/gallery/6.jpg',
+    img: '/gallery/6.png',
     stripe: 'landscape',
     featured: false,
   },
@@ -95,7 +95,7 @@ const artworks = [
     price: '$600–$875',
     priceNote: 'Live-edge slabs $600–$875',
     desc: 'Painted directly onto a natural walnut slab — the organic edge becomes part of the composition, where nature and art merge completely.',
-    img: '/gallery/7.jpg',
+    img: '/gallery/7.png',
     stripe: 'liveedge',
     featured: true,
   },
@@ -108,7 +108,7 @@ const artworks = [
     price: '$425+',
     priceNote: 'Botanical studies from $425',
     desc: 'Intricate detail from the forest floor — mosses, ferns, and fallen leaves rendered with patience and a naturalist\'s eye.',
-    img: '/gallery/8.jpg',
+    img: '/gallery/8.png',
     stripe: 'botanical',
     featured: false,
   },
@@ -121,7 +121,7 @@ const artworks = [
     price: '$400+',
     priceNote: 'Gift commissions from $400',
     desc: 'A gift-ready botanical still life — timeless, elegant, and personal. The kind of piece someone keeps on their wall for a lifetime.',
-    img: '/gallery/9.jpg',
+    img: '/gallery/9.png',
     stripe: 'gift',
     featured: false,
   },
@@ -278,21 +278,14 @@ export default function GalleryPage() {
           <div className="mt-20 bg-[#1A1A1A] rounded-3xl p-12 text-center relative overflow-hidden">
             <div className="absolute inset-0 bg-gradient-to-br from-[#C9A959]/10 via-transparent to-[#8B9A7D]/8" />
             <div className="relative">
-              <p
-                className="text-[#C9A959] text-xs tracking-[0.3em] uppercase mb-4"
-                style={{ fontFamily: 'DM Sans', fontWeight: 500 }}
-              >
+              <p className="text-[#C9A959] text-xs tracking-[0.3em] uppercase mb-4" style={{ fontFamily: 'DM Sans', fontWeight: 500 }}>
                 Ready to Commission?
               </p>
-              <h2
-                className="text-[clamp(2rem,4vw,3.5rem)] text-[#FAF7F2] mb-4"
-                style={{ fontFamily: 'Cormorant Garamond, serif', fontWeight: 400 }}
-              >
+              <h2 className="text-[clamp(2rem,4vw,3.5rem)] text-[#FAF7F2] mb-4" style={{ fontFamily: 'Cormorant Garamond, serif', fontWeight: 400 }}>
                 Your Vision, Brought to Life
               </h2>
               <p className="text-[#888] mb-8 max-w-lg mx-auto" style={{ fontFamily: 'DM Sans', fontWeight: 300 }}>
-                Each piece is unique — priced by size, complexity, and medium.
-                Start with a free consultation.
+                Each piece is unique — priced by size, complexity, and medium. Start with a free consultation.
               </p>
               <Button asChild size="lg" variant="default">
                 <Link href="/#contact">Start Your Commission</Link>
@@ -313,20 +306,11 @@ export default function GalleryPage() {
             onClick={(e) => e.stopPropagation()}
           >
             <div className="relative aspect-video bg-[#F5F0E8]">
-              <Image
-                src={lightbox.img}
-                alt={lightbox.title}
-                fill
-                className="object-contain"
-                sizes="800px"
-              />
+              <Image src={lightbox.img} alt={lightbox.title} fill className="object-contain" sizes="800px" />
             </div>
             <div className="p-6 flex items-center justify-between">
               <div>
-                <h3
-                  className="text-2xl text-[#1A1A1A]"
-                  style={{ fontFamily: 'Cormorant Garamond, serif', fontWeight: 600 }}
-                >
+                <h3 className="text-2xl text-[#1A1A1A]" style={{ fontFamily: 'Cormorant Garamond, serif', fontWeight: 600 }}>
                   {lightbox.title}
                 </h3>
                 <p className="text-sm text-[#999] mt-1" style={{ fontFamily: 'DM Sans' }}>
@@ -334,23 +318,13 @@ export default function GalleryPage() {
                 </p>
               </div>
               <div className="flex items-center gap-4">
-                <span
-                  className="text-2xl text-[#C9A959]"
-                  style={{ fontFamily: 'Cormorant Garamond, serif', fontWeight: 500 }}
-                >
+                <span className="text-2xl text-[#C9A959]" style={{ fontFamily: 'Cormorant Garamond, serif', fontWeight: 500 }}>
                   {lightbox.price}
                 </span>
                 <Button asChild size="sm" variant="default">
-                  <Link href={`/#contact?type=${lightbox.stripe}`} onClick={() => setLightbox(null)}>
-                    Commission
-                  </Link>
+                  <Link href={`/#contact?type=${lightbox.stripe}`} onClick={() => setLightbox(null)}>Commission</Link>
                 </Button>
-                <button
-                  onClick={() => setLightbox(null)}
-                  className="text-[#bbb] hover:text-[#2C2C2C] transition-colors text-2xl leading-none"
-                >
-                  ×
-                </button>
+                <button onClick={() => setLightbox(null)} className="text-[#bbb] hover:text-[#2C2C2C] transition-colors text-2xl leading-none">×</button>
               </div>
             </div>
           </div>
@@ -360,11 +334,7 @@ export default function GalleryPage() {
       {/* Footer */}
       <footer className="bg-[#1A1A1A] text-[#FAF7F2] py-10">
         <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-4">
-          <Link
-            href="/"
-            className="text-xl"
-            style={{ fontFamily: 'Cormorant Garamond, serif', fontWeight: 600 }}
-          >
+          <Link href="/" className="text-xl" style={{ fontFamily: 'Cormorant Garamond, serif', fontWeight: 600 }}>
             Anyly<span className="text-[#C9A959]">Studio</span>
           </Link>
           <p className="text-xs text-[#666]" style={{ fontFamily: 'DM Sans' }}>
