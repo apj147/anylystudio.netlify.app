@@ -176,13 +176,14 @@ export default function Home() {
               <div className="absolute -inset-4 bg-gradient-to-br from-[#C9A959]/20 to-[#8B9A7D]/15 rounded-[2rem] blur-2xl" />
               <div className="relative rounded-[1.5rem] overflow-hidden shadow-2xl aspect-[4/5]">
                 <Image
-                  src="/hero.jpg"
+                  src="/hero.webp"
                   alt="April Johnson - Custom Artwork"
                   fill
                   className="object-cover"
                   priority
                   fetchPriority="high"
                   sizes="(max-width: 768px) 100vw, 50vw"
+                  quality={80}
                 />
                 {/* Overlay badge */}
                 <div className="absolute bottom-6 left-6 bg-[#FAF7F2]/95 backdrop-blur-sm rounded-xl px-5 py-3 shadow-lg">
