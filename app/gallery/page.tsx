@@ -176,7 +176,7 @@ export default function GalleryPage() {
 
                 <div className="flex flex-col gap-2">
                   <Button asChild variant="default" size="sm" className="w-full">
-                    <Link href={`/#contact?type=${art.category.toLowerCase()}`}>
+                    <Link href={`/commission?art=${art.id}`}>
                       Commission Similar Piece
                     </Link>
                   </Button>
