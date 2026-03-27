@@ -8,6 +8,8 @@ const nextConfig: NextConfig = {
     ],
     formats: ['image/avif', 'image/webp'],
     unoptimized: false,
+    loader: 'custom',
+    loaderFile: './image-loader.js',
   },
   experimental: {
     optimizePackageImports: ['framer-motion', 'lucide-react'],
