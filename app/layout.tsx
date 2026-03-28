@@ -81,6 +81,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               <div className="hidden md:flex items-center gap-8 text-sm font-medium">
                 <Link href="/#about" className="text-neutral-600 dark:text-neutral-300 hover:text-amber-600 transition-colors">About</Link>
                 <Link href="/gallery" className="text-neutral-600 dark:text-neutral-300 hover:text-amber-600 transition-colors">Gallery</Link>
+                <Link href="/premium" className="text-[#C9A959] font-semibold hover:text-[#A8883A] transition-colors">Premium</Link>
                 <Link href="/#services" className="text-neutral-600 dark:text-neutral-300 hover:text-amber-600 transition-colors">Services</Link>
                 <Link href="/#process" className="text-neutral-600 dark:text-neutral-300 hover:text-amber-600 transition-colors">Process</Link>
                 <Link href="/#contact" className="text-neutral-600 dark:text-neutral-300 hover:text-amber-600 transition-colors">Contact</Link>

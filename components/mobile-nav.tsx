@@ -8,6 +8,7 @@ import { useTheme } from 'next-themes'
 const links = [
   { href: '/#about', label: 'About' },
   { href: '/gallery', label: 'Gallery' },
+  { href: '/premium', label: 'Premium ✦' },
   { href: '/#services', label: 'Services' },
   { href: '/#process', label: 'Process' },
   { href: '/#contact', label: 'Contact' },
