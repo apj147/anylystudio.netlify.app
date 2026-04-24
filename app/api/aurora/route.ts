@@ -32,7 +32,7 @@ export async function POST(request: NextRequest) {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        model: 'aurora',
+        model: 'grok-imagine-image',
         prompt: prompt.trim(),
         n: 1,
         response_format: 'url',
