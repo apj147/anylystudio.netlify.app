@@ -10,7 +10,9 @@ npm run build    # production build (runs TypeScript + lint)
 npm run lint     # ESLint check
 ```
 
-Deploy by pushing to GitHub — Netlify auto-deploys `main` in ~60s.
+Deploy by pushing to GitHub — **Vercel** auto-deploys `main` in ~60s.
+Live site: https://anylystudio.com
+Repo: https://github.com/apj147/anylystudio.netlify.app (name is stale — still on Netlify URL, but Vercel is the deploy target)
 
 **Git push pattern** (local branch is `master`, remote expects `main`):
 ```bash
@@ -45,5 +47,22 @@ All 9 price IDs are in `lib/stripe.ts` → `PRICE_IDS`. The gallery hardcodes th
 ### Images
 Gallery artwork: `public/gallery/1.png` – `9.png`. Both `.jpg` and `.png` exist; `.png` is what the code references.
 
-### Environment variables (set in Netlify)
-`STRIPE_SECRET_KEY`, `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY`, `RESEND_API_KEY`, `NEXT_PUBLIC_SITE_URL`, `CONTACT_EMAIL`
+### Environment variables (set in Vercel dashboard)
+**Existing:** `STRIPE_SECRET_KEY`, `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY`, `RESEND_API_KEY`, `NEXT_PUBLIC_SITE_URL`, `CONTACT_EMAIL`
+
+**Add these for new features:**
+- `XAI_API_KEY` — xAI API key (Aurora image gen + voice token minting)
+- `TELEGRAM_BOT_TOKEN` — LemkyBot token (Stripe sale notifications)
+- `TELEGRAM_CHAT_ID` — `1373529450` (APRIL's Telegram user ID)
+- `STRIPE_WEBHOOK_SECRET` — from Stripe Dashboard → Webhooks → signing secret
+
+### New API routes added
+- `POST /api/aurora` — generate image via xAI Aurora from a text prompt
+- `POST /api/stripe-webhook` — Stripe webhook → Telegram DM on sale/failure
+- `POST /api/xai-token` — mint ephemeral xAI Realtime token (server-side, never exposed to browser)
+- `GET  /voice` — LemkyBot voice agent UI (browser mic → xAI Realtime API)
+
+### Stripe webhook setup
+In Stripe Dashboard → Developers → Webhooks → Add endpoint:
+- URL: `https://anylystudio.com/api/stripe-webhook`
+- Events: `checkout.session.completed`, `payment_intent.payment_failed`
