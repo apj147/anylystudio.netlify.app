@@ -128,6 +128,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                     <Link href="/#services" className="hover:text-amber-400 transition-colors">Services</Link>
                     <Link href="/#process" className="hover:text-amber-400 transition-colors">Our Process</Link>
                     <Link href="/#contact" className="hover:text-amber-400 transition-colors">Start a Commission</Link>
+                    <Link href="/terms" className="hover:text-amber-400 transition-colors">Terms & Policies</Link>
                   </div>
                 </div>
 

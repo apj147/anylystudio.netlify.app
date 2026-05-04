@@ -177,7 +177,7 @@ export default function GalleryPage() {
                 </div>
 
                 <p className="text-xs text-[#bbb] mt-3 text-center" style={{ fontFamily: 'var(--font-body)' }}>
-                  Secure checkout · Instant invoice via Stripe
+                  Secure checkout · Instant invoice
                 </p>
               </div>
             </div>
