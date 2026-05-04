@@ -231,7 +231,7 @@ export default function TermsPage() {
               the piece ships.
             </p>
             <p>
-              Payments are processed securely through Stripe. Anyly Studio accepts all major credit
+              Payments are processed securely through our payment processor. Anyly Studio accepts all major credit
               cards and debit cards.
             </p>
           </Prose>
@@ -347,7 +347,7 @@ export default function TermsPage() {
             <p>We collect personal information only when you provide it directly, including:</p>
             <ul className="list-disc pl-5 space-y-1">
               <li><strong>Contact form submissions:</strong> name, email address, commission details.</li>
-              <li><strong>Payments:</strong> billing name and address (processed by Stripe — we never see or store full card numbers).</li>
+              <li><strong>Payments:</strong> billing name and address (processed by our payment processor — we never see or store full card numbers).</li>
               <li><strong>Email subscriptions:</strong> email address for commission updates and newsletters.</li>
             </ul>
             <p>
@@ -364,16 +364,7 @@ export default function TermsPage() {
             </p>
             <ul className="list-disc pl-5 space-y-2">
               <li>
-                <strong>Stripe</strong> — payment processing. Stripe may collect billing and
-                fraud-prevention data per their{' '}
-                <a
-                  href="https://stripe.com/privacy"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-[#C9A959] hover:underline"
-                >
-                  Privacy Policy
-                </a>.
+                <strong>Payment processor</strong> — billing and fraud-prevention data is handled by our payment processor under their own privacy terms.
               </li>
               <li>
                 <strong>Resend</strong> — transactional email delivery (commission confirmations,
@@ -401,7 +392,7 @@ export default function TermsPage() {
           <Prose>
             <p>
               Anyly Studio uses <strong>essential cookies only</strong>. These are strictly necessary
-              to operate the site (e.g. session management, Stripe checkout security). We do not
+              to operate the site (e.g. session management, checkout security). We do not
               use tracking cookies, advertising cookies, or third-party analytics that profile you
               across sites.
             </p>
@@ -447,7 +438,7 @@ export default function TermsPage() {
           <Prose>
             <p>
               We implement reasonable technical and organizational measures to protect your data.
-              All payment processing is handled by Stripe using PCI-compliant infrastructure.
+              All payment processing is handled by our payment processor on PCI-compliant infrastructure.
               The site is served over HTTPS at all times.
             </p>
           </Prose>
