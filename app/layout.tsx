@@ -26,10 +26,10 @@ const dmSans = DM_Sans({
 export const metadata: Metadata = {
   title: 'Anyly Studio | Custom Artwork & Commissions',
   description:
-    'Where Your Vision Becomes Art. Handcrafted custom portraits, abstracts, landscapes & more by April Johnson in Ladysmith, Wisconsin.',
+    'Where Your Vision Becomes Art. Handcrafted custom portraits, abstracts, landscapes & more by April Johnson in Glen Flora, Wisconsin.',
   keywords: [
     'custom artwork', 'art commissions', 'portrait artist', 'pet portraits',
-    'abstract art', 'Wisconsin artist', 'Ladysmith WI', 'botanical art',
+    'abstract art', 'Wisconsin artist', 'Glen Flora WI', 'botanical art',
     'landscape painting', 'live edge wood art',
   ],
   authors: [{ name: 'April Johnson' }],
@@ -41,13 +41,13 @@ export const metadata: Metadata = {
     url: 'https://anylystudio.com',
     siteName: 'Anyly Studio',
     title: 'Anyly Studio | Custom Artwork & Commissions',
-    description: 'Where Your Vision Becomes Art. Custom artwork by April Johnson, Ladysmith Wisconsin.',
+    description: 'Where Your Vision Becomes Art. Custom artwork by April Johnson, Glen Flora, Wisconsin.',
     images: [{ url: '/og-image.jpg', width: 1200, height: 630, alt: 'Anyly Studio — Custom Artwork & Commissions' }],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Anyly Studio | Custom Artwork & Commissions',
-    description: 'Custom artwork by April Johnson, Ladysmith Wisconsin.',
+    description: 'Custom artwork by April Johnson, Glen Flora, Wisconsin.',
     images: ['/og-image.jpg'],
   },
   robots: { index: true, follow: true, googleBot: { index: true, follow: true } },
@@ -117,7 +117,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                       Anyly<span className="text-amber-600">Studio</span>
                     </span>
                   </div>
-                  <p className="text-sm">Handcrafted in Ladysmith, Wisconsin</p>
+                  <p className="text-sm">Handcrafted in Glen Flora, Wisconsin</p>
                   <p className="text-xs mt-6">&copy; {new Date().getFullYear()} April Johnson. All Rights Reserved.</p>
                 </div>
 
@@ -134,9 +134,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 <div>
                   <h4 className="font-medium text-white mb-4">Connect</h4>
                   <p className="text-sm">hello@anylystudio.com</p>
-                  <p className="text-sm mt-1">Ladysmith, Wisconsin · Ships Worldwide</p>
+                  <p className="text-sm mt-1">Glen Flora, Wisconsin · Ships Worldwide</p>
                   <div className="mt-8 text-xs">
-                    Secure payments powered by <span className="text-emerald-400">Stripe</span><br />
+                    Secure online payments<br />
                     Instant invoices · Professional receipts
                   </div>
                 </div>

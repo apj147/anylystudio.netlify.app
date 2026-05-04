@@ -17,7 +17,7 @@ export const SITE = {
   name: 'Anyly Studio',
   tagline: 'Where Your Vision Becomes Art',
   artist: 'April Johnson',
-  location: 'Ladysmith, Wisconsin',
+  location: 'Glen Flora, Wisconsin',
   email: 'hello@anylystudio.com',
   url: 'https://anylystudio.com',
 } as const

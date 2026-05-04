@@ -32,7 +32,7 @@ export function BuyButton({ priceId, artId }: BuyButtonProps) {
       size="sm"
       className="w-full bg-emerald-600 hover:bg-emerald-700 text-white rounded-none tracking-widest uppercase text-xs"
     >
-      Buy Now — Secure Stripe Checkout
+      Buy Now — Secure Checkout
     </Button>
   )
 }

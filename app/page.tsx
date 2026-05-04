@@ -14,7 +14,7 @@ import {
 export const metadata: Metadata = {
   title: 'Anyly Studio | Custom Artwork & Commissions',
   description:
-    'Where Your Vision Becomes Art. Custom portraits, landscapes, botanical studies, abstract commissions and live-edge wood slab paintings by April Johnson in Ladysmith, Wisconsin.',
+    'Where Your Vision Becomes Art. Custom portraits, landscapes, botanical studies, abstract commissions and live-edge wood slab paintings by April Johnson in Glen Flora, Wisconsin.',
 }
 
 const services = [
@@ -164,7 +164,7 @@ export default function Home() {
 
               <div className="flex items-center gap-2 text-sm text-[#999]" style={{ fontFamily: 'DM Sans' }}>
                 <MapPin size={14} className="text-[#C9A959]" />
-                <span>Ladysmith, Wisconsin · Commission worldwide</span>
+                <span>Glen Flora, Wisconsin · Commission worldwide</span>
               </div>
             </div>
 
@@ -244,7 +244,7 @@ export default function Home() {
               <div className="space-y-4 text-[#555] leading-relaxed" style={{ fontFamily: 'DM Sans', fontWeight: 300 }}>
                 <p>
                   Welcome to Anyly Studio, where creativity meets craftsmanship.
-                  Based in Ladysmith, Wisconsin, I specialize in creating custom artwork
+                  Based in Glen Flora, Wisconsin, I specialize in creating custom artwork
                   that captures the essence of your vision.
                 </p>
                 <p>
@@ -475,7 +475,7 @@ export default function Home() {
                 </div>
                 <div className="flex items-center gap-3 text-sm text-[#555]">
                   <MapPin size={16} className="text-[#C9A959] flex-shrink-0" />
-                  <span style={{ fontFamily: 'DM Sans' }}>Ladysmith, Wisconsin · Ships Worldwide</span>
+                  <span style={{ fontFamily: 'DM Sans' }}>Glen Flora, Wisconsin · Ships Worldwide</span>
                 </div>
                 <div className="flex items-center gap-3 text-sm text-[#555]">
                   <Star size={16} className="text-[#C9A959] flex-shrink-0" />
