@@ -79,11 +79,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               </Link>
 
               <div className="hidden md:flex items-center gap-8 text-sm font-medium">
-                <Link href="/#about" className="text-neutral-600 dark:text-neutral-300 hover:text-amber-600 transition-colors">About</Link>
+                <Link href="/portfolio" className="text-neutral-600 dark:text-neutral-300 hover:text-amber-600 transition-colors">Portfolio</Link>
+                <Link href="/about" className="text-neutral-600 dark:text-neutral-300 hover:text-amber-600 transition-colors">About</Link>
                 <Link href="/gallery" className="text-neutral-600 dark:text-neutral-300 hover:text-amber-600 transition-colors">Gallery</Link>
+                <Link href="/commissions" className="text-neutral-600 dark:text-neutral-300 hover:text-amber-600 transition-colors">Commissions</Link>
                 <Link href="/premium" className="text-[#C9A959] font-semibold hover:text-[#A8883A] transition-colors">Premium</Link>
                 <Link href="/#services" className="text-neutral-600 dark:text-neutral-300 hover:text-amber-600 transition-colors">Services</Link>
-                <Link href="/#process" className="text-neutral-600 dark:text-neutral-300 hover:text-amber-600 transition-colors">Process</Link>
                 <Link href="/#contact" className="text-neutral-600 dark:text-neutral-300 hover:text-amber-600 transition-colors">Contact</Link>
               </div>
 
@@ -124,17 +125,19 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 <div>
                   <h4 className="font-medium text-white mb-4">Quick Links</h4>
                   <div className="flex flex-col gap-2 text-sm">
+                    <Link href="/portfolio" className="hover:text-amber-400 transition-colors">Portfolio</Link>
+                    <Link href="/about" className="hover:text-amber-400 transition-colors">About April</Link>
                     <Link href="/gallery" className="hover:text-amber-400 transition-colors">Gallery</Link>
+                    <Link href="/commissions" className="hover:text-amber-400 transition-colors">Commissions</Link>
                     <Link href="/#services" className="hover:text-amber-400 transition-colors">Services</Link>
-                    <Link href="/#process" className="hover:text-amber-400 transition-colors">Our Process</Link>
-                    <Link href="/#contact" className="hover:text-amber-400 transition-colors">Start a Commission</Link>
+                    <Link href="/#contact" className="hover:text-amber-400 transition-colors">Contact</Link>
                     <Link href="/terms" className="hover:text-amber-400 transition-colors">Terms & Policies</Link>
                   </div>
                 </div>
 
                 <div>
                   <h4 className="font-medium text-white mb-4">Connect</h4>
-                  <p className="text-sm">hello@anylystudio.com</p>
+                  <p className="text-sm">contact@anylystudio.com</p>
                   <p className="text-sm mt-1">Glen Flora, Wisconsin · Ships Worldwide</p>
                   <div className="mt-8 text-xs">
                     Secure online payments<br />
