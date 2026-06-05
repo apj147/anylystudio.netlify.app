@@ -1,15 +1,7 @@
 import type { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
-import { Button } from '@/components/ui/button'
-import {
-  Palette,
-  Sparkles,
-  Mail,
-  MapPin,
-  ArrowRight,
-  Star,
-} from 'lucide-react'
+import { ArrowRight, MapPin, Mail, Star } from 'lucide-react'
 
 export const metadata: Metadata = {
   title: 'Anyly Studio | Custom Artwork & Commissions',
@@ -18,427 +10,390 @@ export const metadata: Metadata = {
 }
 
 const services = [
-  {
-    icon: '🖼️',
-    title: 'Custom Portraits',
-    desc: 'Timeless portraits capturing personality, emotion, and the unique essence of your subject — painted with warmth and precision.',
-    price: 'Starting at $500',
-    tag: 'Most Requested',
-  },
-  {
-    icon: '✨',
-    title: 'Abstract Commissions',
-    desc: 'Bold, expressive pieces designed to complement your space and reflect your personal aesthetic. No two are alike.',
-    price: 'Starting at $750',
-    tag: null,
-  },
-  {
-    icon: '🗻',
-    title: 'Landscape Paintings',
-    desc: 'Breathtaking landscapes bringing the beauty of the natural world into your home — from rolling Wisconsin hills to sweeping panoramas.',
-    price: 'Starting at $650',
-    tag: null,
-  },
-  {
-    icon: '🌿',
-    title: 'Botanical Studies',
-    desc: 'Elegant, detail-rich botanical artwork celebrating the intricate beauty of plants, florals, and the living world.',
-    price: 'Starting at $425',
-    tag: null,
-  },
-  {
-    icon: '🪵',
-    title: 'Live-Edge Wood Slab Paintings',
-    desc: 'One-of-a-kind artwork painted directly on natural live-edge wood slabs — organic, bold, and completely unforgettable.',
-    price: '$600 – $875',
-    tag: 'Signature Piece',
-  },
-  {
-    icon: '🐾',
-    title: 'Pet Portraits',
-    desc: 'Celebrate your furry family members with a portrait that captures their unique spirit and personality forever.',
-    price: 'Starting at $350',
-    tag: null,
-  },
-  {
-    icon: '🎁',
-    title: 'Gift Commissions',
-    desc: 'Create a meaningful, one-of-a-kind gift for weddings, anniversaries, or any special occasion that deserves something extraordinary.',
-    price: 'Starting at $400',
-    tag: null,
-  },
-  {
-    icon: '🖼️',
-    title: 'Large Scale Artwork',
-    desc: 'Statement pieces for homes, offices, and commercial spaces that demand attention and become the centerpiece of any room.',
-    price: 'Starting at $2,000',
-    tag: 'Statement',
-  },
-  {
-    icon: '🏢',
-    title: 'Commercial Projects',
-    desc: 'Bespoke artwork for businesses, restaurants, hotels, and corporate collections. Every space deserves original art.',
-    price: 'Contact for Quote',
-    tag: null,
-  },
+  { n: '01', title: 'Custom Portraits', price: 'From $500', tag: 'Most Requested' },
+  { n: '02', title: 'Abstract Commissions', price: 'From $750', tag: null },
+  { n: '03', title: 'Landscape Paintings', price: 'From $650', tag: null },
+  { n: '04', title: 'Botanical Studies', price: 'From $425', tag: null },
+  { n: '05', title: 'Live-Edge Wood Slab', price: '$600 – $875', tag: 'Signature' },
+  { n: '06', title: 'Pet Portraits', price: 'From $350', tag: null },
+  { n: '07', title: 'Gift Commissions', price: 'From $400', tag: null },
+  { n: '08', title: 'Large Scale Artwork', price: 'From $2,000', tag: 'Statement' },
+  { n: '09', title: 'Commercial Projects', price: 'Contact for Quote', tag: null },
 ]
 
 const process = [
-  {
-    num: '01',
-    title: 'Consultation',
-    desc: 'We discuss your vision, preferences, size requirements, and timeline to ensure perfect alignment before a single brushstroke.',
-  },
-  {
-    num: '02',
-    title: 'Proposal & Deposit',
-    desc: 'You receive a detailed proposal with timeline and pricing. A 50% deposit secures your commission and begins the creative process.',
-  },
-  {
-    num: '03',
-    title: 'Creation',
-    desc: 'I bring your vision to life with progress updates and check-ins. Your feedback shapes every stage of the work.',
-  },
-  {
-    num: '04',
-    title: 'Delivery',
-    desc: 'Your completed piece is carefully packaged and delivered. The remaining balance is due upon final approval.',
-  },
+  { num: '01', title: 'Consultation', desc: 'We discuss your vision, size requirements, and timeline before a single brushstroke.' },
+  { num: '02', title: 'Proposal & Deposit', desc: 'A detailed proposal with pricing. Deposit secures your slot and begins the work.' },
+  { num: '03', title: 'Creation', desc: 'April paints with regular progress updates. Your feedback shapes every stage.' },
+  { num: '04', title: 'Delivery', desc: 'Your completed piece ships carefully packaged. Balance due on final approval.' },
 ]
+
+const galleryPreviews = [
+  { src: 'https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?w=800&q=90&fit=crop', label: 'Portrait', wide: true },
+  { src: 'https://images.unsplash.com/photo-1541961017774-22349e4a1262?w=800&q=90&fit=crop', label: 'Abstract', wide: false },
+  { src: 'https://images.unsplash.com/photo-1580136579312-94651dfd596d?w=800&q=90&fit=crop', label: 'Landscape', wide: false },
+  { src: 'https://images.unsplash.com/photo-1578301978693-85fa9c0320b9?w=800&q=90&fit=crop', label: 'Botanical', wide: false },
+]
+
+const D = { fontFamily: 'var(--font-display), Georgia, serif' } as const
+const B = { fontFamily: 'var(--font-body), system-ui, sans-serif' } as const
 
 export default function Home() {
   return (
     <>
       {/* ── HERO ── */}
-      <section className="min-h-screen relative overflow-hidden flex items-center pt-24 pb-16 bg-[#FAF7F2]">
-        {/* Background gradients */}
-        <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute top-0 left-0 w-[60vw] h-[60vh] rounded-full bg-[#C9A959]/8 blur-[120px]" />
-          <div className="absolute bottom-0 right-0 w-[50vw] h-[50vh] rounded-full bg-[#8B9A7D]/10 blur-[100px]" />
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[40vw] h-[40vh] rounded-full bg-[#C17F59]/6 blur-[80px]" />
-        </div>
+      <section className="min-h-screen relative overflow-hidden bg-[#0D0D0D] grain">
 
-        <div className="max-w-7xl mx-auto px-6 w-full relative">
-          <div className="grid md:grid-cols-2 gap-16 items-center">
-            {/* Left */}
-            <div className="space-y-8 opacity-0 animate-fade-up" style={{ animationFillMode: 'forwards' }}>
-              <div className="flex items-center gap-3">
-                <span className="h-px w-12 bg-[#C9A959]" />
-                <span
-                  className="text-xs tracking-[0.3em] uppercase text-[#C9A959]"
-                  style={{ fontFamily: 'DM Sans, sans-serif', fontWeight: 500 }}
-                >
-                  Custom Artwork & Commissions
-                </span>
-              </div>
+        {/* Subtle ambient glow */}
+        <div className="absolute top-1/4 left-1/4 w-[40vw] h-[40vh] rounded-full bg-[#C9A959]/5 blur-[140px] pointer-events-none" />
 
-              <h1
-                className="text-[clamp(3.5rem,8vw,6.5rem)] leading-[0.92] tracking-[-0.02em] text-[#1A1A1A]"
-                style={{ fontFamily: 'Cormorant Garamond, serif', fontWeight: 400 }}
-              >
-                Where Your<br />
-                Vision<br />
-                <em className="text-[#C9A959] not-italic" style={{ fontStyle: 'italic' }}>Becomes Art</em>
-              </h1>
+        <div className="relative min-h-screen grid md:grid-cols-[1fr_42%]">
 
-              <p
-                className="text-lg text-[#666] max-w-md leading-relaxed"
-                style={{ fontFamily: 'DM Sans, sans-serif', fontWeight: 300 }}
-              >
-                Transforming ideas into stunning, one-of-a-kind artwork.
-                From portraits to abstract pieces, every commission is crafted
-                with passion and precision.
-              </p>
+          {/* Left — Text */}
+          <div className="flex flex-col justify-center px-8 md:px-16 py-28 relative z-10">
 
-              <div className="flex flex-wrap gap-4">
-                <Button asChild size="lg" variant="default">
-                  <Link href="/#contact">
-                    Start Your Commission
-                    <ArrowRight size={16} />
-                  </Link>
-                </Button>
-                <Button asChild size="lg" variant="outline">
-                  <Link href="/gallery">View Gallery</Link>
-                </Button>
-              </div>
-
-              <div className="flex items-center gap-2 text-sm text-[#999]" style={{ fontFamily: 'DM Sans' }}>
-                <MapPin size={14} className="text-[#C9A959]" />
-                <span>Glen Flora, Wisconsin · Commission worldwide</span>
-              </div>
+            <div className="flex items-center gap-3 mb-10 animate-fade-up">
+              <span className="h-px w-14 bg-[#C9A959]" />
+              <span className="text-[10px] tracking-[0.45em] uppercase text-[#C9A959]" style={B}>
+                Custom Artwork & Commissions
+              </span>
             </div>
 
-            {/* Right — hero image */}
-            <div
-              className="relative opacity-0 animate-fade-up delay-200"
-              style={{ animationFillMode: 'forwards' }}
+            <h1
+              className="text-[clamp(4.5rem,11vw,9.5rem)] leading-[0.86] tracking-[-0.03em] text-[#F5F0E8] animate-fade-up delay-100"
+              style={{ ...D, fontWeight: 300 }}
             >
-              <div className="absolute -inset-4 bg-gradient-to-br from-[#C9A959]/20 to-[#8B9A7D]/15 rounded-[2rem] blur-2xl" />
-              <div className="relative rounded-[1.5rem] overflow-hidden shadow-2xl aspect-[4/5]">
-                <Image
-                  src="/hero.webp"
-                  alt="April Johnson - Custom Artwork"
-                  fill
-                  className="object-cover"
-                  priority
-                  fetchPriority="high"
-                  sizes="(max-width: 768px) 100vw, 50vw"
-                  quality={80}
-                />
-                {/* Overlay badge */}
-                <div className="absolute bottom-6 left-6 bg-[#FAF7F2]/95 backdrop-blur-sm rounded-xl px-5 py-3 shadow-lg">
-                  <p className="text-xs tracking-widest uppercase text-[#C9A959]" style={{ fontFamily: 'DM Sans' }}>
-                    Available for Commissions
-                  </p>
-                  <p className="font-display text-lg text-[#1A1A1A] mt-0.5" style={{ fontFamily: 'Cormorant Garamond, serif' }}>
-                    April Johnson
-                  </p>
-                </div>
-              </div>
+              Where<br />
+              Your<br />
+              Vision<br />
+              <em
+                className="block text-[#C9A959] not-italic"
+                style={{ ...D, fontStyle: 'italic', fontWeight: 400 }}
+              >
+                Becomes<br />Art
+              </em>
+            </h1>
+
+            <p
+              className="text-[#9A9080] mt-10 mb-10 max-w-sm leading-relaxed text-sm animate-fade-up delay-200"
+              style={{ ...B, fontWeight: 300 }}
+            >
+              Handcrafted commissions by April Johnson — 18+ years in practice.
+              Pet portraits, landscapes, botanicals, and large-scale statements.
+            </p>
+
+            <div className="flex flex-col sm:flex-row gap-4 animate-fade-up delay-300">
+              <Link
+                href="/commissions"
+                className="inline-flex items-center justify-center gap-2 px-8 py-3.5 bg-[#C9A959] hover:bg-[#B8944A] text-[#0D0D0D] text-xs tracking-[0.2em] uppercase transition-colors rounded"
+                style={{ ...B, fontWeight: 600 }}
+              >
+                Commission a Piece <ArrowRight size={13} />
+              </Link>
+              <Link
+                href="/portfolio"
+                className="inline-flex items-center justify-center gap-2 px-8 py-3.5 border border-[#C9A959]/40 hover:border-[#C9A959] text-[#C9A959] text-xs tracking-[0.2em] uppercase transition-colors rounded"
+                style={{ ...B, fontWeight: 500 }}
+              >
+                View Portfolio
+              </Link>
+            </div>
+
+            <div
+              className="flex items-center gap-3 mt-10 text-[#6A6055] text-[11px] tracking-widest animate-fade-up delay-400"
+              style={B}
+            >
+              <MapPin size={12} className="text-[#C9A959]" />
+              <span>Glen Flora, Wisconsin</span>
+              <span className="w-1 h-1 rounded-full bg-[#C9A959]/50" />
+              <span>Ships Worldwide</span>
             </div>
           </div>
+
+          {/* Right — Hero image, bleeds to edge */}
+          <div className="hidden md:block relative">
+            <Image
+              src="/hero.webp"
+              alt="Original artwork by April Johnson"
+              fill
+              className="object-cover"
+              priority
+              fetchPriority="high"
+              sizes="42vw"
+              quality={85}
+            />
+            {/* Gradient blend left edge */}
+            <div className="absolute inset-0 bg-gradient-to-r from-[#0D0D0D] via-[#0D0D0D]/30 to-transparent" />
+
+            {/* Artist badge */}
+            <div className="absolute bottom-10 left-6 border border-[#C9A959]/30 rounded-lg px-5 py-3 bg-[#0D0D0D]/80 backdrop-blur-sm">
+              <p className="text-[9px] tracking-[0.35em] uppercase text-[#C9A959]" style={B}>
+                Available for Commissions
+              </p>
+              <p className="text-[#F5F0E8] text-xl mt-1" style={{ ...D, fontWeight: 400 }}>April Johnson</p>
+            </div>
+          </div>
+        </div>
+
+        {/* Scroll cue */}
+        <div className="absolute bottom-8 left-8 hidden md:flex flex-col items-center gap-2">
+          <div className="w-px h-14 bg-gradient-to-b from-transparent to-[#C9A959]/50" />
+          <span className="text-[9px] tracking-[0.4em] uppercase text-[#6A6055] rotate-90 mt-2" style={B}>Scroll</span>
         </div>
       </section>
 
       {/* ── ABOUT ── */}
-      <section id="about" className="py-28 bg-white">
+      <section id="about" className="py-28 bg-[#FAF7F2]">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid md:grid-cols-2 gap-20 items-center">
+
             {/* Image */}
-            <div className="relative">
-              <div className="absolute -top-6 -left-6 w-48 h-48 border border-[#C9A959]/30 rounded-2xl" />
-              <div className="relative rounded-2xl overflow-hidden shadow-xl aspect-[3/4]">
+            <div className="relative order-2 md:order-1">
+              <div className="absolute -top-5 -left-5 w-40 h-40 border border-[#C9A959]/25 rounded-2xl pointer-events-none" />
+              <div className="relative rounded-2xl overflow-hidden shadow-2xl aspect-[3/4]">
                 <Image
-                  src="https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=700&q=90&fit=crop"
-                  alt="April Johnson — Artist, Anyly Studio"
+                  src="/about/april-johnson-studio.jpg"
+                  alt="April Johnson — Anyly Studio, Glen Flora Wisconsin"
                   fill
                   className="object-cover"
                   sizes="(max-width: 768px) 100vw, 40vw"
                 />
               </div>
-              <div className="absolute -bottom-4 -right-4 bg-[#C9A959] text-white px-6 py-4 rounded-xl shadow-lg">
-                <p className="text-2xl font-display" style={{ fontFamily: 'Cormorant Garamond, serif', fontWeight: 600 }}>
-                  9+ Years
-                </p>
-                <p className="text-xs tracking-widest uppercase opacity-80" style={{ fontFamily: 'DM Sans' }}>
-                  Creating Art
-                </p>
+              <div className="absolute -bottom-5 -right-5 bg-[#C9A959] text-[#0D0D0D] px-6 py-4 rounded-xl shadow-xl">
+                <p className="text-3xl leading-none" style={{ ...D, fontWeight: 600 }}>18+</p>
+                <p className="text-[10px] tracking-[0.3em] uppercase mt-0.5 opacity-80" style={{ ...B, fontWeight: 600 }}>Years in Practice</p>
               </div>
             </div>
 
             {/* Text */}
-            <div className="space-y-7">
+            <div className="space-y-7 order-1 md:order-2">
               <div className="flex items-center gap-3">
                 <span className="h-px w-12 bg-[#C9A959]" />
-                <span className="text-xs tracking-[0.3em] uppercase text-[#C9A959]" style={{ fontFamily: 'DM Sans', fontWeight: 500 }}>
+                <span className="text-[10px] tracking-[0.4em] uppercase text-[#C9A959]" style={{ ...B, fontWeight: 500 }}>
                   About April
                 </span>
               </div>
               <h2
-                className="text-[clamp(2.5rem,5vw,4rem)] leading-tight text-[#1A1A1A]"
-                style={{ fontFamily: 'Cormorant Garamond, serif', fontWeight: 400 }}
+                className="text-[clamp(2.5rem,5vw,4rem)] leading-[1.05] text-[#1A1A1A]"
+                style={{ ...D, fontWeight: 400 }}
               >
                 Art That<br />
-                <em style={{ fontStyle: 'italic', color: '#C9A959' }}>Tells Your Story</em>
+                <em className="text-[#C9A959]" style={{ fontStyle: 'italic' }}>Tells Your Story</em>
               </h2>
-              <div className="space-y-4 text-[#555] leading-relaxed" style={{ fontFamily: 'DM Sans', fontWeight: 300 }}>
+              <div className="space-y-4 text-[#555] leading-relaxed" style={{ ...B, fontWeight: 300 }}>
                 <p>
-                  Welcome to Anyly Studio, where creativity meets craftsmanship.
-                  Based in Glen Flora, Wisconsin, I specialize in creating custom artwork
-                  that captures the essence of your vision.
+                  Based in Glen Flora, Wisconsin with a BFA from the University of Florida
+                  (2007) and an AA from Miami Dade College (2005), April has spent 18+ years
+                  building a practice rooted in observation, craft, and collaboration.
                 </p>
                 <p>
-                  Every piece I create is a collaboration between artist and client.
-                  Whether you&apos;re looking for a portrait that captures a precious moment,
-                  an abstract piece that speaks to your soul, or a custom commission for
-                  a special occasion — I pour my heart into every brushstroke.
+                  Whether it&apos;s a pet portrait that captures spirit, a botanical study
+                  painted from life, or a large-scale statement piece — every commission
+                  begins with listening and ends with something irreplaceable.
                 </p>
-                <p className="italic text-[#2C2C2C]" style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: '1.1rem' }}>
-                  &ldquo;Art isn&apos;t just what I do — it&apos;s who I am. Let&apos;s create
-                  something beautiful together.&rdquo;
+                <p className="text-[#1A1A1A]" style={{ ...D, fontSize: '1.15rem', fontStyle: 'italic' }}>
+                  &ldquo;The best commissions feel like collaborations. I want to paint
+                  what&apos;s already in your mind.&rdquo;
                 </p>
-                <p className="text-[#C9A959] tracking-widest text-sm uppercase" style={{ fontWeight: 500 }}>
+                <p className="text-[#C9A959] text-xs tracking-[0.3em] uppercase" style={{ ...B, fontWeight: 500 }}>
                   — April Johnson
                 </p>
               </div>
-              <Button asChild variant="outline" size="lg">
-                <Link href="/gallery">Browse My Work</Link>
-              </Button>
+              <Link
+                href="/about"
+                className="inline-flex items-center gap-2 text-[#2C2C2C] border-b border-[#C9A959] pb-0.5 text-sm hover:text-[#C9A959] transition-colors"
+                style={{ ...B, fontWeight: 500 }}
+              >
+                Full biography <ArrowRight size={13} />
+              </Link>
             </div>
           </div>
         </div>
       </section>
 
       {/* ── GALLERY PREVIEW ── */}
-      <section className="py-20 bg-[#FAF7F2]">
+      <section className="py-24 bg-[#0D0D0D] grain relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-6">
+
           <div className="flex items-end justify-between mb-12">
             <div>
               <div className="flex items-center gap-3 mb-4">
                 <span className="h-px w-12 bg-[#C9A959]" />
-                <span className="text-xs tracking-[0.3em] uppercase text-[#C9A959]" style={{ fontFamily: 'DM Sans', fontWeight: 500 }}>
+                <span className="text-[10px] tracking-[0.4em] uppercase text-[#C9A959]" style={{ ...B, fontWeight: 500 }}>
                   Selected Works
                 </span>
               </div>
               <h2
-                className="text-[clamp(2rem,4vw,3.5rem)] text-[#1A1A1A]"
-                style={{ fontFamily: 'Cormorant Garamond, serif', fontWeight: 400 }}
+                className="text-[clamp(2rem,5vw,3.5rem)] text-[#F5F0E8]"
+                style={{ ...D, fontWeight: 400 }}
               >
                 From the Studio
               </h2>
             </div>
-            <Button asChild variant="ghost">
-              <Link href="/gallery" className="flex items-center gap-2">
-                View All <ArrowRight size={16} />
-              </Link>
-            </Button>
+            <Link
+              href="/gallery"
+              className="hidden md:inline-flex items-center gap-2 text-[#C9A959] text-xs tracking-widest uppercase hover:gap-3 transition-all"
+              style={{ ...B, fontWeight: 500 }}
+            >
+              Full Gallery <ArrowRight size={13} />
+            </Link>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {[
-              { src: 'https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?w=500&q=80&fit=crop', label: 'Custom Portrait' },
-              { src: 'https://images.unsplash.com/photo-1541961017774-22349e4a1262?w=500&q=80&fit=crop', label: 'Abstract' },
-              { src: 'https://images.unsplash.com/photo-1580136579312-94651dfd596d?w=500&q=80&fit=crop', label: 'Landscape' },
-              { src: 'https://images.unsplash.com/photo-1578301978693-85fa9c0320b9?w=500&q=80&fit=crop', label: 'Botanical' },
-            ].map((img, i) => (
-              <Link
-                key={i}
-                href="/gallery"
-                className="group relative aspect-square rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300"
-              >
-                <Image
-                  src={img.src}
-                  alt={img.label}
-                  fill
-                  className="object-cover group-hover:scale-105 transition-transform duration-500"
-                  sizes="(max-width: 768px) 50vw, 25vw"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#1A1A1A]/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
-                  <span className="text-white text-sm tracking-widest uppercase" style={{ fontFamily: 'DM Sans' }}>
-                    {img.label}
-                  </span>
+          {/* Asymmetric grid */}
+          <div className="grid grid-cols-2 md:grid-cols-12 gap-3 auto-rows-[220px]">
+            {/* Wide tall card */}
+            <Link href="/gallery" className="group relative col-span-2 md:col-span-7 row-span-2 overflow-hidden rounded-xl">
+              <Image src={galleryPreviews[0].src} alt={galleryPreviews[0].label} fill className="object-cover group-hover:scale-105 transition-transform duration-700" sizes="(max-width: 768px) 100vw, 58vw" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#0D0D0D]/80 via-transparent to-transparent" />
+              <div className="absolute bottom-5 left-5 border border-[#C9A959]/0 group-hover:border-[#C9A959]/40 transition-all duration-500 inset-0 absolute rounded-xl" />
+              <div className="absolute bottom-5 left-5">
+                <span className="text-[10px] tracking-[0.3em] uppercase text-[#C9A959] opacity-0 group-hover:opacity-100 transition-opacity duration-300" style={B}>{galleryPreviews[0].label}</span>
+              </div>
+            </Link>
+            {/* Three smaller cards */}
+            {galleryPreviews.slice(1).map((img, i) => (
+              <Link key={i} href="/gallery" className="group relative col-span-1 md:col-span-5 overflow-hidden rounded-xl">
+                <Image src={img.src} alt={img.label} fill className="object-cover group-hover:scale-105 transition-transform duration-700" sizes="(max-width: 768px) 50vw, 42vw" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0D0D0D]/70 via-transparent to-transparent" />
+                <div className="absolute bottom-4 left-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <span className="text-[10px] tracking-[0.3em] uppercase text-[#C9A959]" style={B}>{img.label}</span>
                 </div>
               </Link>
             ))}
           </div>
 
-          <div className="text-center mt-10">
-            <Button asChild variant="dark" size="lg">
-              <Link href="/gallery">Explore Full Gallery — 9 Artworks</Link>
-            </Button>
+          <div className="mt-8 md:hidden">
+            <Link
+              href="/gallery"
+              className="inline-flex items-center gap-2 text-[#C9A959] text-xs tracking-widest uppercase"
+              style={{ ...B, fontWeight: 500 }}
+            >
+              Full Gallery <ArrowRight size={13} />
+            </Link>
           </div>
         </div>
       </section>
 
       {/* ── SERVICES ── */}
-      <section id="services" className="py-28 bg-white">
+      <section id="services" className="py-28 bg-[#0D0D0D] border-t border-[#C9A959]/10">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center mb-16 space-y-4">
-            <div className="flex items-center justify-center gap-3">
-              <span className="h-px w-12 bg-[#C9A959]" />
-              <span className="text-xs tracking-[0.3em] uppercase text-[#C9A959]" style={{ fontFamily: 'DM Sans', fontWeight: 500 }}>
-                What I Create
-              </span>
-              <span className="h-px w-12 bg-[#C9A959]" />
+
+          <div className="grid md:grid-cols-[1fr_2fr] gap-16 mb-16 items-end">
+            <div>
+              <div className="flex items-center gap-3 mb-4">
+                <span className="h-px w-12 bg-[#C9A959]" />
+                <span className="text-[10px] tracking-[0.4em] uppercase text-[#C9A959]" style={{ ...B, fontWeight: 500 }}>
+                  What I Create
+                </span>
+              </div>
+              <h2
+                className="text-[clamp(2.5rem,5vw,4rem)] text-[#F5F0E8] leading-[1.05]"
+                style={{ ...D, fontWeight: 400 }}
+              >
+                Commission<br />
+                <em style={{ fontStyle: 'italic', color: '#C9A959' }}>Services</em>
+              </h2>
             </div>
-            <h2
-              className="text-[clamp(2.5rem,5vw,4rem)] text-[#1A1A1A]"
-              style={{ fontFamily: 'Cormorant Garamond, serif', fontWeight: 400 }}
-            >
-              Commission Services
-            </h2>
-            <p className="text-[#888] max-w-xl mx-auto" style={{ fontFamily: 'DM Sans', fontWeight: 300 }}>
-              Every piece is one-of-a-kind, crafted with care and built around your vision.
+            <p className="text-[#9A9080] text-sm leading-relaxed max-w-md self-end" style={{ ...B, fontWeight: 300 }}>
+              Every piece is one-of-a-kind, crafted around your vision. Accepting commissions
+              for private collectors and business clients.
             </p>
           </div>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {/* Service list */}
+          <div className="divide-y divide-[#C9A959]/10">
             {services.map((s, i) => (
               <div
                 key={i}
-                className="service-card-hover relative group bg-[#FAF7F2] rounded-xl p-8 hover:shadow-lg transition-all duration-300 border border-transparent hover:border-[#E8D5A3]"
+                className="group flex items-center justify-between py-5 hover:bg-[#C9A959]/5 -mx-4 px-4 transition-colors duration-200 cursor-default rounded"
               >
-                {s.tag && (
-                  <span className="absolute top-4 right-4 text-xs bg-[#C9A959] text-white px-3 py-1 rounded-full tracking-wider uppercase" style={{ fontFamily: 'DM Sans', fontWeight: 500 }}>
-                    {s.tag}
+                <div className="flex items-center gap-6 md:gap-10">
+                  <span
+                    className="text-[#C9A959]/40 group-hover:text-[#C9A959]/80 transition-colors text-sm leading-none tabular-nums"
+                    style={{ ...D, fontWeight: 300 }}
+                  >
+                    {s.n}
                   </span>
-                )}
-                <div className="text-3xl mb-4">{s.icon}</div>
-                <h3
-                  className="text-xl mb-2 text-[#1A1A1A]"
-                  style={{ fontFamily: 'Cormorant Garamond, serif', fontWeight: 600 }}
-                >
-                  {s.title}
-                </h3>
-                <p className="text-sm text-[#777] leading-relaxed mb-4" style={{ fontFamily: 'DM Sans', fontWeight: 300 }}>
-                  {s.desc}
-                </p>
-                <p className="text-[#C9A959] font-medium text-sm tracking-wide" style={{ fontFamily: 'DM Sans' }}>
-                  {s.price}
-                </p>
+                  <h3
+                    className="text-lg md:text-xl text-[#F5F0E8] group-hover:text-[#C9A959] transition-colors duration-300"
+                    style={{ ...D, fontWeight: 400 }}
+                  >
+                    {s.title}
+                  </h3>
+                  {s.tag && (
+                    <span
+                      className="hidden md:inline-block text-[9px] tracking-[0.3em] uppercase border border-[#C9A959]/40 text-[#C9A959] px-2.5 py-1 rounded-full"
+                      style={{ ...B, fontWeight: 500 }}
+                    >
+                      {s.tag}
+                    </span>
+                  )}
+                </div>
+                <div className="flex items-center gap-4">
+                  <span className="text-[#C9A959] text-sm" style={{ ...B, fontWeight: 400 }}>{s.price}</span>
+                  <ArrowRight size={14} className="text-[#C9A959]/0 group-hover:text-[#C9A959]/60 transition-colors duration-300" />
+                </div>
               </div>
             ))}
           </div>
 
-          <div className="text-center mt-14">
-            <Button asChild size="lg" variant="default">
-              <Link href="/#contact">
-                Start a Commission <ArrowRight size={16} />
-              </Link>
-            </Button>
+          <div className="mt-14">
+            <Link
+              href="/commissions"
+              className="inline-flex items-center gap-2 px-8 py-3.5 bg-[#C9A959] hover:bg-[#B8944A] text-[#0D0D0D] text-xs tracking-[0.2em] uppercase transition-colors rounded"
+              style={{ ...B, fontWeight: 600 }}
+            >
+              Start a Commission <ArrowRight size={13} />
+            </Link>
           </div>
         </div>
       </section>
 
       {/* ── PROCESS ── */}
-      <section id="process" className="py-28 bg-[#1A1A1A] text-[#FAF7F2] relative overflow-hidden">
-        <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute top-0 right-0 w-[40vw] h-[40vh] rounded-full bg-[#C9A959]/6 blur-[100px]" />
-          <div className="absolute bottom-0 left-0 w-[30vw] h-[30vh] rounded-full bg-[#8B9A7D]/8 blur-[80px]" />
+      <section id="process" className="py-28 bg-[#141414] relative overflow-hidden">
+
+        {/* Giant watermark */}
+        <div
+          className="absolute right-0 top-1/2 -translate-y-1/2 text-[20rem] leading-none text-[#C9A959]/[0.025] select-none pointer-events-none"
+          style={{ ...D, fontWeight: 300 }}
+        >
+          Process
         </div>
+
         <div className="max-w-7xl mx-auto px-6 relative">
-          <div className="text-center mb-16 space-y-4">
-            <div className="flex items-center justify-center gap-3">
+          <div className="mb-16">
+            <div className="flex items-center gap-3 mb-4">
               <span className="h-px w-12 bg-[#C9A959]" />
-              <span className="text-xs tracking-[0.3em] uppercase text-[#C9A959]" style={{ fontFamily: 'DM Sans', fontWeight: 500 }}>
+              <span className="text-[10px] tracking-[0.4em] uppercase text-[#C9A959]" style={{ ...B, fontWeight: 500 }}>
                 How It Works
               </span>
-              <span className="h-px w-12 bg-[#C9A959]" />
             </div>
             <h2
-              className="text-[clamp(2.5rem,5vw,4rem)] text-[#FAF7F2]"
-              style={{ fontFamily: 'Cormorant Garamond, serif', fontWeight: 400 }}
+              className="text-[clamp(2.5rem,5vw,4rem)] text-[#F5F0E8]"
+              style={{ ...D, fontWeight: 400 }}
             >
               The Creative Process
             </h2>
-            <p className="text-[#888] max-w-xl mx-auto" style={{ fontFamily: 'DM Sans', fontWeight: 300 }}>
-              A seamless journey from concept to completed masterpiece
-            </p>
           </div>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-0 divide-y sm:divide-y-0 sm:divide-x divide-[#C9A959]/10">
             {process.map((step, i) => (
-              <div key={i} className="relative">
-                {i < process.length - 1 && (
-                  <div className="hidden lg:block absolute top-8 left-full w-full h-px bg-[#C9A959]/20 z-0" />
-                )}
-                <div className="relative z-10">
-                  <div
-                    className="text-[#C9A959] text-5xl mb-4 leading-none"
-                    style={{ fontFamily: 'Cormorant Garamond, serif', fontWeight: 300 }}
-                  >
-                    {step.num}
-                  </div>
-                  <h3
-                    className="text-xl text-[#FAF7F2] mb-3"
-                    style={{ fontFamily: 'Cormorant Garamond, serif', fontWeight: 600 }}
-                  >
-                    {step.title}
-                  </h3>
-                  <p className="text-sm text-[#888] leading-relaxed" style={{ fontFamily: 'DM Sans', fontWeight: 300 }}>
-                    {step.desc}
-                  </p>
+              <div key={i} className="relative p-8 lg:pl-10">
+                <div
+                  className="text-[4.5rem] leading-none text-[#C9A959]/15 mb-6 select-none"
+                  style={{ ...D, fontWeight: 300 }}
+                >
+                  {step.num}
                 </div>
+                <h3
+                  className="text-xl text-[#F5F0E8] mb-3"
+                  style={{ ...D, fontWeight: 600 }}
+                >
+                  {step.title}
+                </h3>
+                <p className="text-sm text-[#9A9080] leading-relaxed" style={{ ...B, fontWeight: 300 }}>
+                  {step.desc}
+                </p>
               </div>
             ))}
           </div>
@@ -449,84 +404,71 @@ export default function Home() {
       <section id="contact" className="py-28 bg-[#FAF7F2]">
         <div className="max-w-5xl mx-auto px-6">
           <div className="grid md:grid-cols-2 gap-16">
+
             {/* Left */}
             <div className="space-y-7">
               <div className="flex items-center gap-3">
                 <span className="h-px w-12 bg-[#C9A959]" />
-                <span className="text-xs tracking-[0.3em] uppercase text-[#C9A959]" style={{ fontFamily: 'DM Sans', fontWeight: 500 }}>
+                <span className="text-[10px] tracking-[0.4em] uppercase text-[#C9A959]" style={{ ...B, fontWeight: 500 }}>
                   Let&apos;s Create Together
                 </span>
               </div>
               <h2
                 className="text-[clamp(2.5rem,5vw,3.5rem)] text-[#1A1A1A] leading-tight"
-                style={{ fontFamily: 'Cormorant Garamond, serif', fontWeight: 400 }}
+                style={{ ...D, fontWeight: 400 }}
               >
                 Start Your<br />
                 <em className="text-[#C9A959]" style={{ fontStyle: 'italic' }}>Commission</em>
               </h2>
-              <p className="text-[#666]" style={{ fontFamily: 'DM Sans', fontWeight: 300 }}>
-                Ready to bring your vision to life? Tell me about your project
-                and I&apos;ll get back to you within 24–48 hours with a personalized proposal.
+              <p className="text-[#666] text-sm leading-relaxed" style={{ ...B, fontWeight: 300 }}>
+                Ready to bring your vision to life? Tell me about your project and I&apos;ll
+                respond within 24–48 hours with a personalized proposal.
               </p>
-              <div className="space-y-4">
+              <div className="space-y-4 pt-2">
                 <div className="flex items-center gap-3 text-sm text-[#555]">
-                  <Mail size={16} className="text-[#C9A959] flex-shrink-0" />
-                  <span style={{ fontFamily: 'DM Sans' }}>hello@anylystudio.com</span>
+                  <Mail size={14} className="text-[#C9A959] shrink-0" />
+                  <span style={B}>contact@anylystudio.com</span>
                 </div>
                 <div className="flex items-center gap-3 text-sm text-[#555]">
-                  <MapPin size={16} className="text-[#C9A959] flex-shrink-0" />
-                  <span style={{ fontFamily: 'DM Sans' }}>Glen Flora, Wisconsin · Ships Worldwide</span>
+                  <MapPin size={14} className="text-[#C9A959] shrink-0" />
+                  <span style={B}>Glen Flora, Wisconsin · Ships Worldwide</span>
                 </div>
                 <div className="flex items-center gap-3 text-sm text-[#555]">
-                  <Star size={16} className="text-[#C9A959] flex-shrink-0" />
-                  <span style={{ fontFamily: 'DM Sans' }}>50% deposit to begin · Balance on delivery</span>
+                  <Star size={14} className="text-[#C9A959] shrink-0" />
+                  <span style={B}>$150 deposit to reserve slot · Balance on completion</span>
                 </div>
               </div>
             </div>
 
             {/* Form */}
-            <form
-              action="/api/contact"
-              method="POST"
-              className="space-y-5"
-            >
+            <form action="/api/contact" method="POST" className="space-y-5">
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="text-xs tracking-widest uppercase text-[#999] block mb-2" style={{ fontFamily: 'DM Sans', fontWeight: 500 }}>
-                    Name
-                  </label>
+                  <label className="text-[10px] tracking-[0.3em] uppercase text-[#999] block mb-2" style={{ ...B, fontWeight: 500 }}>Name</label>
                   <input
-                    type="text"
-                    name="name"
-                    required
-                    className="w-full bg-white border border-[#E8D5A3] rounded-lg px-4 py-3 text-sm text-[#2C2C2C] placeholder:text-[#bbb] focus:outline-none focus:border-[#C9A959] transition-colors"
+                    type="text" name="name" required
                     placeholder="Your name"
-                    style={{ fontFamily: 'DM Sans' }}
+                    className="w-full bg-white border border-[#E8D5A3] rounded-lg px-4 py-3 text-sm text-[#2C2C2C] placeholder:text-[#ccc] focus:outline-none focus:border-[#C9A959] transition-colors"
+                    style={B}
                   />
                 </div>
                 <div>
-                  <label className="text-xs tracking-widest uppercase text-[#999] block mb-2" style={{ fontFamily: 'DM Sans', fontWeight: 500 }}>
-                    Email
-                  </label>
+                  <label className="text-[10px] tracking-[0.3em] uppercase text-[#999] block mb-2" style={{ ...B, fontWeight: 500 }}>Email</label>
                   <input
-                    type="email"
-                    name="email"
-                    required
-                    className="w-full bg-white border border-[#E8D5A3] rounded-lg px-4 py-3 text-sm text-[#2C2C2C] placeholder:text-[#bbb] focus:outline-none focus:border-[#C9A959] transition-colors"
+                    type="email" name="email" required
                     placeholder="your@email.com"
-                    style={{ fontFamily: 'DM Sans' }}
+                    className="w-full bg-white border border-[#E8D5A3] rounded-lg px-4 py-3 text-sm text-[#2C2C2C] placeholder:text-[#ccc] focus:outline-none focus:border-[#C9A959] transition-colors"
+                    style={B}
                   />
                 </div>
               </div>
 
               <div>
-                <label className="text-xs tracking-widest uppercase text-[#999] block mb-2" style={{ fontFamily: 'DM Sans', fontWeight: 500 }}>
-                  Commission Type
-                </label>
+                <label className="text-[10px] tracking-[0.3em] uppercase text-[#999] block mb-2" style={{ ...B, fontWeight: 500 }}>Commission Type</label>
                 <select
                   name="type"
                   className="w-full bg-white border border-[#E8D5A3] rounded-lg px-4 py-3 text-sm text-[#2C2C2C] focus:outline-none focus:border-[#C9A959] transition-colors"
-                  style={{ fontFamily: 'DM Sans' }}
+                  style={B}
                 >
                   <option value="">Select a service...</option>
                   <option value="portrait">Custom Portrait — from $500</option>
@@ -542,32 +484,30 @@ export default function Home() {
               </div>
 
               <div>
-                <label className="text-xs tracking-widest uppercase text-[#999] block mb-2" style={{ fontFamily: 'DM Sans', fontWeight: 500 }}>
-                  Tell Me About Your Vision
-                </label>
+                <label className="text-[10px] tracking-[0.3em] uppercase text-[#999] block mb-2" style={{ ...B, fontWeight: 500 }}>Your Vision</label>
                 <textarea
-                  name="message"
-                  rows={5}
-                  required
-                  className="w-full bg-white border border-[#E8D5A3] rounded-lg px-4 py-3 text-sm text-[#2C2C2C] placeholder:text-[#bbb] focus:outline-none focus:border-[#C9A959] transition-colors resize-none"
-                  placeholder="Describe your vision, size preferences, timeline, and any reference images or inspiration you have..."
-                  style={{ fontFamily: 'DM Sans' }}
+                  name="message" rows={5} required
+                  placeholder="Describe your vision, size preferences, timeline, and any reference inspiration..."
+                  className="w-full bg-white border border-[#E8D5A3] rounded-lg px-4 py-3 text-sm text-[#2C2C2C] placeholder:text-[#ccc] focus:outline-none focus:border-[#C9A959] transition-colors resize-none"
+                  style={B}
                 />
               </div>
 
-              <Button type="submit" variant="default" size="lg" className="w-full">
-                Send Commission Request
-                <ArrowRight size={16} />
-              </Button>
+              <button
+                type="submit"
+                className="w-full flex items-center justify-center gap-2 px-8 py-3.5 bg-[#2C2C2C] hover:bg-[#1A1A1A] text-[#FAF7F2] text-xs tracking-[0.2em] uppercase transition-colors rounded"
+                style={{ ...B, fontWeight: 500 }}
+              >
+                Send Commission Request <ArrowRight size={13} />
+              </button>
 
-              <p className="text-xs text-center text-[#bbb]" style={{ fontFamily: 'DM Sans' }}>
+              <p className="text-xs text-center text-[#bbb]" style={B}>
                 I respond within 24–48 hours · No obligation consultation
               </p>
             </form>
           </div>
         </div>
       </section>
-
     </>
   )
 }
