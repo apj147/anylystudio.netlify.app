@@ -10,8 +10,9 @@ const links = [
   { href: '/about', label: 'About' },
   { href: '/gallery', label: 'Gallery' },
   { href: '/commissions', label: 'Commissions' },
+  { href: '/gift', label: 'Gift a Commission' },
+  { href: '/faq', label: 'FAQ' },
   { href: '/premium', label: 'Premium ✦' },
-  { href: '/#services', label: 'Services' },
   { href: '/#contact', label: 'Contact' },
 ]
 

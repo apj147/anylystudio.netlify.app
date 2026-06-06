@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button'
 import { Palette } from 'lucide-react'
 import Link from 'next/link'
 import { MobileNav } from '@/components/mobile-nav'
+import { Analytics } from '@/components/analytics'
 
 const cormorant = Cormorant_Garamond({
   subsets: ['latin'],
@@ -61,8 +62,51 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           rel="icon"
           href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎨</text></svg>"
         />
+        {/* JSON-LD structured data */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'https://schema.org',
+              '@graph': [
+                {
+                  '@type': ['LocalBusiness', 'ArtGallery'],
+                  '@id': 'https://anylystudio.com/#business',
+                  name: 'Anyly Studio',
+                  description: 'Custom artwork and commissions by April Johnson — pet portraits, landscapes, botanicals, and large-scale pieces.',
+                  url: 'https://anylystudio.com',
+                  email: 'contact@anylystudio.com',
+                  address: { '@type': 'PostalAddress', addressLocality: 'Glen Flora', addressRegion: 'WI', addressCountry: 'US' },
+                  priceRange: '$150–$2,000+',
+                  founder: { '@id': 'https://anylystudio.com/#april' },
+                  sameAs: [],
+                },
+                {
+                  '@type': 'Person',
+                  '@id': 'https://anylystudio.com/#april',
+                  name: 'April Johnson',
+                  jobTitle: 'Fine Artist',
+                  worksFor: { '@id': 'https://anylystudio.com/#business' },
+                  alumniOf: [
+                    { '@type': 'CollegeOrUniversity', name: 'University of Florida', description: 'BFA 2007' },
+                    { '@type': 'CollegeOrUniversity', name: 'Miami Dade College', description: 'AA 2005' },
+                  ],
+                  knowsAbout: ['pet portrait painting', 'landscape painting', 'botanical art', 'acrylic painting', 'oil painting', 'large scale artwork'],
+                },
+                {
+                  '@type': 'WebSite',
+                  '@id': 'https://anylystudio.com/#website',
+                  url: 'https://anylystudio.com',
+                  name: 'Anyly Studio',
+                  publisher: { '@id': 'https://anylystudio.com/#business' },
+                },
+              ],
+            }),
+          }}
+        />
       </head>
       <body className="antialiased" style={{ fontFamily: 'var(--font-body), system-ui, sans-serif' }}>
+        <Analytics />
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
 
           {/* Global Sticky Nav */}
@@ -83,9 +127,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 <Link href="/about" className="text-neutral-600 dark:text-neutral-300 hover:text-amber-600 transition-colors">About</Link>
                 <Link href="/gallery" className="text-neutral-600 dark:text-neutral-300 hover:text-amber-600 transition-colors">Gallery</Link>
                 <Link href="/commissions" className="text-neutral-600 dark:text-neutral-300 hover:text-amber-600 transition-colors">Commissions</Link>
+                <Link href="/gift" className="text-neutral-600 dark:text-neutral-300 hover:text-amber-600 transition-colors">Gift</Link>
+                <Link href="/faq" className="text-neutral-600 dark:text-neutral-300 hover:text-amber-600 transition-colors">FAQ</Link>
                 <Link href="/premium" className="text-[#C9A959] font-semibold hover:text-[#A8883A] transition-colors">Premium</Link>
-                <Link href="/#services" className="text-neutral-600 dark:text-neutral-300 hover:text-amber-600 transition-colors">Services</Link>
-                <Link href="/#contact" className="text-neutral-600 dark:text-neutral-300 hover:text-amber-600 transition-colors">Contact</Link>
               </div>
 
               <div className="flex items-center gap-3">
@@ -129,8 +173,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                     <Link href="/about" className="hover:text-amber-400 transition-colors">About April</Link>
                     <Link href="/gallery" className="hover:text-amber-400 transition-colors">Gallery</Link>
                     <Link href="/commissions" className="hover:text-amber-400 transition-colors">Commissions</Link>
-                    <Link href="/#services" className="hover:text-amber-400 transition-colors">Services</Link>
-                    <Link href="/#contact" className="hover:text-amber-400 transition-colors">Contact</Link>
+                    <Link href="/gift" className="hover:text-amber-400 transition-colors">Gift a Commission</Link>
+                    <Link href="/faq" className="hover:text-amber-400 transition-colors">FAQ</Link>
                     <Link href="/terms" className="hover:text-amber-400 transition-colors">Terms & Policies</Link>
                   </div>
                 </div>

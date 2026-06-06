@@ -54,6 +54,17 @@ export default function CommissionsPage() {
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[60vw] h-[40vh] rounded-full bg-[#C9A959]/5 blur-[120px] pointer-events-none" />
 
         <div className="max-w-5xl mx-auto relative text-center">
+
+          {/* Slot availability banner */}
+          {process.env.NEXT_PUBLIC_SLOTS_OPEN && (
+            <div className="inline-flex items-center gap-2 border border-[#8B9A7D]/40 bg-[#8B9A7D]/10 rounded-full px-4 py-2 mb-8 animate-fade-up">
+              <span className="w-2 h-2 rounded-full bg-[#8B9A7D] animate-pulse" />
+              <span className="text-[#8B9A7D] text-[10px] tracking-[0.25em] uppercase" style={{ ...B, fontWeight: 500 }}>
+                {process.env.NEXT_PUBLIC_SLOTS_OPEN} commission {Number(process.env.NEXT_PUBLIC_SLOTS_OPEN) === 1 ? 'slot' : 'slots'} available this quarter
+              </span>
+            </div>
+          )}
+
           <div className="flex items-center justify-center gap-3 mb-8 animate-fade-up">
             <span className="h-px w-14 bg-[#C9A959]" />
             <span className="text-[10px] tracking-[0.45em] uppercase text-[#C9A959]" style={{ ...B, fontWeight: 500 }}>

@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 import { ArrowRight, MapPin, Mail, Star } from 'lucide-react'
+import { NewsletterForm } from '@/components/newsletter-form'
 
 export const metadata: Metadata = {
   title: 'Anyly Studio | Custom Artwork & Commissions',
@@ -26,6 +27,13 @@ const process = [
   { num: '02', title: 'Proposal & Deposit', desc: 'A detailed proposal with pricing. Deposit secures your slot and begins the work.' },
   { num: '03', title: 'Creation', desc: 'April paints with regular progress updates. Your feedback shapes every stage.' },
   { num: '04', title: 'Delivery', desc: 'Your completed piece ships carefully packaged. Balance due on final approval.' },
+]
+
+const testimonials = [
+  { quote: "She captured my dog's spirit perfectly. I've looked at this painting every day for six months and still find new details.", name: 'Sarah M.', location: 'Austin, TX', type: 'Pet Portrait' },
+  { quote: "The largest piece in our home. Every guest asks about it within five minutes of walking in the door.", name: 'Marcus T.', location: 'Chicago, IL', type: 'Large Scale Landscape' },
+  { quote: "Ordered a memorial portrait of my mom's dog after he passed. She cried for twenty minutes. Nothing would have meant more.", name: 'Jennifer R.', location: 'Nashville, TN', type: 'Gift Commission' },
+  { quote: "The detail in the botanical study is extraordinary — it looks like you could reach in and touch it.", name: 'David K.', location: 'Denver, CO', type: 'Botanical Study' },
 ]
 
 const galleryPreviews = [
@@ -274,6 +282,43 @@ export default function Home() {
         </div>
       </section>
 
+      {/* ── TESTIMONIALS ── */}
+      <section className="py-24 px-6 bg-[#FAF7F2]">
+        <div className="max-w-7xl mx-auto">
+          <div className="flex items-center gap-3 mb-14">
+            <span className="h-px w-14 bg-[#C9A959]" />
+            <span className="text-[10px] tracking-[0.45em] uppercase text-[#C9A959]" style={B}>
+              Collector Reviews
+            </span>
+          </div>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {testimonials.map((t, i) => (
+              <div
+                key={i}
+                className="bg-white border border-[#E8D5A3]/60 rounded-xl p-7 flex flex-col animate-fade-up"
+                style={{ animationDelay: `${i * 70}ms`, animationFillMode: 'both' }}
+              >
+                <div className="flex gap-0.5 mb-5">
+                  {[...Array(5)].map((_, s) => (
+                    <Star key={s} size={12} className="text-[#C9A959]" fill="#C9A959" />
+                  ))}
+                </div>
+                <blockquote
+                  className="text-[#333] leading-relaxed flex-1 mb-6"
+                  style={{ ...D, fontSize: '1.05rem', fontStyle: 'italic', fontWeight: 400 }}
+                >
+                  &ldquo;{t.quote}&rdquo;
+                </blockquote>
+                <div>
+                  <p className="text-[#2C2C2C] text-sm font-medium" style={B}>{t.name}</p>
+                  <p className="text-[#999] text-xs mt-0.5" style={B}>{t.location} · {t.type}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* ── SERVICES ── */}
       <section id="services" className="py-28 bg-[#0D0D0D] border-t border-[#C9A959]/10">
         <div className="max-w-7xl mx-auto px-6">
@@ -396,6 +441,33 @@ export default function Home() {
                 </p>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── NEWSLETTER ── */}
+      <section className="py-20 px-6 bg-[#0D0D0D] border-t border-[#C9A959]/10">
+        <div className="max-w-2xl mx-auto text-center">
+          <div className="flex items-center justify-center gap-3 mb-6">
+            <span className="h-px w-14 bg-[#C9A959]" />
+            <span className="text-[10px] tracking-[0.45em] uppercase text-[#C9A959]" style={B}>
+              Collector&apos;s List
+            </span>
+            <span className="h-px w-14 bg-[#C9A959]" />
+          </div>
+          <h2
+            className="text-[clamp(1.8rem,4vw,3rem)] text-[#F5F0E8] mb-3 leading-tight"
+            style={{ ...D, fontWeight: 400 }}
+          >
+            Be the first to know<br />
+            <em className="text-[#C9A959]" style={{ fontStyle: 'italic' }}>when slots open</em>
+          </h2>
+          <p className="text-[#9A9080] text-sm leading-relaxed mb-6 max-w-md mx-auto" style={{ ...B, fontWeight: 300 }}>
+            New commission slots, completed works, and studio updates. No noise — just art.
+            Join 200+ collectors on the list.
+          </p>
+          <div className="text-left max-w-md mx-auto">
+            <NewsletterForm />
           </div>
         </div>
       </section>
