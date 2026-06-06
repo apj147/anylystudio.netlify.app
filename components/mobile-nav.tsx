@@ -7,10 +7,13 @@ import { useTheme } from 'next-themes'
 
 const links = [
   { href: '/portfolio', label: 'Portfolio' },
-  { href: '/about', label: 'About' },
+  { href: '/prints', label: 'Prints' },
   { href: '/gallery', label: 'Gallery' },
   { href: '/commissions', label: 'Commissions' },
   { href: '/gift', label: 'Gift a Commission' },
+  { href: '/process', label: 'The Process' },
+  { href: '/journal', label: 'Journal' },
+  { href: '/about', label: 'About' },
   { href: '/faq', label: 'FAQ' },
   { href: '/premium', label: 'Premium ✦' },
   { href: '/#contact', label: 'Contact' },

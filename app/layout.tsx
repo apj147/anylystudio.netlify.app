@@ -122,12 +122,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 </span>
               </Link>
 
-              <div className="hidden md:flex items-center gap-8 text-sm font-medium">
+              <div className="hidden md:flex items-center gap-7 text-sm font-medium">
                 <Link href="/portfolio" className="text-neutral-600 dark:text-neutral-300 hover:text-amber-600 transition-colors">Portfolio</Link>
-                <Link href="/about" className="text-neutral-600 dark:text-neutral-300 hover:text-amber-600 transition-colors">About</Link>
+                <Link href="/prints" className="text-neutral-600 dark:text-neutral-300 hover:text-amber-600 transition-colors">Prints</Link>
                 <Link href="/gallery" className="text-neutral-600 dark:text-neutral-300 hover:text-amber-600 transition-colors">Gallery</Link>
                 <Link href="/commissions" className="text-neutral-600 dark:text-neutral-300 hover:text-amber-600 transition-colors">Commissions</Link>
-                <Link href="/gift" className="text-neutral-600 dark:text-neutral-300 hover:text-amber-600 transition-colors">Gift</Link>
+                <Link href="/journal" className="text-neutral-600 dark:text-neutral-300 hover:text-amber-600 transition-colors">Journal</Link>
                 <Link href="/faq" className="text-neutral-600 dark:text-neutral-300 hover:text-amber-600 transition-colors">FAQ</Link>
                 <Link href="/premium" className="text-[#C9A959] font-semibold hover:text-[#A8883A] transition-colors">Premium</Link>
               </div>
@@ -170,11 +170,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                   <h4 className="font-medium text-white mb-4">Quick Links</h4>
                   <div className="flex flex-col gap-2 text-sm">
                     <Link href="/portfolio" className="hover:text-amber-400 transition-colors">Portfolio</Link>
+                    <Link href="/prints" className="hover:text-amber-400 transition-colors">Fine Art Prints</Link>
                     <Link href="/about" className="hover:text-amber-400 transition-colors">About April</Link>
                     <Link href="/gallery" className="hover:text-amber-400 transition-colors">Gallery</Link>
                     <Link href="/commissions" className="hover:text-amber-400 transition-colors">Commissions</Link>
                     <Link href="/gift" className="hover:text-amber-400 transition-colors">Gift a Commission</Link>
+                    <Link href="/process" className="hover:text-amber-400 transition-colors">The Process</Link>
+                    <Link href="/journal" className="hover:text-amber-400 transition-colors">Journal</Link>
                     <Link href="/faq" className="hover:text-amber-400 transition-colors">FAQ</Link>
+                    <Link href="/refund" className="hover:text-amber-400 transition-colors">Refund Policy</Link>
                     <Link href="/terms" className="hover:text-amber-400 transition-colors">Terms & Policies</Link>
                   </div>
                 </div>

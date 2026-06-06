@@ -3,6 +3,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { ArrowRight, MapPin, Mail, Star } from 'lucide-react'
 import { NewsletterForm } from '@/components/newsletter-form'
+import { InstagramFeed } from '@/components/instagram-feed'
 
 export const metadata: Metadata = {
   title: 'Anyly Studio | Custom Artwork & Commissions',
@@ -444,6 +445,9 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* ── INSTAGRAM ── */}
+      <InstagramFeed />
 
       {/* ── NEWSLETTER ── */}
       <section className="py-20 px-6 bg-[#0D0D0D] border-t border-[#C9A959]/10">
