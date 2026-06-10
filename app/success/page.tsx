@@ -33,13 +33,13 @@ export default function SuccessPage() {
           {/* Body */}
           <div className="space-y-4 text-[#666]" style={{ fontFamily: 'DM Sans', fontWeight: 300 }}>
             <p className="text-lg">
-              Your order has been received. Stripe has emailed you the invoice and receipt.
+              Your order has been received. A receipt has been emailed to you.
             </p>
             <div className="bg-white border border-[#E8D5A3] rounded-xl p-6 text-left space-y-3">
               <div className="flex items-start gap-3">
                 <Mail size={16} className="text-[#C9A959] mt-0.5 flex-shrink-0" />
                 <p className="text-sm">
-                  <strong className="text-[#2C2C2C] font-medium">Check your inbox</strong> — Stripe sent a receipt and invoice to your email address.
+                  <strong className="text-[#2C2C2C] font-medium">Check your inbox</strong> — a receipt was sent to your email address by our payment provider.
                 </p>
               </div>
               <div className="flex items-start gap-3">
