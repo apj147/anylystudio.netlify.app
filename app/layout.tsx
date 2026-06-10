@@ -1,4 +1,4 @@
-import type { Metadata } from 'next'
+import type { Metadata, Viewport } from 'next'
 import { Cormorant_Garamond, DM_Sans } from 'next/font/google'
 import './globals.css'
 import { ThemeProvider } from 'next-themes'
@@ -7,6 +7,8 @@ import { Palette } from 'lucide-react'
 import Link from 'next/link'
 import { MobileNav } from '@/components/mobile-nav'
 import { Analytics } from '@/components/analytics'
+import { PwaRegister, InstallPrompt } from '@/components/pwa'
+import { AppTabBar } from '@/components/app-tab-bar'
 
 const cormorant = Cormorant_Garamond({
   subsets: ['latin'],
@@ -52,16 +54,31 @@ export const metadata: Metadata = {
     images: ['/og-image.jpg'],
   },
   robots: { index: true, follow: true, googleBot: { index: true, follow: true } },
+  icons: {
+    icon: [{ url: '/icons/icon-192.png', sizes: '192x192', type: 'image/png' }],
+    apple: [{ url: '/icons/apple-touch-icon.png', sizes: '180x180', type: 'image/png' }],
+  },
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: 'default',
+    title: 'Anyly Studio',
+  },
+}
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  viewportFit: 'cover',
+  themeColor: [
+    { media: '(prefers-color-scheme: light)', color: '#FAF7F2' },
+    { media: '(prefers-color-scheme: dark)', color: '#0a0a0a' },
+  ],
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" suppressHydrationWarning className={`${cormorant.variable} ${dmSans.variable}`}>
       <head>
-        <link
-          rel="icon"
-          href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎨</text></svg>"
-        />
         {/* JSON-LD structured data */}
         <script
           type="application/ld+json"
@@ -107,6 +124,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body className="antialiased" style={{ fontFamily: 'var(--font-body), system-ui, sans-serif' }}>
         <Analytics />
+        <PwaRegister />
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
 
           {/* Global Sticky Nav */}
@@ -195,6 +213,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               </div>
             </div>
           </footer>
+
+          {/* App experience: install banner (browser) + bottom tab bar (installed app) */}
+          <InstallPrompt />
+          <AppTabBar />
 
         </ThemeProvider>
       </body>

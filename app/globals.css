@@ -153,6 +153,25 @@ body {
 }
 
 
+/* ─── PWA: installed-app experience ─── */
+/* Elements with .standalone-only render only when running as an installed app */
+.standalone-only {
+  display: none;
+}
+
+@media (display-mode: standalone) {
+  .standalone-only {
+    display: block;
+  }
+
+  /* Make room for the bottom tab bar on phones */
+  @media (max-width: 767px) {
+    body {
+      padding-bottom: calc(56px + env(safe-area-inset-bottom));
+    }
+  }
+}
+
 /* ─── Accessibility: Reduced Motion ─── */
 @media (prefers-reduced-motion: reduce) {
   *,
