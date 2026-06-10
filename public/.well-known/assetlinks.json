@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.anylystudio.app",
+      "sha256_cert_fingerprints": [
+        "F7:84:59:03:EA:66:D9:53:A6:13:6E:D7:AC:CD:97:55:3C:8E:8D:4E:7E:41:B0:B1:BF:4D:1A:51:39:9D:D8:09"
+      ]
+    }
+  }
+]
