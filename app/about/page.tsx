@@ -26,7 +26,7 @@ const credentials = [
   { label: 'Education', lines: ['BFA · University of Florida, 2007', 'AA · Miami Dade College, 2005'] },
   { label: 'Practice', lines: ['18+ years professional fine art', 'Acrylic · Oil · Watercolor · Mixed Media', 'Commissions & originals'] },
   { label: 'Exhibitions', lines: ['Exhibiting since 2004', 'Group & solo shows', 'Private collections nationwide'] },
-  { label: 'Studio', lines: ['Glen Flora, Wisconsin', 'Ships worldwide', 'contact@anylystudio.com'] },
+  { label: 'Studio', lines: ['Glen Flora, Wisconsin', 'Ships nationwide (US only)', 'contact@anylystudio.com'] },
 ]
 
 const practiceColumns = [

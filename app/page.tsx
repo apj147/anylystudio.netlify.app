@@ -115,7 +115,7 @@ export default function Home() {
               <MapPin size={12} className="text-[#C9A959]" />
               <span>Glen Flora, Wisconsin</span>
               <span className="w-1 h-1 rounded-full bg-[#C9A959]/50" />
-              <span>Ships Worldwide</span>
+              <span>Ships Nationwide</span>
             </div>
           </div>
 
@@ -507,7 +507,7 @@ export default function Home() {
                 </div>
                 <div className="flex items-center gap-3 text-sm text-[#555]">
                   <MapPin size={14} className="text-[#C9A959] shrink-0" />
-                  <span style={B}>Glen Flora, Wisconsin · Ships Worldwide</span>
+                  <span style={B}>Glen Flora, Wisconsin · Ships Nationwide (US only)</span>
                 </div>
                 <div className="flex items-center gap-3 text-sm text-[#555]">
                   <Star size={14} className="text-[#C9A959] shrink-0" />

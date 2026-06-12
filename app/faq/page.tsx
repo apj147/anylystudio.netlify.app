@@ -75,8 +75,8 @@ const categories = [
     slug: 'shipping',
     faqs: [
       {
-        q: 'Do you ship internationally?',
-        a: 'Yes — Anyly Studio ships worldwide. Shipping cost is calculated based on destination and piece size and is invoiced separately at the time of delivery.',
+        q: 'Where do you ship?',
+        a: 'Anyly Studio ships within the United States only. Shipping cost is calculated based on destination and piece size and is invoiced separately at the time of delivery.',
       },
       {
         q: 'How is the artwork packaged?',

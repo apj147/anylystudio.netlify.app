@@ -8,7 +8,7 @@ export const metadata: Metadata = {
     'Commission a custom original painting from April Johnson — pet portraits, botanicals, landscapes, and large-scale pieces. Secure your slot with a $150 deposit.',
   openGraph: {
     title: 'Commission an Original Work | Anyly Studio',
-    description: 'Custom paintings by April Johnson. Deposit to secure your slot. Ships worldwide.',
+    description: 'Custom paintings by April Johnson. Deposit to secure your slot. Ships nationwide (US only).',
     url: 'https://anylystudio.com/commissions',
     siteName: 'Anyly Studio',
     images: [{ url: '/og-image.jpg', width: 1200, height: 630, alt: 'Anyly Studio Commissions' }],
@@ -223,7 +223,7 @@ export default function CommissionsPage() {
               </p>
               <p className="text-[#9A9080] text-sm leading-relaxed flex-1 mb-8" style={{ ...B, fontWeight: 300 }}>
                 A hand-painted 16 × 20 pet portrait in acrylic on gallery-wrapped canvas.
-                Includes progress updates, certificate of authenticity, and worldwide shipping.
+                Includes progress updates, certificate of authenticity, and nationwide (US) shipping.
               </p>
               <a
                 href="https://whop.com/anyly-studio/"

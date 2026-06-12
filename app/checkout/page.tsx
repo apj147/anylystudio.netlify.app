@@ -59,7 +59,7 @@ export default async function CheckoutPage({
             </div>
             <p className="flex items-center gap-2 text-xs text-neutral-400 mt-6">
               <ShieldCheck size={14} className="text-sage shrink-0" />
-              Secure checkout · Ships worldwide · 24–48&nbsp;hour response on every order
+              Secure checkout · Ships nationwide (US only) · 24–48&nbsp;hour response on every order
             </p>
           </div>
 

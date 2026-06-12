@@ -204,7 +204,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 <div>
                   <h4 className="font-medium text-white mb-4">Connect</h4>
                   <p className="text-sm">contact@anylystudio.com</p>
-                  <p className="text-sm mt-1">Glen Flora, Wisconsin · Ships Worldwide</p>
+                  <p className="text-sm mt-1">Glen Flora, Wisconsin · Ships Nationwide (US only)</p>
                   <div className="mt-8 text-xs">
                     Secure online payments<br />
                     Instant invoices · Professional receipts

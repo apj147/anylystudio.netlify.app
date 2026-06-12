@@ -292,8 +292,8 @@ export default function TermsPage() {
           <Prose>
             <p>
               All artwork is carefully packaged and shipped via insured carrier. Shipping costs are
-              quoted separately and due at the time of final payment. Anyly Studio ships worldwide.
-              Risk of loss passes to the client upon handoff to the carrier.
+              quoted separately and due at the time of final payment. Anyly Studio ships within the
+              United States only. Risk of loss passes to the client upon handoff to the carrier.
             </p>
           </Prose>
 
