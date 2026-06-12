@@ -6,8 +6,7 @@ import { NextRequest, NextResponse } from 'next/server'
 
 const EXEMPT_PREFIXES = [
   '/.well-known/',        // Android app verification (assetlinks.json)
-  '/api/stripe-webhook',  // payment processors may call from non-US IPs
-  '/api/paypal/webhook',
+  '/api/paypal/webhook',  // PayPal may call this from non-US IPs
   '/manifest.webmanifest', // keep installed apps from breaking on update checks
   '/sw.js',
   '/icons/',

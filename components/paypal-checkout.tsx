@@ -22,17 +22,27 @@ const COUNTRIES: Array<[string, string]> = [
   ['MX', 'Mexico'], ['BR', 'Brazil'],
 ]
 
+// PayPal renders each card field inside its own iframe. The `style` object
+// reaches the <input> inside; allowed props are font/color/outline/padding/
+// transition (not border). We keep the text calm and let our own container
+// (boxClass + focus-within ring) carry the visible border, so empty fields
+// no longer flash an alarming red box.
 const fieldStyle = {
   input: {
     'font-size': '16px',
     'font-family': 'DM Sans, system-ui, sans-serif',
     color: '#2C2C2C',
+    padding: '12px 14px',
+    outline: 'none',
+    transition: 'color .15s ease',
   },
+  ':focus': { color: '#2C2C2C', outline: 'none' },
+  '.invalid': { color: '#C0392B', outline: 'none' },
 }
 
 const labelClass = 'block text-sm font-semibold text-charcoal dark:text-neutral-200 mb-1.5'
 const boxClass =
-  'rounded-lg border border-neutral-300 dark:border-neutral-700 bg-white dark:bg-neutral-900 px-1'
+  'rounded-lg border border-neutral-300 dark:border-neutral-700 bg-white dark:bg-neutral-900 overflow-hidden transition focus-within:border-amber-500 focus-within:ring-2 focus-within:ring-amber-500/40'
 const inputClass =
   'w-full rounded-lg border border-neutral-300 dark:border-neutral-700 bg-white dark:bg-neutral-900 px-4 py-3 text-base text-charcoal dark:text-neutral-100 focus:outline-none focus:ring-2 focus:ring-amber-500'
 

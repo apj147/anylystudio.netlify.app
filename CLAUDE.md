@@ -28,11 +28,10 @@ Repo: https://github.com/apj147/anylystudio.netlify.app (name is stale — still
 - Gallery (`app/gallery/page.tsx`) — server component with `BuyButton` client island
 - Commission (`app/commission/page.tsx`) — client component (uses `useSearchParams`), wrapped in `<Suspense>`
 - Contact form submits to `app/api/contact/route.ts` → Resend → `hello@anylystudio.com`
-- Buy Now hits `app/api/checkout/route.ts` → Stripe Checkout session → redirects to Stripe-hosted page → `/success`
+- Buy Now → `BuyButton` maps the catalog key to a sku → routes to `/checkout?item=<sku>` (PayPal). See PayPal section below. **Stripe was fully removed 2026-06-12.**
 
 ### Key design decisions
-- **Stripe is lazy-initialized** via `getStripe()` in `lib/stripe.ts` — prevents build-time crash when `STRIPE_SECRET_KEY` is absent from the build environment
-- **`buy-button.tsx`** is the only client component on the gallery page — keeps the page server-rendered for SEO while enabling Stripe redirects
+- **`buy-button.tsx`** is the only client component on the gallery page — keeps the page server-rendered for SEO while routing to the PayPal checkout
 - **Fonts** are loaded via `next/font/google` (Cormorant Garamond + DM Sans) and exposed as CSS variables `--font-display` / `--font-body`. Use `var(--font-display)` in inline styles rather than hardcoded font names
 - **Nav + Footer** live in `app/layout.tsx` globally. Do not add them inside individual pages
 - **`MobileNav`** (`components/mobile-nav.tsx`) handles hamburger + dark/light mode toggle via `next-themes`
@@ -41,31 +40,27 @@ Repo: https://github.com/apj147/anylystudio.netlify.app (name is stale — still
 - Gold: `#C9A959` · Sage: `#8B9A7D` · Cream: `#FAF7F2` · Charcoal: `#2C2C2C`
 - Amber-600 used in the nav/footer shell; gold `#C9A959` used throughout page content — both are intentional
 
-### Stripe price IDs
-All 9 price IDs are in `lib/stripe.ts` → `PRICE_IDS`. The gallery hardcodes them inline for simplicity; `PRICE_IDS` is the authoritative source if they need updating.
-
 ### Images
 Gallery artwork: `public/gallery/1.png` – `9.png`. Both `.jpg` and `.png` exist; `.png` is what the code references.
 
 ### Environment variables (set in Vercel dashboard)
-**Existing:** `STRIPE_SECRET_KEY`, `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY`, `RESEND_API_KEY`, `NEXT_PUBLIC_SITE_URL`, `CONTACT_EMAIL`
+**Payments (live):** `PAYPAL_CLIENT_ID`, `PAYPAL_CLIENT_SECRET`, `NEXT_PUBLIC_PAYPAL_CLIENT_ID` (= client id), optional `PAYPAL_ENV=sandbox`
+**Other:** `RESEND_API_KEY`, `NEXT_PUBLIC_SITE_URL`, `CONTACT_EMAIL`, optional `GEO_RESTRICT=off` to lift the US-only wall
 
-**Add these for new features:**
+**For other features:**
 - `XAI_API_KEY` — xAI API key (Aurora image gen + voice token minting)
-- `TELEGRAM_BOT_TOKEN` — LemkyBot token (Stripe sale notifications)
+- `TELEGRAM_BOT_TOKEN` — LemkyBot token (PayPal sale notifications)
 - `TELEGRAM_CHAT_ID` — `1373529450` (APRIL's Telegram user ID)
-- `STRIPE_WEBHOOK_SECRET` — from Stripe Dashboard → Webhooks → signing secret
 
 ### New API routes added
 - `POST /api/aurora` — generate image via xAI Aurora from a text prompt
-- `POST /api/stripe-webhook` — Stripe webhook → Telegram DM on sale/failure
 - `POST /api/xai-token` — mint ephemeral xAI Realtime token (server-side, never exposed to browser)
 - `GET  /voice` — LemkyBot voice agent UI (browser mic → xAI Realtime API)
 
 ### PWA (installable app version)
 The site is a full PWA — installable on iOS/Android home screens and desktop.
 - `app/manifest.ts` — web app manifest (Next.js serves it at `/manifest.webmanifest`)
-- `public/sw.js` — hand-rolled service worker: network-first for pages with `/offline` fallback, cache-first for `_next/static` + images, **never intercepts `/api/*`** (Stripe/contact must stay live). Bump `CACHE_VERSION` when changing caching strategy.
+- `public/sw.js` — hand-rolled service worker: network-first for pages with `/offline` fallback, cache-first for `_next/static` + images, **never intercepts `/api/*`** (PayPal/contact must stay live). Bump `CACHE_VERSION` when changing caching strategy.
 - `components/pwa.tsx` — `PwaRegister` (registers SW, production only) + `InstallPrompt` (native install on Chrome/Android, Add-to-Home-Screen instructions on iOS; dismissal stored in localStorage key `anyly-install-dismissed`)
 - `components/app-tab-bar.tsx` — bottom tab bar, visible only in installed/standalone mode on phones via the `.standalone-only` CSS class in `globals.css` (`display-mode: standalone` media query)
 - `app/app/page.tsx` — `/app` marketing page with install instructions
@@ -77,16 +72,11 @@ spoof-proof `x-vercel-ip-country` header. Exempt: `/.well-known/`, payment
 webhooks, `manifest.webmanifest`, `sw.js`, `/icons/`. No header (local dev) =
 allowed. Kill switch: set `GEO_RESTRICT=off` in Vercel env and redeploy.
 
-### PayPal checkout (preferred provider once configured)
-- `lib/catalog.ts` — client-safe product catalog; **authoritative prices for PayPal**. Maps Stripe price IDs → skus.
+### PayPal checkout (LIVE — sole payment provider)
+- `lib/catalog.ts` — client-safe product catalog; **authoritative prices**. `stripePriceId` is a legacy opaque key the gallery passes to map artwork → sku (no Stripe calls).
 - `lib/paypal.ts` — server-only: OAuth, Orders v2 create/capture, Telegram notify. `PAYPAL_ENV=sandbox` switches API base.
 - `/api/paypal/create-order` + `/api/paypal/capture-order` — sku is validated server-side; amounts never come from the browser.
-- `/checkout?item=<sku>` — Advanced Checkout page (`components/paypal-checkout.tsx`): inline card fields + Pay now, PayPal, Pay Later, and PayPal-hosted card button. Uses `@paypal/react-paypal-js` v8 classic API (PayPalScriptProvider / PayPalCardFieldsProvider).
-- `BuyButton` routes to `/checkout` when `NEXT_PUBLIC_PAYPAL_CLIENT_ID` is set at build time; otherwise falls back to the Stripe flow. Stripe code is intact — switching back = removing the env var and redeploying.
+- `/checkout?item=<sku>` — Advanced Checkout page (`components/paypal-checkout.tsx`): inline card fields + Pay now, PayPal, Pay Later, Venmo, and PayPal-hosted card button. Uses `@paypal/react-paypal-js` v10 classic API (PayPalScriptProvider / PayPalCardFieldsProvider).
+- `BuyButton` always routes to `/checkout?item=<sku>`. Live and verified 2026-06-12.
 - Env vars: `PAYPAL_CLIENT_ID`, `PAYPAL_CLIENT_SECRET`, `NEXT_PUBLIC_PAYPAL_CLIENT_ID` (same value as client id), optional `PAYPAL_ENV=sandbox`.
-- Inline card fields require "Advanced Credit and Debit Card Payments" enabled on the PayPal business account; the PayPal/Pay Later/black card buttons work regardless.
-
-### Stripe webhook setup
-In Stripe Dashboard → Developers → Webhooks → Add endpoint:
-- URL: `https://anylystudio.com/api/stripe-webhook`
-- Events: `checkout.session.completed`, `payment_intent.payment_failed`
+- Inline card fields require "Advanced Credit and Debit Card Payments" enabled on the PayPal business account (it is). Apple Pay / Google Pay are approved on the account but not yet wired into the page — they need the dedicated SDK components + Apple domain registration + on-device testing.

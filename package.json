@@ -20,7 +20,6 @@
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "resend": "^4.1.2",
-    "stripe": "^17.7.0",
     "tailwind-merge": "^2.5.4"
   },
   "devDependencies": {

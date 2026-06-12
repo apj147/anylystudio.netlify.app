@@ -1,5 +1,6 @@
 // Client-safe product catalog — single source of truth for PayPal checkout.
-// Prices are authoritative here for PayPal; Stripe prices live in Stripe price objects.
+// Prices here are authoritative. `stripePriceId` is a legacy opaque key the
+// gallery still passes; it only maps an artwork to its sku (no Stripe calls).
 export type CatalogItem = {
   sku: string
   title: string
