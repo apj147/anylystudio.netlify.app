@@ -14,11 +14,14 @@ export const metadata: Metadata = {
 export default async function CheckoutPage({
   searchParams,
 }: {
-  searchParams: Promise<{ item?: string }>
+  searchParams: Promise<{ item?: string; paymethods?: string }>
 }) {
-  const { item } = await searchParams
+  const { item, paymethods } = await searchParams
   const product = item ? CATALOG[item] : undefined
   if (!product) notFound()
+  // Apple Pay / Google Pay are gated behind ?paymethods=new while validated on
+  // real devices. Remove this gate (always pass showWallets) once confirmed.
+  const showWallets = paymethods === 'new'
 
   return (
     <main className="bg-cream dark:bg-neutral-950 min-h-screen">
@@ -65,7 +68,7 @@ export default async function CheckoutPage({
 
           {/* Payment */}
           <div className="bg-white dark:bg-neutral-900 border border-amber-100 dark:border-amber-900 rounded-xl p-6">
-            <PayPalCheckout sku={product.sku} />
+            <PayPalCheckout sku={product.sku} showWallets={showWallets} />
           </div>
         </div>
       </div>

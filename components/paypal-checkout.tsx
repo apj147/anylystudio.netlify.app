@@ -11,6 +11,8 @@ import {
   PayPalCVVField,
   usePayPalCardFields,
 } from '@paypal/react-paypal-js'
+import { CATALOG } from '@/lib/catalog'
+import { PayPalWallets } from './paypal-wallets'
 
 const COUNTRIES: Array<[string, string]> = [
   ['US', 'United States'], ['CA', 'Canada'], ['GB', 'United Kingdom'],
@@ -74,12 +76,13 @@ function PayNowButton({ countryCode, postalCode }: { countryCode: string; postal
   )
 }
 
-export function PayPalCheckout({ sku }: { sku: string }) {
+export function PayPalCheckout({ sku, showWallets = false }: { sku: string; showWallets?: boolean }) {
   const router = useRouter()
   const clientId = process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID
   const [error, setError] = useState('')
   const [country, setCountry] = useState('US')
   const [zip, setZip] = useState('')
+  const item = CATALOG[sku]
 
   if (!clientId) {
     return (
@@ -105,18 +108,24 @@ export function PayPalCheckout({ sku }: { sku: string }) {
     return data.id
   }
 
-  const onApprove = async (data: { orderID: string }) => {
-    const res = await fetch('/api/paypal/capture-order', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ orderID: data.orderID }),
-    })
-    const capture = await res.json()
-    if (!res.ok || capture.status !== 'COMPLETED') {
-      setError('Your payment could not be completed. You have not been charged — please try again.')
-      return
+  // Shared capture step — returns true only on a COMPLETED capture.
+  const captureOrder = async (orderID: string): Promise<boolean> => {
+    try {
+      const res = await fetch('/api/paypal/capture-order', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ orderID }),
+      })
+      const capture = await res.json()
+      return res.ok && capture.status === 'COMPLETED'
+    } catch {
+      return false
     }
-    router.push('/success')
+  }
+
+  const onApprove = async (data: { orderID: string }) => {
+    if (await captureOrder(data.orderID)) router.push('/success')
+    else setError('Your payment could not be completed. You have not been charged — please try again.')
   }
 
   const onError = () => {
@@ -127,7 +136,7 @@ export function PayPalCheckout({ sku }: { sku: string }) {
     <PayPalScriptProvider
       options={{
         clientId,
-        components: 'buttons,card-fields',
+        components: showWallets ? 'buttons,card-fields,applepay,googlepay' : 'buttons,card-fields',
         currency: 'USD',
         intent: 'capture',
         enableFunding: 'paylater,venmo',
@@ -192,6 +201,17 @@ export function PayPalCheckout({ sku }: { sku: string }) {
           <span className="text-neutral-500 dark:text-neutral-400 text-base">Or pay with</span>
           <div className="h-px flex-1 bg-neutral-200 dark:bg-neutral-700" />
         </div>
+
+        {showWallets && item && (
+          <PayPalWallets
+            amount={item.price}
+            label={`Anyly Studio — ${item.title}`}
+            createOrder={createOrder}
+            captureOrder={captureOrder}
+            onCaptured={() => router.push('/success')}
+            onError={(m) => setError(m)}
+          />
+        )}
 
         <PayPalButtons
           fundingSource="paypal"
