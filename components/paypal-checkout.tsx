@@ -14,6 +14,7 @@ import {
 } from '@paypal/react-paypal-js'
 import { CATALOG } from '@/lib/catalog'
 import { PayPalWallets } from './paypal-wallets'
+import { BraintreeBank } from './braintree-bank'
 
 const COUNTRIES: Array<[string, string]> = [
   ['US', 'United States'], ['CA', 'Canada'], ['GB', 'United Kingdom'],
@@ -210,6 +211,15 @@ export function PayPalCheckout({ sku, showWallets = false }: { sku: string; show
             createOrder={createOrder}
             captureOrder={captureOrder}
             onCaptured={() => router.push('/success')}
+            onError={(m) => setError(m)}
+          />
+        )}
+
+        {showWallets && item && (
+          <BraintreeBank
+            sku={sku}
+            displayAmount={item.displayPrice}
+            onPaid={() => router.push('/success')}
             onError={(m) => setError(m)}
           />
         )}
