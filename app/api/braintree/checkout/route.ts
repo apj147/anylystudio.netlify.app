@@ -15,13 +15,11 @@ export async function POST(request: Request) {
     const result = await achSale(sku, nonce, deviceData)
 
     if (result.success) {
-      const t = result.transaction
-      // ACH settles asynchronously — status is typically settlement_pending.
       notifyTelegram(
         `🏦 <b>New Sale — Anyly Studio (Bank / ACH)</b>\n\n` +
-        `🖼 ${CATALOG[sku].title}\n💰 $${t.amount}\n🔗 ${t.id} (${t.status})`
+        `🖼 ${CATALOG[sku].title}\n💰 $${CATALOG[sku].price}\n🔗 ${result.id} (${result.status})`
       )
-      return NextResponse.json({ success: true, id: t.id, status: t.status })
+      return NextResponse.json({ success: true, id: result.id, status: result.status })
     }
 
     return NextResponse.json(
