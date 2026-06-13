@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
+import { Landmark } from 'lucide-react'
 import {
   PayPalScriptProvider,
   PayPalButtons,
@@ -220,6 +221,13 @@ export function PayPalCheckout({ sku, showWallets = false }: { sku: string; show
           onApprove={onApprove}
           onError={onError}
         />
+        <p className="flex items-start gap-2 text-xs text-neutral-500 dark:text-neutral-400 -mt-1 px-1">
+          <Landmark size={13} className="text-sage shrink-0 mt-0.5" />
+          <span>
+            Prefer to pay straight from your bank? Choose <strong className="font-medium text-neutral-600 dark:text-neutral-300">PayPal</strong> above
+            and select your linked bank account — no card required.
+          </span>
+        </p>
         <PayPalButtons
           fundingSource="paylater"
           style={{ layout: 'vertical', color: 'gold', shape: 'rect', height: 48 }}
