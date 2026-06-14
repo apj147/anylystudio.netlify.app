@@ -91,6 +91,13 @@ export const CATALOG: Record<string, CatalogItem> = {
     displayPrice: '$150',
     image: '/icons/icon-512.png',
   },
+  'living-portrait': {
+    sku: 'living-portrait',
+    title: 'Living Portrait Add-On',
+    price: '95.00',
+    displayPrice: '$95',
+    image: '/gallery/6.png',
+  },
 }
 
 export function itemByStripePriceId(priceId: string): CatalogItem | undefined {

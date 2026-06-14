@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { ArrowRight } from 'lucide-react'
+import { ArrowRight, Sparkles } from 'lucide-react'
 
 export const metadata: Metadata = {
   title: 'Commission an Original Work | Anyly Studio',
@@ -234,6 +234,47 @@ export default function CommissionsPage() {
               >
                 Begin Commission <ArrowRight size={11} />
               </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── Living Portrait Add-On ── */}
+      <section className="relative py-24 px-6 overflow-hidden bg-[#0D0D0D]">
+        <div
+          className="pointer-events-none absolute inset-0 opacity-50"
+          style={{ background: 'radial-gradient(55% 60% at 50% 50%, rgba(201,169,89,0.16), transparent 70%)' }}
+        />
+        <div className="relative max-w-4xl mx-auto">
+          <div className="border border-[#C9A959]/30 rounded-2xl p-8 md:p-12 bg-[#111]/60 backdrop-blur-sm">
+            <span className="inline-flex items-center gap-2 text-[10px] tracking-[0.35em] uppercase text-[#C9A959] mb-6" style={{ ...B, fontWeight: 500 }}>
+              <Sparkles size={13} /> New · Premium Add-On
+            </span>
+            <h2 className="text-3xl md:text-5xl text-[#F5F0E8] leading-tight mb-5" style={{ ...D, fontWeight: 400 }}>
+              Make your portrait <span className="text-[#C9A959]">come alive</span>
+            </h2>
+            <p className="text-[#9A9080] text-base leading-relaxed max-w-2xl mb-8" style={{ ...B, fontWeight: 300 }}>
+              Add a <strong className="text-[#C9A959] font-normal">Living Portrait</strong> to any commission. Alongside your
+              hand-painted original, you receive a mesmerizing animated version — your pet blinks and breathes,
+              the light shifts, the canvas stirs — delivered as a video you can set as a phone wallpaper,
+              post, or share. A one-of-a-kind keepsake no other studio offers.
+            </p>
+            <ul className="grid sm:grid-cols-3 gap-4 mb-10 text-sm text-[#B5AC9E]" style={{ ...B, fontWeight: 300 }}>
+              <li className="flex items-start gap-2"><span className="text-[#C9A959] mt-0.5">✦</span> The original canvas, brought to life</li>
+              <li className="flex items-start gap-2"><span className="text-[#C9A959] mt-0.5">✦</span> HD video — wallpaper &amp; share-ready</li>
+              <li className="flex items-start gap-2"><span className="text-[#C9A959] mt-0.5">✦</span> Optional touch-interactive web version</li>
+            </ul>
+            <div className="flex flex-wrap items-center gap-5">
+              <Link
+                href="/checkout?item=living-portrait"
+                className="inline-flex items-center justify-center gap-2 px-7 py-4 bg-[#C9A959] hover:bg-[#B8944A] text-[#0D0D0D] text-[10px] tracking-[0.25em] uppercase rounded transition-colors"
+                style={{ ...B, fontWeight: 600 }}
+              >
+                Add Living Portrait — $95 <ArrowRight size={11} />
+              </Link>
+              <Link href="/living" className="inline-flex items-center gap-2 text-[#C9A959] text-[10px] tracking-[0.25em] uppercase hover:text-[#E8D5A3] transition-colors" style={{ ...B, fontWeight: 500 }}>
+                See it in action ✦
+              </Link>
             </div>
           </div>
         </div>
