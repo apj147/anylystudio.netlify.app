@@ -7,6 +7,7 @@ import { useTheme } from 'next-themes'
 
 const links = [
   { href: '/portfolio', label: 'Portfolio' },
+  { href: '/living', label: 'Living Gallery ✦' },
   { href: '/prints', label: 'Prints' },
   { href: '/gallery', label: 'Gallery' },
   { href: '/commissions', label: 'Commissions' },
