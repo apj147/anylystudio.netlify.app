@@ -68,10 +68,11 @@ export function KoiArtwork({ imageSrc, videoSrc, title, caption }: Props) {
     const ripples: Ripple[] = []
     let pointer = { x: 0, y: 0, active: false, t: -9999 }
 
-    const drawFish = (f: Fish, t: number) => {
+    const drawFish = (f: Fish, t: number, alpha: number) => {
       const ang = Math.atan2(f.vy, f.vx)
       const wig = Math.sin(t * 6 + f.phase) * 0.35
       ctx.save()
+      ctx.globalAlpha = alpha
       ctx.translate(f.x, f.y)
       ctx.rotate(ang)
       ctx.shadowColor = `hsla(${f.hue},90%,55%,0.9)`
@@ -106,16 +107,19 @@ export function KoiArtwork({ imageSrc, videoSrc, title, caption }: Props) {
     }
 
     let raf = 0, t = 0
+    let activity = 0
+    let lastTarget = defaultTarget()
     const loop = () => {
       t += 0.016
       ctx.clearRect(0, 0, W, H)
 
-      const pActive = pointer.active && t - pointer.t < 0.4 && pointer.y > waterTop()
-      const dt = pActive ? pointer : defaultTarget()
-      const tx = dt.x, ty = dt.y
-
-      // golden ripple at the default fingertip (gentle) + at touches
-      if (!pActive && Math.sin(t * 1.3) > 0.985) ripples.push({ x: tx, y: ty, r: 4, life: 1 })
+      // The artwork is still until touched. `activity` ramps up while the
+      // pointer is in the water and decays afterwards; the koi only wake,
+      // swim and render while activity is non-zero.
+      const want = pointer.active && t - pointer.t < 0.6 && pointer.y > waterTop() ? 1 : 0
+      if (want) lastTarget = { x: pointer.x, y: pointer.y }
+      activity += (want - activity) * (want ? 0.12 : 0.025)
+      const tx = lastTarget.x, ty = lastTarget.y
 
       for (let i = ripples.length - 1; i >= 0; i--) {
         const rp = ripples[i]
@@ -137,30 +141,34 @@ export function KoiArtwork({ imageSrc, videoSrc, title, caption }: Props) {
         ctx.restore()
       }
 
-      for (const f of fish) {
-        let dx = f.x - tx, dy = f.y - ty
-        let dist = Math.hypot(dx, dy) || 0.001
-        // tangential (circling) + radial correction toward orbit radius R
-        const tangx = (-dy / dist) * f.dir
-        const tangy = (dx / dist) * f.dir
-        const radial = dist - f.R
-        const radx = (-dx / dist) * radial * 0.05
-        const rady = (-dy / dist) * radial * 0.05
-        const dvx = tangx * f.speed + radx
-        const dvy = tangy * f.speed + rady
-        const steer = pActive ? 0.08 : 0.045
-        f.vx += (dvx - f.vx) * steer
-        f.vy += (dvy - f.vy) * steer
-        f.x += f.vx; f.y += f.vy
+      // Koi only stir when the water has been touched.
+      if (activity > 0.015) {
+        for (const f of fish) {
+          const dx = f.x - tx, dy = f.y - ty
+          const dist = Math.hypot(dx, dy) || 0.001
+          // tangential (circling) + radial correction toward orbit radius R
+          const tangx = (-dy / dist) * f.dir
+          const tangy = (dx / dist) * f.dir
+          const radial = dist - f.R
+          const radx = (-dx / dist) * radial * 0.05
+          const rady = (-dy / dist) * radial * 0.05
+          const dvx = tangx * f.speed + radx
+          const dvy = tangy * f.speed + rady
+          f.vx += (dvx - f.vx) * 0.08
+          f.vy += (dvy - f.vy) * 0.08
+          // step scales with activity so they ease in and slow as they settle
+          f.x += f.vx * activity
+          f.y += f.vy * activity
 
-        // keep fish in the water band
-        const top = waterTop() + f.size
-        if (f.y < top) { f.y = top; f.vy += 0.4 }
-        if (f.y > H - f.size) { f.y = H - f.size; f.vy -= 0.4 }
-        if (f.x < f.size) { f.x = f.size; f.vx += 0.4 }
-        if (f.x > W - f.size) { f.x = W - f.size; f.vx -= 0.4 }
+          // keep fish in the water band
+          const top = waterTop() + f.size
+          if (f.y < top) { f.y = top; f.vy += 0.4 }
+          if (f.y > H - f.size) { f.y = H - f.size; f.vy -= 0.4 }
+          if (f.x < f.size) { f.x = f.size; f.vx += 0.4 }
+          if (f.x > W - f.size) { f.x = W - f.size; f.vx -= 0.4 }
 
-        drawFish(f, t)
+          drawFish(f, t, activity)
+        }
       }
 
       raf = requestAnimationFrame(loop)
@@ -217,13 +225,13 @@ export function KoiArtwork({ imageSrc, videoSrc, title, caption }: Props) {
         )}
         <canvas ref={canvasRef} className="absolute inset-0" />
         <div className="pointer-events-none absolute top-3 left-3 rounded-full bg-black/45 backdrop-blur-sm px-3 py-1 text-[11px] tracking-widest uppercase text-amber-100">
-          ✦ Point into the water
+          ✦ Touch the water
         </div>
       </div>
       <div className="mt-7 text-center max-w-md">
         <h3 className="text-2xl text-amber-50" style={{ fontFamily: 'var(--font-display), Georgia, serif', fontWeight: 600 }}>{title}</h3>
         {caption && <p className="mt-2 text-sm text-neutral-400 leading-relaxed">{caption}</p>}
-        <p className="mt-3 text-xs text-amber-500/80">Move your finger across the water — the koi follow, circling where you point.</p>
+        <p className="mt-3 text-xs text-amber-500/80">Touch and drag across the water — the koi wake and circle your finger, then settle when you let go.</p>
       </div>
     </div>
   )
