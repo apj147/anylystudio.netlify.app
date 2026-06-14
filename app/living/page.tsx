@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { Sparkles, ArrowRight } from 'lucide-react'
-import { LivingArtwork } from '@/components/living-artwork'
+import { InteractiveVideo } from '@/components/interactive-video'
 import { RippleArtwork } from '@/components/ripple-artwork'
 
 export const metadata: Metadata = {
@@ -39,20 +39,21 @@ export default function LivingGalleryPage() {
             Paintings that breathe
           </h1>
           <p className="mt-6 text-neutral-400 leading-relaxed">
-            Every Anyly Studio piece begins as oil and canvas. Here, a few of them wake up.
-            Move your cursor across the frame — or tilt your phone — and watch the light shift,
-            the air drift, and the brushwork stir. Still a painting. Just alive.
+            Every Anyly Studio piece begins as oil and canvas. Here, a few of them wake up —
+            but only at your touch. Press and hold a painting (or hover it) and it stirs to life;
+            let go, and it falls still again. Nothing moves on its own.
           </p>
         </div>
       </section>
 
       {/* Centerpiece living artwork */}
       <section className="relative px-6 py-12">
-        <LivingArtwork
-          videoSrc="/living/forest-alive.mp4"
+        <InteractiveVideo
+          src="/living/forest-alive.mp4"
           poster="/gallery/1.png"
+          aspect="square"
           title="Golden Hour, Northwoods"
-          caption="Oil on canvas, brought to life. The same birch path you'd hang on your wall — here it keeps the sun moving through the trees."
+          caption="Oil on canvas. Hold the frame and the sun moves through the birches; release, and the light holds still."
         />
       </section>
 
@@ -64,38 +65,23 @@ export default function LivingGalleryPage() {
         />
         <div className="relative max-w-2xl mx-auto text-center mb-12">
           <p className="inline-flex items-center gap-2 text-xs tracking-[0.3em] uppercase text-amber-400/90 mb-4">
-            <Sparkles size={14} /> Brought to life
+            <Sparkles size={14} /> Hold the water
           </p>
           <h2 className="text-4xl sm:text-5xl text-amber-50 leading-tight" style={{ fontFamily: 'var(--font-display), Georgia, serif', fontWeight: 600 }}>
-            The koi pond, alive
+            The koi pond
           </h2>
           <p className="mt-5 text-neutral-400 leading-relaxed">
-            An original painting brought to life — the golden koi drift and turn through the
-            water while she rests, perfectly still.
+            Still as a painting — until you touch it. Press and hold the water and the golden
+            koi begin to swim and turn; lift your hand, and they settle back into the canvas.
           </p>
         </div>
-        <div className="flex flex-col items-center">
-          <div
-            className="relative overflow-hidden"
-            style={{
-              width: 'min(88vw, 460px)', aspectRatio: '9 / 16',
-              boxShadow: '0 40px 90px -30px rgba(0,0,0,.8), 0 0 0 12px #1a1a1a, 0 0 0 14px #caa85f',
-            }}
-          >
-            <video
-              src="/living/koi.mp4"
-              autoPlay
-              loop
-              muted
-              playsInline
-              className="absolute inset-0 w-full h-full object-cover"
-            />
-          </div>
-          <div className="mt-7 text-center max-w-md">
-            <h3 className="text-2xl text-amber-50" style={{ fontFamily: 'var(--font-display), Georgia, serif', fontWeight: 600 }}>The Lily Pad</h3>
-            <p className="mt-2 text-sm text-neutral-400 leading-relaxed">An original piece by April Johnson, gently animated.</p>
-          </div>
-        </div>
+        <InteractiveVideo
+          src="/living/koi.mp4"
+          poster="/living/koi-poster.webp"
+          aspect="portrait"
+          title="The Lily Pad"
+          caption="An original piece by April Johnson. Hold the water and the koi swim; let go, and they rest."
+        />
       </section>
 
       {/* Touch-reactive painting */}
