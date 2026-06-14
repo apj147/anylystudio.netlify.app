@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { Sparkles, ArrowRight } from 'lucide-react'
 import { LivingArtwork } from '@/components/living-artwork'
 import { RippleArtwork } from '@/components/ripple-artwork'
+import { KoiArtwork } from '@/components/koi-artwork'
 
 export const metadata: Metadata = {
   title: 'The Living Gallery | Anyly Studio',
@@ -53,6 +54,31 @@ export default function LivingGalleryPage() {
           poster="/gallery/1.png"
           title="Golden Hour, Northwoods"
           caption="Oil on canvas, brought to life. The same birch path you'd hang on your wall — here it keeps the sun moving through the trees."
+        />
+      </section>
+
+      {/* Koi — fish follow your finger */}
+      <section className="relative px-6 py-16 border-t border-neutral-900">
+        <div
+          className="pointer-events-none absolute inset-0 opacity-40"
+          style={{ background: 'radial-gradient(50% 50% at 50% 40%, rgba(201,169,89,0.14), transparent 70%)' }}
+        />
+        <div className="relative max-w-2xl mx-auto text-center mb-12">
+          <p className="inline-flex items-center gap-2 text-xs tracking-[0.3em] uppercase text-amber-400/90 mb-4">
+            <Sparkles size={14} /> Feed the pond
+          </p>
+          <h2 className="text-4xl sm:text-5xl text-amber-50 leading-tight" style={{ fontFamily: 'var(--font-display), Georgia, serif', fontWeight: 600 }}>
+            The koi know your touch
+          </h2>
+          <p className="mt-5 text-neutral-400 leading-relaxed">
+            Move your finger across the water and the golden koi gather to it, circling your
+            fingertip just as they circle hers — and a ripple of light blooms wherever you touch.
+          </p>
+        </div>
+        <KoiArtwork
+          imageSrc="/living/koi.webp"
+          title="The Lily Pad"
+          caption="An original piece — golden koi that answer to your hand."
         />
       </section>
 
