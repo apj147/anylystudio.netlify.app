@@ -3,7 +3,6 @@ import Link from 'next/link'
 import { Sparkles, ArrowRight } from 'lucide-react'
 import { LivingArtwork } from '@/components/living-artwork'
 import { RippleArtwork } from '@/components/ripple-artwork'
-import { KoiArtwork } from '@/components/koi-artwork'
 
 export const metadata: Metadata = {
   title: 'The Living Gallery | Anyly Studio',
@@ -57,7 +56,7 @@ export default function LivingGalleryPage() {
         />
       </section>
 
-      {/* Koi — fish follow your finger */}
+      {/* Koi — living painting (video) */}
       <section className="relative px-6 py-16 border-t border-neutral-900">
         <div
           className="pointer-events-none absolute inset-0 opacity-40"
@@ -65,21 +64,38 @@ export default function LivingGalleryPage() {
         />
         <div className="relative max-w-2xl mx-auto text-center mb-12">
           <p className="inline-flex items-center gap-2 text-xs tracking-[0.3em] uppercase text-amber-400/90 mb-4">
-            <Sparkles size={14} /> Feed the pond
+            <Sparkles size={14} /> Brought to life
           </p>
           <h2 className="text-4xl sm:text-5xl text-amber-50 leading-tight" style={{ fontFamily: 'var(--font-display), Georgia, serif', fontWeight: 600 }}>
-            The koi know your touch
+            The koi pond, alive
           </h2>
           <p className="mt-5 text-neutral-400 leading-relaxed">
-            Move your finger across the water and the golden koi gather to it, circling your
-            fingertip just as they circle hers — and a ripple of light blooms wherever you touch.
+            An original painting brought to life — the golden koi drift and turn through the
+            water while she rests, perfectly still.
           </p>
         </div>
-        <KoiArtwork
-          imageSrc="/living/koi-pond.webp"
-          title="The Lily Pad"
-          caption="An original piece — still, until you touch the water. Then the golden koi wake and gather to your hand."
-        />
+        <div className="flex flex-col items-center">
+          <div
+            className="relative overflow-hidden"
+            style={{
+              width: 'min(88vw, 460px)', aspectRatio: '9 / 16',
+              boxShadow: '0 40px 90px -30px rgba(0,0,0,.8), 0 0 0 12px #1a1a1a, 0 0 0 14px #caa85f',
+            }}
+          >
+            <video
+              src="/living/koi.mp4"
+              autoPlay
+              loop
+              muted
+              playsInline
+              className="absolute inset-0 w-full h-full object-cover"
+            />
+          </div>
+          <div className="mt-7 text-center max-w-md">
+            <h3 className="text-2xl text-amber-50" style={{ fontFamily: 'var(--font-display), Georgia, serif', fontWeight: 600 }}>The Lily Pad</h3>
+            <p className="mt-2 text-sm text-neutral-400 leading-relaxed">An original piece by April Johnson, gently animated.</p>
+          </div>
+        </div>
       </section>
 
       {/* Touch-reactive painting */}
