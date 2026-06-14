@@ -14,6 +14,7 @@ import { useEffect, useRef } from 'react'
 
 type Props = {
   imageSrc: string
+  videoSrc?: string
   title: string
   caption?: string
 }
@@ -24,7 +25,7 @@ type Fish = {
 }
 type Ripple = { x: number; y: number; r: number; life: number }
 
-export function KoiArtwork({ imageSrc, title, caption }: Props) {
+export function KoiArtwork({ imageSrc, videoSrc, title, caption }: Props) {
   const wrapRef = useRef<HTMLDivElement>(null)
   const canvasRef = useRef<HTMLCanvasElement>(null)
 
@@ -200,8 +201,20 @@ export function KoiArtwork({ imageSrc, title, caption }: Props) {
           boxShadow: '0 40px 90px -30px rgba(0,0,0,.8), 0 0 0 12px #1a1a1a, 0 0 0 14px #caa85f',
         }}
       >
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={imageSrc} alt={title} className="absolute inset-0 w-full h-full object-cover" draggable={false} />
+        {videoSrc ? (
+          <video
+            src={videoSrc}
+            poster={imageSrc}
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="absolute inset-0 w-full h-full object-cover"
+          />
+        ) : (
+          /* eslint-disable-next-line @next/next/no-img-element */
+          <img src={imageSrc} alt={title} className="absolute inset-0 w-full h-full object-cover" draggable={false} />
+        )}
         <canvas ref={canvasRef} className="absolute inset-0" />
         <div className="pointer-events-none absolute top-3 left-3 rounded-full bg-black/45 backdrop-blur-sm px-3 py-1 text-[11px] tracking-widest uppercase text-amber-100">
           ✦ Point into the water

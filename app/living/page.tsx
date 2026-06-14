@@ -77,8 +77,9 @@ export default function LivingGalleryPage() {
         </div>
         <KoiArtwork
           imageSrc="/living/koi.webp"
+          videoSrc="/living/koi.mp4"
           title="The Lily Pad"
-          caption="An original piece — golden koi that answer to your hand."
+          caption="An original piece, brought to life — and golden koi that answer to your hand."
         />
       </section>
 
