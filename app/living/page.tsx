@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { Sparkles, ArrowRight } from 'lucide-react'
 import { LivingArtwork } from '@/components/living-artwork'
+import { RippleArtwork } from '@/components/ripple-artwork'
 
 export const metadata: Metadata = {
   title: 'The Living Gallery | Anyly Studio',
@@ -52,6 +53,27 @@ export default function LivingGalleryPage() {
           poster="/gallery/1.png"
           title="Golden Hour, Northwoods"
           caption="Oil on canvas, brought to life. The same birch path you'd hang on your wall — here it keeps the sun moving through the trees."
+        />
+      </section>
+
+      {/* Touch-reactive painting */}
+      <section className="relative px-6 py-16 border-t border-neutral-900">
+        <div className="max-w-2xl mx-auto text-center mb-12">
+          <p className="inline-flex items-center gap-2 text-xs tracking-[0.3em] uppercase text-amber-400/90 mb-4">
+            <Sparkles size={14} /> Reach in
+          </p>
+          <h2 className="text-4xl sm:text-5xl text-amber-50 leading-tight" style={{ fontFamily: 'var(--font-display), Georgia, serif', fontWeight: 600 }}>
+            Touch the painting
+          </h2>
+          <p className="mt-5 text-neutral-400 leading-relaxed">
+            This one answers back. Drag your finger or cursor across the canvas and the surface
+            ripples like a disturbed reflection — and leaves shake loose and fall wherever you press.
+          </p>
+        </div>
+        <RippleArtwork
+          imageSrc="/gallery/1.png"
+          title="Northwoods, disturbed"
+          caption="The same forest — but now the paint moves under your hand."
         />
       </section>
 
