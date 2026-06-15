@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { Sparkles, ArrowRight } from 'lucide-react'
 import { InteractiveVideo } from '@/components/interactive-video'
 import { RippleArtwork } from '@/components/ripple-artwork'
+import { RevealArtwork } from '@/components/reveal-artwork'
 
 export const metadata: Metadata = {
   title: 'The Living Gallery | Anyly Studio',
@@ -102,6 +103,33 @@ export default function LivingGalleryPage() {
           imageSrc="/gallery/1.png"
           title="Northwoods, disturbed"
           caption="The same forest — but now the paint moves under your hand."
+        />
+      </section>
+
+      {/* Reveal — cursor spotlight (day → night) */}
+      <section className="relative px-6 py-16 border-t border-neutral-900">
+        <div
+          className="pointer-events-none absolute inset-0 opacity-40"
+          style={{ background: 'radial-gradient(50% 50% at 50% 40%, rgba(120,140,201,0.12), transparent 70%)' }}
+        />
+        <div className="relative max-w-2xl mx-auto text-center mb-12">
+          <p className="inline-flex items-center gap-2 text-xs tracking-[0.3em] uppercase text-amber-400/90 mb-4">
+            <Sparkles size={14} /> Carry the light
+          </p>
+          <h2 className="text-4xl sm:text-5xl text-amber-50 leading-tight" style={{ fontFamily: 'var(--font-display), Georgia, serif', fontWeight: 600 }}>
+            The forest, after dark
+          </h2>
+          <p className="mt-5 text-neutral-400 leading-relaxed">
+            One painting, two worlds. By day it&apos;s golden hour — but move your light across
+            the canvas and you uncover the very same forest at night, moonlit and full of fireflies.
+          </p>
+        </div>
+        <RevealArtwork
+          baseSrc="/gallery/1.png"
+          revealSrc="/living/forest-night.webp"
+          aspect="square"
+          title="Golden Hour / Moonlight"
+          caption="The same brushwork, two times of day — wherever your hand passes, night falls."
         />
       </section>
 
